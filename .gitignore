@@ -373,3 +373,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/reactnative,visualstudiocode,windows,macos,linux
+package-lock.json
