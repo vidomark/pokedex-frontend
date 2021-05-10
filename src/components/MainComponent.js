@@ -1,4 +1,5 @@
 import React from "react";
+import Pokemon from "./Pokemon";
 import { Container } from "react-bootstrap";
 import { useHttp } from "../hooks/useHttp";
 
@@ -10,7 +11,9 @@ export default function MainComponent() {
     isLoaded &&
     fetchedData && (
       <Container>
-        {fetchedData.data.results.forEach((pokemon) => console.log(pokemon))}
+        {fetchedData.data.results.map((pokemonData) => (
+          <Pokemon key={pokemonData.name} pokemonData={pokemonData} />
+        ))}
       </Container>
     )
   );
