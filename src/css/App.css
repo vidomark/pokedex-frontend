@@ -80,3 +80,11 @@
 .card {
   width: 9rem;
 }
+
+.profilepicture {
+  color: blue;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(https://www.pinclipart.com/picdir/middle/447-4473590_random-png-transparent-background-imagenes-random-png-clipart.png);
+  background-size: cover;
+}

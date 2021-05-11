@@ -21,7 +21,7 @@ function App() {
             </React.Fragment>
           )}
         />
-        <Route path='profile' component={ProfilePage} />
+        <Route path='/profile' component={ProfilePage} />
         <Footer />
       </div>
     </Router>
