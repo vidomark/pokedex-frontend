@@ -1,7 +1,3 @@
-* {
-  font-family: "Itim", cursive;
-}
-
 .cards-list {
   z-index: 0;
   width: 100%;
@@ -73,8 +69,7 @@
   width: 200px;
   height: 200px;
   border-radius: 40px;
-  /* background-image: url("https://i.redd.it/b3esnz5ra34y.jpg"); */
-  background-image: url("/../pokemon-api/src/images/pokemon-background-image.jpeg");
+  background-image: url("../images/pokemon-background-image.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -98,6 +93,7 @@
   text-align: left;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
+  border-radius: 5%;
 }
 
 .detail-container:hover {
@@ -112,6 +108,7 @@
 }
 
 .detail-title {
+  margin-top: 3%;
   margin-left: 22px;
   font-size: 25px;
 }
@@ -119,6 +116,7 @@
 .detail-name {
   font-size: 19px;
   margin-right: 10%;
+  margin-bottom: 10%;
   border-radius: 10%;
   padding: 0px 5%;
 }

@@ -1,5 +1,11 @@
+* {
+  font-family: "Itim", cursive;
+  color: #bbbbbb;
+}
+
 .App {
   text-align: center;
+  background-image: url("../images/background.jpg");
 }
 
 .App-logo {
@@ -60,4 +66,6 @@
   flex-wrap: wrap;
   justify-items: center;
   align-items: center;
+  background-color: #fff;
+  border-radius: 5%;
 }
