@@ -28,18 +28,6 @@ export default function Pokemon(props) {
             <Card.Img src={pokemon.data.sprites.front_default} alt="pokemon" />
           </Link>
         </Card>
-        <p style={{ textAlign: "left" }}>{capitalizeName(name)}</p>
-        <div style={{ align: "left" }} className="pokemon-type">
-          {pokemon.data.types.map((type) => (
-            <div
-              style={{ textAlign: "intial" }}
-              className="type"
-              key={type.type.name}
-            >
-              {type.type.name}
-            </div>
-          ))}
-        </div>
         <PokemonDetail title={pokemon.data.name} details={pokemon.data.types} />
       </div>
     )
