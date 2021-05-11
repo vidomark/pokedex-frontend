@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import { footerStyle } from '../css/App.css';
 
 export default function Footer() {
   return (
@@ -12,13 +13,3 @@ export default function Footer() {
     </div>
   );
 }
-
-const footerStyle = {
-  position: "fixed",
-  left: "0",
-  bottom: "0",
-  width: "100%",
-  background: "#f3f3f3",
-  color: "black",
-  textAlign: "center",
-};
