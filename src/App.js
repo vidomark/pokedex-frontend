@@ -9,7 +9,7 @@ import ProfilePage from './profilePageComponents/ProfilePage';
 
 function App() {
   const selectedPokemon = (pokemonData) => {
-    console.log(pokemonData);
+    return pokemonData;
   };
 
   return (
@@ -25,7 +25,11 @@ function App() {
             </React.Fragment>
           )}
         />
-        <Route path='/profile' render={() => <ProfilePage />} />
+        <Route
+          path='/profile'
+          render={() => <ProfilePage />}
+          selectedPokemon={selectedPokemon}
+        />
         <Footer />
       </div>
     </Router>

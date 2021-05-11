@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {Grid, Paper} from '@material-ui/core';
 
@@ -19,7 +19,16 @@ const useStyles = makeStyles((theme)=>({
 
 
 export default function ProfilePage(props) {
+    const [state,setState] = useState({
     
+    })
+
+    const propeller = props.selectedPokemon;
+
+    console.log(propeller);
+
+
+
     const classes = useStyles();
 
     
