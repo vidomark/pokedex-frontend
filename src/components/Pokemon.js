@@ -18,26 +18,17 @@ export default function Pokemon(props) {
   return (
     isLoaded &&
     pokemon && (
-      <div className="card-container">
-        <Card className="card">
-          <Link
-            to={`/profile/${pokemon.data.id}`}
-            style={card}
-            onClick={() => selectPokemon(pokemon.data)}
-          >
-            <Card.Img src={pokemon.data.sprites.front_default} alt="pokemon" />
-          </Link>
-        </Card>
+      <div className="card">
+        <Link
+          className="card_image"
+          to={`/profile/${pokemon.data.id}`}
+          style={card}
+          onClick={() => selectPokemon(pokemon.data)}
+        >
+          <img src={pokemon.data.sprites.front_default} />
+        </Link>
         <PokemonDetail title={pokemon.data.name} details={pokemon.data.types} />
       </div>
     )
   );
 }
-
-/* div className="card">
-        <div className="card_image">
-          <img src={pokemon.data.sprites.front_default} />{" "}
-
-        </div>
-        <PokemonDetail title={pokemon.data.name} details={pokemon.data.types} />
-      </div> */
