@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useFetch } from '../hooks/useFetch';
+import { Link } from 'react-router-dom';
 
 export default function Pokemon(props) {
   const { name, url } = props.pokemonData;
@@ -14,7 +15,9 @@ export default function Pokemon(props) {
     pokemon && (
       <div className='card-container'>
         <Card className='card'>
-          <Card.Img src={pokemon.data.sprites.front_default} alt='pokemon' />
+          <Link to='/profile'>
+            <Card.Img src={pokemon.data.sprites.front_default} alt='pokemon' />
+          </Link>
         </Card>
         <p style={{ textAlign: 'left' }}>{capitalizeName(name)}</p>
         <div style={{ align: 'left' }} className='pokemon-type'>
