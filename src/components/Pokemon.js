@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useFetch } from '../hooks/useFetch';
-import { cardTextAligner } from '../css/App.css';
 
 export default function Pokemon(props) {
   const { name, url } = props.pokemonData;

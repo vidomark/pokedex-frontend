@@ -18,11 +18,11 @@ function App() {
           render={(props) => (
             <React.Fragment>
               <MainComponent />
-              <Footer />
             </React.Fragment>
           )}
         />
         <Route path='profile' component={ProfilePage} />
+        <Footer />
       </div>
     </Router>
   );
