@@ -1,3 +1,7 @@
+* {
+  font-family: "Itim", cursive;
+}
+
 .cards-list {
   z-index: 0;
   width: 100%;
@@ -109,9 +113,12 @@
 
 .detail-title {
   margin-left: 22px;
+  font-size: 25px;
 }
 
 .detail-name {
-  font-size: 16px;
+  font-size: 19px;
   margin-right: 10%;
+  border-radius: 10%;
+  padding: 0px 5%;
 }

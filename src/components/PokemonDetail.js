@@ -9,7 +9,7 @@ import flyingTypeImage from "../images/types/flying-type.png";
 
 // array of details
 export default function PokemonDetail({ title, details }) {
-  const capitalizeTitle = (title) => {
+  const capitalizeText = (title) => {
     return title.charAt(0).toUpperCase() + title.slice(1);
   };
 
@@ -25,7 +25,7 @@ export default function PokemonDetail({ title, details }) {
 
   return (
     <div className="detail-container">
-      <p className="detail-title">{capitalizeTitle(title)}</p>
+      <p className="detail-title">{capitalizeText(title)}</p>
       <div className="detail-detail">
         {details.map((detail) => (
           <div
@@ -33,7 +33,7 @@ export default function PokemonDetail({ title, details }) {
             className="detail-name"
             style={{ backgroundImage: `url(${image[detail.type.name]})` }}
           >
-            {detail.type.name}
+            {capitalizeText(detail.type.name)}
           </div>
         ))}
       </div>
