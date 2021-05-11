@@ -1,3 +1,60 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.headerStlye {
+  position: relative;
+  width: auto;
+  background: cornflowerblue;
+  image-rendering: auto;
+  image-orientation: inherit;
+}
+
+.footerStyle {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: "#f3f3f3";
+  color: black;
+  text-align: center;
+}
+
 .main-container {
   display: flex;
   flex-wrap: wrap;
@@ -6,31 +63,33 @@
 }
 
 .card-container {
-  margin: 20px;
+  margin: 15px;
   text-indent: 15%;
   font-size: 130%;
   cursor: pointer;
 }
 
-.pokemon-detail {
+.pokemon-type {
   display: flex;
-  flex-direction: column;
+  margin-left: 12px;
+}
+
+.pokemon-detail {
+  text-indent: 15%;
 }
 
 .detail-name-container {
   display: flex;
-  margin-left: 13%;
-  text-align: center;
 }
 
 .detail-name {
   padding-right: 10%;
-  margin-right: 5%;
-  border: 5px solid blue;
-  border-radius: 20%;
-  font-size: 20px;
+}
+
+.type {
+  margin-left: 10px;
 }
 
 .card {
-  width: 11rem;
+  width: 9rem;
 }
