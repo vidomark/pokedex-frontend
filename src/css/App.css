@@ -71,7 +71,6 @@
 
 .pokemon-type {
   display: flex;
-  margin-left: 12px;
 }
 
 .type {
@@ -80,4 +79,8 @@
 
 .card {
   width: 9rem;
+}
+
+.cardTextAligner {
+  text-align: left;
 }

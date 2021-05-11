@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useFetch } from '../hooks/useFetch';
+import { cardTextAligner } from '../css/App.css';
 
 export default function Pokemon(props) {
   const { name, url } = props.pokemonData;
@@ -16,12 +17,16 @@ export default function Pokemon(props) {
         <Card className='card'>
           <Card.Img src={pokemon.data.sprites.front_default} alt='pokemon' />
         </Card>
-        <p>{capitalizeName(name)}</p>
-        <div className='pokemon-type'>
+        <p style={{ textAlign: 'left' }}>{capitalizeName(name)}</p>
+        <div style={{ align: 'left' }} className='pokemon-type'>
           {pokemon.data.types.map((type) => (
-            <p className='type' key={type.type.name}>
+            <div
+              style={{ textAlign: 'intial' }}
+              className='type'
+              key={type.type.name}
+            >
               {type.type.name}
-            </p>
+            </div>
           ))}
         </div>
       </div>
