@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export const useHttp = (url, dependencies) => {
-  // dependencies of array
+// array of dependencies
+export const useFetch = (url, dependencies) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);
 

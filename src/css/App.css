@@ -1,5 +1,11 @@
+* {
+  font-family: "Itim", cursive;
+  color: #bbbbbb;
+}
+
 .App {
   text-align: center;
+  background-image: url("../images/background.jpg");
 }
 
 .App-logo {
@@ -35,4 +41,31 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.headerStlye {
+  position: relative;
+  width: auto;
+  background: cornflowerblue;
+  image-rendering: auto;
+  image-orientation: inherit;
+}
+
+.footerStyle {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: "#f3f3f3";
+  color: black;
+  text-align: center;
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5%;
 }
