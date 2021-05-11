@@ -7,9 +7,9 @@ export default function PokemonDetail({ title, details }) {
   };
 
   return (
-    <div className="pokemon-detail">
-      <p>{capitalizeTitle(title)}</p>
-      <div className="detail-name-container">
+    <div className="detail-container">
+      <p className="detail-title">{capitalizeTitle(title)}</p>
+      <div className="detail-detail">
         {details.map((detail) => (
           <div key={detail.type.name} className="detail-name">
             {detail.type.name}

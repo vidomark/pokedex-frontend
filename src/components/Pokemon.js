@@ -10,11 +10,16 @@ export default function Pokemon(props) {
   return (
     isLoaded &&
     pokemon && (
-      <div className="card-container">
-        <Card className="card">
-          <Card.Img src={pokemon.data.sprites.front_default} alt="pokemon" />
-        </Card>
-        <PokemonDetail title={name} details={pokemon.data.types} />
+      <div class="cards-list">
+        <div class="card 1">
+          <div class="card_image">
+            {" "}
+            <img src={pokemon.data.sprites.front_default} />{" "}
+          </div>
+          <div class="card_title title-white">
+            <p>Card Title</p>
+          </div>
+        </div>
       </div>
     )
   );

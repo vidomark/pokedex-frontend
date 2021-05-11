@@ -61,35 +61,3 @@
   justify-items: center;
   align-items: center;
 }
-
-.card-container {
-  margin: 15px;
-  text-indent: 15%;
-  font-size: 130%;
-  cursor: pointer;
-}
-
-.pokemon-type {
-  display: flex;
-  margin-left: 12px;
-}
-
-.pokemon-detail {
-  text-indent: 15%;
-}
-
-.detail-name-container {
-  display: flex;
-}
-
-.detail-name {
-  padding-right: 10%;
-}
-
-.type {
-  margin-left: 10px;
-}
-
-.card {
-  width: 9rem;
-}
