@@ -1,11 +1,4 @@
 import React from "react";
-import waterTypeImage from "../images/types/water-type.png";
-import fireTypeImage from "../images/types/fire-type.jpeg";
-import grassTypeImage from "../images/types/grass-type.png";
-import normalTypeImage from "../images/types/normal-type.png";
-import bugTypeImage from "../images/types/bug-type.png";
-import poisonTypeImage from "../images/types/poison-type.webp";
-import flyingTypeImage from "../images/types/flying-type.png";
 
 // array of details
 export default function PokemonDetail({ title, details }) {
@@ -13,14 +6,14 @@ export default function PokemonDetail({ title, details }) {
     return title.charAt(0).toUpperCase() + title.slice(1);
   };
 
-  const image = {
-    water: waterTypeImage,
-    fire: fireTypeImage,
-    grass: grassTypeImage,
-    normal: normalTypeImage,
-    bug: bugTypeImage,
-    poison: poisonTypeImage,
-    flying: flyingTypeImage,
+  const color = {
+    water: "#1b7ced",
+    fire: "#b32100",
+    grass: "#456613",
+    normal: "#666666",
+    bug: "#61370f",
+    poison: "#60397f",
+    flying: "#f4d600",
   };
 
   return (
@@ -31,7 +24,7 @@ export default function PokemonDetail({ title, details }) {
           <div
             key={detail.type.name}
             className="detail-name"
-            style={{ backgroundImage: `url(${image[detail.type.name]})` }}
+            style={{ backgroundColor: color[detail.type.name] }}
           >
             {capitalizeText(detail.type.name)}
           </div>
