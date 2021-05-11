@@ -10,13 +10,20 @@ export default function Pokemon(props) {
   const capitalizeName = (name) => {
     return name.charAt(0).toUpperCase() + name.slice(1);
   };
+  const selectedPokemon = (pokemonData) => {
+    props.selectedPokemon(pokemonData);
+  };
 
   return (
     isLoaded &&
     pokemon && (
       <div className='card-container'>
         <Card className='card'>
-          <Link to='/profile' style={card}>
+          <Link
+            to='/profile'
+            style={card}
+            onClick={() => selectedPokemon(pokemon.data)}
+          >
             <Card.Img src={pokemon.data.sprites.front_default} alt='pokemon' />
           </Link>
         </Card>

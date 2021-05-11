@@ -8,6 +8,10 @@ import React from 'react';
 import ProfilePage from './profilePageComponents/ProfilePage';
 
 function App() {
+  const selectedPokemon = (pokemonData) => {
+    console.log(pokemonData);
+  };
+
   return (
     <Router>
       <div className='App'>
@@ -17,11 +21,11 @@ function App() {
           path='/'
           render={(props) => (
             <React.Fragment>
-              <MainComponent />
+              <MainComponent selectedPokemon={selectedPokemon} />
             </React.Fragment>
           )}
         />
-        <Route path='/profile' component={ProfilePage} />
+        <Route path='/profile' render={() => <ProfilePage />} />
         <Footer />
       </div>
     </Router>
