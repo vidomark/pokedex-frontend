@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap";
 import { useFetch } from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import { card } from "../css/App.css";
+import PokemonDetail from "./PokemonDetail";
 
 export default function Pokemon(props) {
   const { name, url } = props.pokemonData;
@@ -39,7 +40,16 @@ export default function Pokemon(props) {
             </div>
           ))}
         </div>
+        <PokemonDetail title={pokemon.data.name} details={pokemon.data.types} />
       </div>
     )
   );
 }
+
+/* div className="card">
+        <div className="card_image">
+          <img src={pokemon.data.sprites.front_default} />{" "}
+
+        </div>
+        <PokemonDetail title={pokemon.data.name} details={pokemon.data.types} />
+      </div> */

@@ -1,5 +1,11 @@
+* {
+  font-family: "Itim", cursive;
+  color: #bbbbbb;
+}
+
 .App {
   text-align: center;
+  background-image: url("../images/background.jpg");
 }
 
 .App-logo {
@@ -50,7 +56,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background: '#f3f3f3';
+  background: "#f3f3f3";
   color: black;
   text-align: center;
 }
@@ -60,25 +66,8 @@
   flex-wrap: wrap;
   justify-items: center;
   align-items: center;
-}
-
-.card-container {
-  margin: 15px;
-  text-indent: 15%;
-  font-size: 130%;
-  cursor: pointer;
-}
-
-.pokemon-type {
-  display: flex;
-}
-
-.type {
-  margin-left: 10px;
-}
-
-.card {
-  width: 9rem;
+  background-color: #fff;
+  border-radius: 5%;
 }
 
 .profilepicture {
