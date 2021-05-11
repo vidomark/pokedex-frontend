@@ -1,8 +1,8 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
-import { useFetch } from '../hooks/useFetch';
-import { Link } from 'react-router-dom';
-import { card } from '../css/App.css';
+import React from "react";
+import { Card } from "react-bootstrap";
+import { useFetch } from "../hooks/useFetch";
+import { Link } from "react-router-dom";
+import { card } from "../css/App.css";
 
 export default function Pokemon(props) {
   const { name, url } = props.pokemonData;
@@ -10,29 +10,29 @@ export default function Pokemon(props) {
   const capitalizeName = (name) => {
     return name.charAt(0).toUpperCase() + name.slice(1);
   };
-  const selectedPokemon = (pokemonData) => {
-    props.selectedPokemon(pokemonData);
+  const selectPokemon = (pokemon) => {
+    props.selectPokemon(pokemon);
   };
 
   return (
     isLoaded &&
     pokemon && (
-      <div className='card-container'>
-        <Card className='card'>
+      <div className="card-container">
+        <Card className="card">
           <Link
-            to='/profile'
+            to={`/profile/${pokemon.data.id}`}
             style={card}
-            onClick={() => selectedPokemon(pokemon.data)}
+            onClick={() => selectPokemon(pokemon.data)}
           >
-            <Card.Img src={pokemon.data.sprites.front_default} alt='pokemon' />
+            <Card.Img src={pokemon.data.sprites.front_default} alt="pokemon" />
           </Link>
         </Card>
-        <p style={{ textAlign: 'left' }}>{capitalizeName(name)}</p>
-        <div style={{ align: 'left' }} className='pokemon-type'>
+        <p style={{ textAlign: "left" }}>{capitalizeName(name)}</p>
+        <div style={{ align: "left" }} className="pokemon-type">
           {pokemon.data.types.map((type) => (
             <div
-              style={{ textAlign: 'intial' }}
-              className='type'
+              style={{ textAlign: "intial" }}
+              className="type"
               key={type.type.name}
             >
               {type.type.name}

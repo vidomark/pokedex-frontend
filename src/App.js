@@ -1,35 +1,38 @@
-import './css/App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import MainComponent from './components/MainComponent';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import React from 'react';
-import ProfilePage from './profilePageComponents/ProfilePage';
+import "./css/App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ProfilePage from "./components/ProfilePage";
+import MainComponent from "./components/MainComponent";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useState } from "react";
 
 function App() {
-  const selectedPokemon = (pokemonData) => {
-    return pokemonData;
+  const [pokemon, setPokemon] = useState(null);
+  const selectPokemon = (pokemon) => {
+    setPokemon(pokemon);
   };
 
   return (
     <Router>
-      <div className='App'>
+      <div className="App">
         <Header />
         <Route
           exact
-          path='/'
+          path="/"
           render={(props) => (
             <React.Fragment>
-              <MainComponent selectedPokemon={selectedPokemon} />
+              <MainComponent selectPokemon={selectPokemon} />
             </React.Fragment>
           )}
         />
-        <Route
-          path='/profile'
-          render={() => <ProfilePage />}
-          selectedPokemon={selectedPokemon}
-        />
+        {pokemon && (
+          <Route
+            exact
+            path={`/profile/${pokemon.id}`}
+            render={() => <ProfilePage pokemon={pokemon} />}
+          />
+        )}
         <Footer />
       </div>
     </Router>
