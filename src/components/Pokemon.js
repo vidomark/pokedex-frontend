@@ -1,5 +1,5 @@
 import React from "react";
-import { pictureConverter } from "../hooks/pictureConverter";
+import { convertPicture } from "../util/pictureConverter";
 import { useFetch } from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import { card } from "../css/App.css";
@@ -26,7 +26,7 @@ export default function Pokemon(props) {
           onClick={() => selectPokemon(pokemon.data)}
         >
           {/* <img src={pokemon.data.sprites.front_default} /> */}
-          <img src={pictureConverter(pokemon.data.id)} alt="" />
+          <img src={convertPicture(pokemon.data.id)} alt="" />
         </Link>
         <PokemonDetail title={pokemon.data.name} details={pokemon.data.types} />
       </div>

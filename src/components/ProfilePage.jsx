@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
-import { pictureConverter } from "../hooks/pictureConverter";
+import { convertPicture } from "../util/pictureConverter";
 import PokemonDetail from "./PokemonDetail";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,19 +24,24 @@ export default function ProfilePage(props) {
   const { name, id, weight, height } = props.pokemon;
   const classes = useStyles();
 
-  console.log(temp_json);
-
-
   return (
     <div className="main-container">
       <div>
-        <button  style = {{align:'center'}}onClick={()=>console.log("clicked!")}type="submit" value="submit">
-        click!
+        <button
+          style={{ align: "center" }}
+          onClick={() => console.log("clicked!")}
+          type="submit"
+          value="submit"
+        >
+          click!
         </button>
-        <button  onClick={()=>console.log("clicked!")}type="submit" value="submit">
-        click!
+        <button
+          onClick={() => console.log("clicked!")}
+          type="submit"
+          value="submit"
+        >
+          click!
         </button>
-
       </div>
       <Grid container spacing={4} className="classes.grid">
         <Grid item xs={12} md={6}>
@@ -44,7 +49,7 @@ export default function ProfilePage(props) {
             <div>
               <img
                 className={"profile-picture"}
-                src={pictureConverter(id)}
+                src={convertPicture(id)}
                 alt=""
               />
             </div>
@@ -58,20 +63,21 @@ export default function ProfilePage(props) {
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
             <table>
-              <tr>
-                <th>Pokemon Name</th>
-                <th>Abilities</th>
-                <th>Height</th>
-                <th>Weight</th>
-                <th>Generation</th>
-              </tr>
-              <tr>
-                <td>{name}</td>
-                <td>{}</td>
-                <td>{height}</td>
-                <td>{weight}</td>
+              <tbody>
+                <tr>
+                  <th>Pokemon Name</th>
+                  <th>Abilities</th>
+                  <th>Height</th>
+                  <th>Weight</th>
+                  <th>Generation</th>
                 </tr>
-              
+                <tr>
+                  <td>{name}</td>
+                  <td>{}</td>
+                  <td>{height}</td>
+                  <td>{weight}</td>
+                </tr>
+              </tbody>
             </table>
           </Paper>
         </Grid>
