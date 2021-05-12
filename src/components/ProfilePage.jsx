@@ -73,10 +73,15 @@ export default function ProfilePage(props) {
             </div>
           </Paper>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper className={classes.Paper}>
-            <PokemonTable pokemon={pokemon} />
-          </Paper>
+        <Grid item container xs={12} md={6} direction={"column"} spacing={2000}>
+          <Grid item>
+            <Paper className={classes.Paper}>
+              <PokemonTable pokemon={pokemon} />
+            </Paper>
+          </Grid>
+          <Grid item spacing={20}>
+            <PokemonDetail style={{margin:'10%'}}title={"Type"} details={pokemon.types} card={false} />
+          </Grid>
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
@@ -84,7 +89,7 @@ export default function ProfilePage(props) {
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
-          <PokemonDetail title={"Type"} details={pokemon.types} card={false} />
+          <img className={"pokeball"} src="https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"/>
         </Grid>
       </Grid>
     </div>

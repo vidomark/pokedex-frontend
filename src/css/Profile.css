@@ -12,6 +12,16 @@
   width: 100%;
 }
 
+.pokeball {
+  color: white;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  max-width: 100px;
+  background-color: white;
+  border-radius: 15px;
+}
+
 .button {
   border: 1px solid green;
   backdrop-filter: blur(10px);
