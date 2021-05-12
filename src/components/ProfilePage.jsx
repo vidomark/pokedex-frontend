@@ -5,6 +5,7 @@ import { convertPicture } from "../util/pictureConverter";
 import { capitalizeText } from "../util/textCapitalizer";
 import PokemonDetail from "./PokemonDetail";
 import Chart from "./Chart";
+import { Button } from "react-bootstrap";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -53,44 +54,22 @@ const createDataset = (stats) => {
 
 export default function ProfilePage(props) {
   const pokemon = props.pokemon;
-  /* const {
-    name,
-    id,
-    weight,
-    height,
-    types,
-    abilities,
-    species,
-    stats,
-    forms,
-    base_experience,
-    held_items,
-  } = props.pokemon; */
   const classes = useStyles();
   const dataset = createDataset(pokemon.stats);
   const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
   return (
     <div className="main-container">
-      <Grid item xs ={12}>
-        <paper className="buttonDiv">
-        <button
-          className="button"
-          onClick={() => console.log("clicked!")}
-          type="submit"
-          value="submit"
-        >
-          click!
-        </button>
-        <button
-          className="button"
-          onClick={() => console.log("clicked!")}
-          type="submit"
-          value="submit"
-        >
-          click!
-        </button>
-        </paper>
-        </Grid>
+      <Grid item xs={12}>
+        <Paper className="buttonDiv">
+          <Button variant="outline-primary" className="button">
+            Primary
+          </Button>
+          <div className="pokemon-name">{pokemon.name}</div>
+          <Button variant="outline-primary" className="button">
+            Primary
+          </Button>
+        </Paper>
+      </Grid>
       <Grid container spacing={4} className="classes.grid">
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>

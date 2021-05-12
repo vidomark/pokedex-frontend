@@ -1,11 +1,11 @@
 * {
-  font-family: 'Itim', cursive;
+  font-family: "Itim", cursive;
   color: #bbbbbb;
 }
 
 .App {
   text-align: center;
-  background-image: url('../images/background.jpg');
+  background-image: url("../images/background.jpg");
 }
 
 .App-logo {
@@ -56,7 +56,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background: '#f3f3f3';
+  background: "#f3f3f3";
   color: black;
   text-align: center;
 }
@@ -69,38 +69,4 @@
   background-color: #fff;
   border-radius: 5%;
   margin: 0 10%;
-}
-
-.profile-picture {
-  color: white;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  max-width: 400px;
-}
-
-.buttonDiv {
-  display: inline-block;
-  offset-distance: 200px;
-}
-
-.button {
-  border: 1px solid green;
-  backdrop-filter: blur(10px);
-  transform: skewX(-10deg);
-  height: 50px;
-  width: 200px;
-  border-radius: 20px 5px 20px 0px;
-  position: relative;
-  display: inline-block;
-  align-items: flex-start;
-  justify-content: center;
-  transition: all 0.3s ease;
-  font: 15px sans-serif;
-  font-weight: 300;
-  text-shadow: 0 0 20px #fff;
-  text-transform: uppercase;
-  animation: breath2 2s 0.5s infinite alternate;
-  transition: all 0.2s ease;
-  cursor: pointer;
 }
