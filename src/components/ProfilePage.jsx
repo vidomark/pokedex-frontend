@@ -85,7 +85,7 @@ export default function ProfilePage(props) {
             </Paper>
           </Grid>
           <Grid item spacing={20}>
-            <PokemonDetail style={{margin:'10%'}}title={"Type"} details={pokemon.types} card={false} />
+            <PokemonDetail title={"Type"} details={pokemon.types} card={false} />
           </Grid>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -94,7 +94,10 @@ export default function ProfilePage(props) {
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
-          <img className={"pokeball"} src="https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"/>
+          <div className={"box"}>
+            <img  src="https://freepngimg.com/thumb/pokemon/20092-1-pokeball-transparent-image.png?fbclid=IwAR0JGJhEi7QaA8jYcrOLpCuEglKkIYpKw7Tr8vuhOAUT2MKcUoy3-sVRmDI" alt="open pokeball"/>
+            <img className={"hover-img"} src="https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE" alt="closed pokeball"/>
+          </div>        
         </Grid>
       </Grid>
     </div>

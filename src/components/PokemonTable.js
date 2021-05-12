@@ -1,9 +1,10 @@
-import React from "react";
-import { capitalizeText } from "../util/textCapitalizer";
+import React from 'react';
+import { capitalizeText } from '../util/textCapitalizer';
+import '../css/App.css';
 
 export default function PokemonTable({ pokemon }) {
   return (
-    <table>
+    <table className={'pokemon-table'}>
       <tbody>
         <tr>
           <th>Species</th>
