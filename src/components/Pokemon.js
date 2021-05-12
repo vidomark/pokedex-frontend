@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { pictureConverter } from "../hooks/pictureConverter";
 import { useFetch } from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import { card } from "../css/App.css";
@@ -25,7 +25,8 @@ export default function Pokemon(props) {
           style={card}
           onClick={() => selectPokemon(pokemon.data)}
         >
-          <img src={pokemon.data.sprites.front_default} />
+          {/* <img src={pokemon.data.sprites.front_default} /> */}
+          <img src={pictureConverter(pokemon.data.id)} alt="" />
         </Link>
         <PokemonDetail title={pokemon.data.name} details={pokemon.data.types} />
       </div>
