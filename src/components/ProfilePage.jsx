@@ -71,9 +71,9 @@ export default function ProfilePage(props) {
   const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
   return (
     <div className="main-container">
-      <div>
+      <Grid item xs ={12}>
         <button
-          style={{ align: "center" }}
+          className="button"
           onClick={() => console.log("clicked!")}
           type="submit"
           value="submit"
@@ -81,13 +81,14 @@ export default function ProfilePage(props) {
           click!
         </button>
         <button
+          className="button"
           onClick={() => console.log("clicked!")}
           type="submit"
           value="submit"
         >
           click!
         </button>
-      </div>
+        </Grid>
       <Grid container spacing={4} className="classes.grid">
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
