@@ -72,6 +72,7 @@ export default function ProfilePage(props) {
   return (
     <div className="main-container">
       <Grid item xs ={12}>
+        <paper className="buttonDiv">
         <button
           className="button"
           onClick={() => console.log("clicked!")}
@@ -88,6 +89,7 @@ export default function ProfilePage(props) {
         >
           click!
         </button>
+        </paper>
         </Grid>
       <Grid container spacing={4} className="classes.grid">
         <Grid item xs={12} md={6}>
