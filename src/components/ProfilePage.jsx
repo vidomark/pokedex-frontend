@@ -4,6 +4,7 @@ import { Grid, Paper } from "@material-ui/core";
 import { convertPicture } from "../util/pictureConverter";
 import { capitalizeText } from "../util/textCapitalizer";
 import PokemonDetail from "./PokemonDetail";
+import Chart from "./Chart";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -20,8 +21,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const createDataset = (stats) => {
+  const statValues = stats.map((stat) => stat.base_stat);
+  const statStyle = {
+    backgroundColor: [
+      "rgba(255, 99, 132, 0.6)",
+      "rgba(54, 162, 235, 0.6)",
+      "rgba(255, 206, 86, 0.6)",
+      "rgba(75, 192, 192, 0.6)",
+      "rgba(153, 102, 255, 0.6)",
+      "rgba(255, 159, 64, 0.6)",
+      "rgba(255, 99, 132, 0.6)",
+    ],
+    borderWidth: 2,
+    borderColor: "#777",
+    hoverBorderWidth: 3,
+    hoverBorderColor: "#000",
+  };
+  return [
+    {
+      label: "Statistics",
+      data: statValues,
+      backgroundColor: statStyle.backgroundColor,
+      borderWidth: statStyle.borderWidth,
+      borderColor: statStyle.borderColor,
+      hoverBorderWidth: statStyle.hoverBorderWidth,
+      hoverBorderColor: statStyle.hoverBorderColor,
+    },
+  ];
+};
+
 export default function ProfilePage(props) {
-  const {
+  const pokemon = props.pokemon;
+  /* const {
     name,
     id,
     weight,
@@ -33,8 +65,10 @@ export default function ProfilePage(props) {
     forms,
     base_experience,
     held_items,
-  } = props.pokemon;
+  } = props.pokemon; */
   const classes = useStyles();
+  const dataset = createDataset(pokemon.stats);
+  const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
   return (
     <div className="main-container">
       <div>
@@ -60,7 +94,7 @@ export default function ProfilePage(props) {
             <div>
               <img
                 className={"profile-picture"}
-                src={convertPicture(id)}
+                src={convertPicture(pokemon.id)}
                 alt=""
               />
             </div>
@@ -75,21 +109,21 @@ export default function ProfilePage(props) {
                   <th>Base experience</th>
                 </tr>
                 <tr>
-                  <td>{capitalizeText(species.name)}</td>
-                  <td>{base_experience}</td>
+                  <td>{capitalizeText(pokemon.species.name)}</td>
+                  <td>{pokemon.base_experience}</td>
                 </tr>
                 <tr>
                   <th>Height</th>
                   <th>Weight</th>
                 </tr>
                 <tr>
-                  <td>{height}</td>
-                  <td>{weight}</td>
+                  <td>{pokemon.height}</td>
+                  <td>{pokemon.weight}</td>
                 </tr>
                 <tr>
                   <th>Abilities</th>
                 </tr>
-                {abilities.map((ability) => {
+                {pokemon.abilities.map((ability) => {
                   ability = ability.ability;
                   return (
                     <tr key={ability.name}>
@@ -103,11 +137,11 @@ export default function ProfilePage(props) {
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
-            <div>chart</div>
+            <Chart labels={statNames} datasets={dataset} />
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
-          <PokemonDetail title={"Type"} details={types} />
+          <PokemonDetail title={"Type"} details={pokemon.types} />
         </Grid>
       </Grid>
     </div>
