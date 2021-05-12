@@ -6,13 +6,10 @@ import normalTypeImage from "../images/types/normal-type.png";
 import bugTypeImage from "../images/types/bug-type.png";
 import poisonTypeImage from "../images/types/poison-type.webp";
 import flyingTypeImage from "../images/types/flying-type.png";
+import { capitalizeText } from "../util/textCapitalizer";
 
 // array of details
 export default function PokemonDetail({ title, details }) {
-  const capitalizeText = (title) => {
-    return title.charAt(0).toUpperCase() + title.slice(1);
-  };
-
   const image = {
     water: waterTypeImage,
     fire: fireTypeImage,

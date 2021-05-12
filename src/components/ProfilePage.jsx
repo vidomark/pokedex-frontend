@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 import { convertPicture } from "../util/pictureConverter";
+import { capitalizeText } from "../util/textCapitalizer";
 import PokemonDetail from "./PokemonDetail";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,10 +21,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfilePage(props) {
-  const temp_json = props.pokemon;
-  const { name, id, weight, height } = props.pokemon;
+  const {
+    name,
+    id,
+    weight,
+    height,
+    types,
+    abilities,
+    species,
+    stats,
+    forms,
+    base_experience,
+    held_items,
+  } = props.pokemon;
   const classes = useStyles();
-
   return (
     <div className="main-container">
       <div>
@@ -57,32 +68,43 @@ export default function ProfilePage(props) {
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
-            <PokemonDetail title={name} details={props.pokemon.types} />
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper className={classes.Paper}>
             <table>
               <tbody>
                 <tr>
-                  <th>Pokemon Name</th>
-                  <th>Abilities</th>
-                  <th>Height</th>
-                  <th>Weight</th>
-                  <th>Generation</th>
+                  <th>Species</th>
+                  <th>Base experience</th>
                 </tr>
                 <tr>
-                  <td>{name}</td>
-                  <td>{}</td>
+                  <td>{capitalizeText(species.name)}</td>
+                  <td>{base_experience}</td>
+                </tr>
+                <tr>
+                  <th>Height</th>
+                  <th>Weight</th>
+                </tr>
+                <tr>
                   <td>{height}</td>
                   <td>{weight}</td>
+                </tr>
+                <tr>
+                  <th>Abilities</th>
+                </tr>
+                <tr>
+                  {abilities.map((ability) => (
+                    <tr>{ability.ability.name}</tr>
+                  ))}
                 </tr>
               </tbody>
             </table>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Paper className={classes.Paper}>BRuH</Paper>
+          <Paper className={classes.Paper}>
+            <div>chart</div>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <PokemonDetail title={"Type"} details={types} />
         </Grid>
       </Grid>
     </div>
