@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 import { convertPicture } from "../util/pictureConverter";
@@ -54,13 +54,18 @@ const createDataset = (stats) => {
 };
 
 export default function ProfilePage(props) {
-  const pokemon = props.pokemon;
+  const [pokemon, setPokemon] = useState(props.pokemon);
+  console.log(pokemon);
   const classes = useStyles();
   const dataset = createDataset(pokemon.stats);
   const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
+  const selectPokemon = (pokemon) => {
+    setPokemon(pokemon);
+  };
+
   return (
     <div className="main-container">
-      <PokemonController pokemon={pokemon} />
+      <PokemonController pokemon={pokemon} selectPokemon={selectPokemon} />
       <Grid container spacing={4} className="classes.grid">
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
