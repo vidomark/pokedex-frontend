@@ -89,11 +89,14 @@ export default function ProfilePage(props) {
                 <tr>
                   <th>Abilities</th>
                 </tr>
-                <tr>
-                  {abilities.map((ability) => (
-                    <tr>{ability.ability.name}</tr>
-                  ))}
-                </tr>
+                {abilities.map((ability) => {
+                  ability = ability.ability;
+                  return (
+                    <tr key={ability.name}>
+                      <td>{capitalizeText(ability.name)}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </Paper>
