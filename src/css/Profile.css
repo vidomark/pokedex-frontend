@@ -41,5 +41,13 @@
 
 .pokemon-name {
   display: inline-block;
-  max-width: 300px;
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+.pokemon-id {
+  display: inline-block;
+  font-size: 40px;
+  font-weight: bolder;
+  margin-left: 35px;
 }

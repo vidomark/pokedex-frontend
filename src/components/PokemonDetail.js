@@ -7,9 +7,15 @@ import bugTypeImage from "../images/types/bug-type.png";
 import poisonTypeImage from "../images/types/poison-type.webp";
 import flyingTypeImage from "../images/types/flying-type.png";
 import { capitalizeText } from "../util/textCapitalizer";
+import { convertId } from "../util/idConverter";
 
 // array of details
-export default function PokemonDetail({ title, details }) {
+export default function PokemonDetail({
+  title,
+  details,
+  card = true,
+  id = null,
+}) {
   const image = {
     water: waterTypeImage,
     fire: fireTypeImage,
@@ -22,7 +28,8 @@ export default function PokemonDetail({ title, details }) {
 
   return (
     <div className="detail-container">
-      <p className="detail-title">{capitalizeText(title)}</p>
+      {card && <div className="detail-id">{convertId(id)}</div>}
+      <div className="detail-title">{capitalizeText(title)}</div>
       <div className="detail-detail">
         {details.map((detail) => (
           <div

@@ -59,7 +59,7 @@ export default function ProfilePage(props) {
   const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
   return (
     <div className="main-container">
-      <PokemonController name={pokemon.name} />
+      <PokemonController pokemon={pokemon} />
       <Grid container spacing={4} className="classes.grid">
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
@@ -113,7 +113,7 @@ export default function ProfilePage(props) {
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
-          <PokemonDetail title={"Type"} details={pokemon.types} />
+          <PokemonDetail title={"Type"} details={pokemon.types} card={false} />
         </Grid>
       </Grid>
     </div>
