@@ -52,6 +52,11 @@ export default function ProfilePage(props) {
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
+            <PokemonDetail title={name} details={props.pokemon.types} />
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Paper className={classes.Paper}>
             <table>
               <tr>
                 <th>Pokemon Name</th>
@@ -68,11 +73,6 @@ export default function ProfilePage(props) {
                 </tr>
               
             </table>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper className={classes.Paper}>
-            <PokemonDetail title={name} details={props.pokemon.types} />
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
