@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 import { pictureConverter } from "../hooks/pictureConverter";
+import PokemonDetail from "./PokemonDetail";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -20,11 +21,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfilePage(props) {
   const temp_json = props.pokemon;
-  const { name, sprites, id, weight, height } = props.pokemon;
+  const { name, id, weight, height } = props.pokemon;
   const classes = useStyles();
+
+  console.log(temp_json);
+
 
   return (
     <div className="main-container">
+      <div>
+        <button  style = {{align:'center'}}onClick={()=>console.log("clicked!")}type="submit" value="submit">
+        click!
+        </button>
+        <button  onClick={()=>console.log("clicked!")}type="submit" value="submit">
+        click!
+        </button>
+
+      </div>
       <Grid container spacing={4} className="classes.grid">
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
@@ -40,17 +53,27 @@ export default function ProfilePage(props) {
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
             <table>
-              <th>1</th>
-              <tr> 123</tr>
-              <th>2</th>
-              <tr>124</tr>
-              <th>3</th>
-              <th>4</th>
+              <tr>
+                <th>Pokemon Name</th>
+                <th>Abilities</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Generation</th>
+              </tr>
+              <tr>
+                <td>{name}</td>
+                <td>{}</td>
+                <td>{height}</td>
+                <td>{weight}</td>
+                </tr>
+              
             </table>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Paper className={classes.Paper}>BRAH</Paper>
+          <Paper className={classes.Paper}>
+            <PokemonDetail title={name} details={props.pokemon.types} />
+          </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>BRuH</Paper>
