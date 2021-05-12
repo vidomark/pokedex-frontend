@@ -4,8 +4,8 @@ import { Grid, Paper } from "@material-ui/core";
 import { convertPicture } from "../util/pictureConverter";
 import { capitalizeText } from "../util/textCapitalizer";
 import PokemonDetail from "./PokemonDetail";
+import PokemonController from "./PokemonController";
 import Chart from "./Chart";
-import { Button } from "react-bootstrap";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -59,17 +59,7 @@ export default function ProfilePage(props) {
   const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
   return (
     <div className="main-container">
-      <Grid item xs={12}>
-        <Paper className="buttonDiv">
-          <Button variant="outline-primary" className="button">
-            Primary
-          </Button>
-          <div className="pokemon-name">{pokemon.name}</div>
-          <Button variant="outline-primary" className="button">
-            Primary
-          </Button>
-        </Paper>
-      </Grid>
+      <PokemonController name={pokemon.name} />
       <Grid container spacing={4} className="classes.grid">
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
