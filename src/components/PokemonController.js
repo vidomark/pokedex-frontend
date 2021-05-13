@@ -28,22 +28,20 @@ export default function PokemonController(props) {
     previousPokemon &&
     followingPokemon && (
       <div className="button-container">
-        <Button
-          variant="outline-primary"
-          className="button previous rounded-pill"
+        <button
+          className="button previous"
           onClick={() => selectPokemon(previousPokemon.data)}
         >
-          {capitalizeText(previousPokemon.data.name)}
-        </Button>
+          <span>{capitalizeText(previousPokemon.data.name)}</span>
+        </button>
         <div className="pokemon-name">{capitalizeText(props.pokemon.name)}</div>
         <div className="pokemon-id">{convertId(props.pokemon.id)}</div>
-        <Button
-          variant="outline-primary"
-          className="button next rounded-pill"
+        <button
+          className="button following"
           onClick={() => selectPokemon(followingPokemon.data)}
         >
-          {followingPokemon.data.name}
-        </Button>
+          <span>{capitalizeText(followingPokemon.data.name)}</span>
+        </button>
       </div>
     )
   );

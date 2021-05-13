@@ -22,33 +22,6 @@
   border-radius: 15px;
 }
 
-.button {
-  border: 1px solid green;
-  backdrop-filter: blur(10px);
-  height: 50px;
-  width: 200px;
-  position: relative;
-  display: inline-block;
-  align-items: flex-start;
-  justify-content: center;
-  transition: all 0.3s ease;
-  font: 15px sans-serif;
-  font-weight: 300;
-  text-shadow: 0 0 20px #fff;
-  text-transform: uppercase;
-  animation: breath2 2s 0.5s infinite alternate;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.button.previous {
-  float: left;
-}
-
-.button.next {
-  float: right;
-}
-
 .pokemon-name {
   display: inline-block;
   font-size: 40px;
@@ -60,4 +33,48 @@
   font-size: 40px;
   font-weight: bolder;
   margin-left: 35px;
+}
+
+/* button */
+
+.button {
+  display: inline;
+  padding: 0.46em 1.6em;
+  border: 0.1em solid grey;
+  border-radius: 0.3em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: grey;
+  text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+  background-color: #009dff;
+  text-align: center;
+  transition: all 0.15s;
+}
+.button:hover {
+  text-shadow: 0 0 2em rgba(255, 255, 255, 1);
+  color: #ffffff;
+  border-color: black;
+}
+
+.button.previous {
+  float: left;
+}
+
+.button.following {
+  float: right;
+}
+
+@media all and (max-width: 30em) {
+  .button {
+    display: block;
+    margin: 0.4em auto;
+  }
+}
+
+/* pokemon table */
+
+.pokemon-table {
+  background-color: #009dff;
 }

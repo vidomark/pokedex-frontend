@@ -3,7 +3,7 @@ import { capitalizeText } from "../util/textCapitalizer";
 
 export default function PokemonTable({ pokemon }) {
   return (
-    <table>
+    <table className="pokemon-table">
       <tbody>
         <tr>
           <th>Species</th>
