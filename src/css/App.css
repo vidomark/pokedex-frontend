@@ -69,7 +69,7 @@
   justify-items: center;
   align-items: center;
   background-color: #fff;
-  border-radius: 5%;
-  padding-bottom: 30px;
-  margin-bottom: 100px;
+  border-radius: 10px;
+  margin: 0 10%;
+  max-width: 1800px;
 }
