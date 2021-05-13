@@ -6,7 +6,7 @@ import { card } from "../css/App.css";
 import PokemonDetail from "./PokemonDetail";
 
 export default function Pokemon(props) {
-  const { name, url } = props.pokemonData;
+  const { url } = props.pokemonData;
   const [isLoaded, pokemon] = useFetch(url, []);
   const selectPokemon = (pokemon) => {
     props.selectPokemon(pokemon);

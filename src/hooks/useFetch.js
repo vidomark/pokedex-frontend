@@ -7,7 +7,10 @@ export const useFetch = (url, dependencies) => {
   const [fetchedData, setFetchedData] = useState(null);
 
   const fetchData = (url) => {
-    axios.get(url).then((data) => setFetchedData(data));
+    axios
+      .get(url)
+      .then((data) => setFetchedData(data))
+      .catch((error) => console.error(error));
   };
 
   useEffect(() => {
