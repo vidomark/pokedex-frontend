@@ -1,6 +1,6 @@
 * {
   font-family: 'Itim', cursive;
-  color: #bbbbbb;
+
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -77,4 +77,6 @@
 .pokemon-table {
   background-color: rgb(50, 141, 184);
   color: white;
+  width: 100%;
+  border-radius: 10px;
 }

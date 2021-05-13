@@ -22,23 +22,23 @@
   margin: 15px;
   border: 2px solid #fff;
 }
-img {
-  width: 100%;
+
+.pokeball {
+  max-width: 130px;
   transition: all linear 0.35s;
 }
-img.hover-img {
+.pokeball.hover-img {
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
 }
-.box:hover img {
+.box:hover .pokeball {
   opacity: 0;
 }
-.box:hover img.hover-img {
+.box:hover .pokeball.hover-img {
   opacity: 1;
 }
-
 .button {
   border: 1px solid green;
   backdrop-filter: blur(10px);
