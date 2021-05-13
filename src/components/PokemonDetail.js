@@ -16,9 +16,16 @@ export default function PokemonDetail({ title, details }) {
     flying: "#f4d600",
   };
 
+  const containerClassName = card
+    ? "detail-container"
+    : "detail-container profile";
+
+  const detailClassName = card ? "detail-name" : "detail-name profile";
+
   return (
-    <div className="detail-container">
-      <p className="detail-title">{capitalizeText(title)}</p>
+    <div className={containerClassName}>
+      {card && <div className="detail-id">{convertId(id)}</div>}
+      <div className="detail-title">{capitalizeText(title)}</div>
       <div className="detail-detail">
         {details.map((detail) => (
           <div

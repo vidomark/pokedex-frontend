@@ -1,0 +1,136 @@
+.profile-picture {
+  color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  max-width: 400px;
+  background-image: url("../images/pokemon-background-image.png");
+  border-radius: 15px;
+}
+
+.button-container {
+  width: 100%;
+}
+
+.box {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 15px;
+  border: 2px solid #fff;
+}
+
+.pokeball {
+  margin-top: 15%;
+  max-width: 300px;
+}
+
+.pokeball.caught {
+  width: 70%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  max-width: 180px;
+}
+
+.pokemon-id {
+  display: inline-block;
+  font-size: 40px;
+  font-weight: bolder;
+  margin-left: 35px;
+  color: #bbbbbb;
+}
+
+.pokemon-name {
+  display: inline;
+  font-size: 40px;
+  color: #bbbbbb;
+  font-weight: bolder;
+}
+
+/* button */
+
+.button {
+  display: inline;
+  padding: 0.46em 1.6em;
+  border: 0.1em solid grey;
+  border-radius: 0.3em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+  background-color: #6787e7;
+  text-align: center;
+  transition: all 0.15s;
+}
+.button:hover {
+  text-shadow: 0 0 2em rgba(255, 255, 255, 1);
+  color: #ffffff;
+  border-color: black;
+}
+
+.button.previous {
+  float: left;
+}
+
+.button.following {
+  float: right;
+}
+
+@media all and (max-width: 30em) {
+  .button {
+    display: block;
+    margin: 0.4em auto;
+  }
+}
+
+/* pokemon table */
+
+.pokemon-table {
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #6787e7;
+  border-radius: 10px;
+  width: 100%;
+  color: #ffffff;
+}
+
+td {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+th {
+  font-weight: normal;
+}
+
+th,
+td {
+  padding: 4px;
+
+  color: #fff;
+}
+
+th {
+  text-align: left;
+}
+
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+tbody td:hover {
+  content: "";
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+  top: -9999px;
+  bottom: -9999px;
+}
