@@ -2,7 +2,6 @@ import React from "react";
 import { capitalizeText } from "../util/textCapitalizer";
 import { convertId } from "../util/idConverter";
 import { useFetch } from "../hooks/useFetch";
-import { Button } from "react-bootstrap";
 
 export default function PokemonController(props) {
   const previousPokemonUrl = `https://pokeapi.co/api/v2/pokemon/${
@@ -35,6 +34,9 @@ export default function PokemonController(props) {
             onClick={() => selectPokemon(previousPokemon.data)}
           >
             <span>{capitalizeText(previousPokemon.data.name)}</span>
+            <span className="pokemon-change-id">
+              {convertId(previousPokemon.data.id)}
+            </span>
           </button>
         )}
         <div className="pokemon-name">{capitalizeText(props.pokemon.name)}</div>
@@ -44,6 +46,9 @@ export default function PokemonController(props) {
           onClick={() => selectPokemon(followingPokemon.data)}
         >
           <span>{capitalizeText(followingPokemon.data.name)}</span>
+          <span className="pokemon-change-id">
+            {convertId(followingPokemon.data.id)}
+          </span>
         </button>
       </div>
     )

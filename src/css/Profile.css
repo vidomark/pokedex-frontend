@@ -52,6 +52,10 @@
   font-weight: bolder;
 }
 
+.pokemon-change-id {
+  margin-left: 20px;
+}
+
 /* button */
 
 .button {
