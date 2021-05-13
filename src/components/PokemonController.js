@@ -11,6 +11,7 @@ export default function PokemonController(props) {
   const followingPokemonUrl = `https://pokeapi.co/api/v2/pokemon/${
     props.pokemon.id + 1
   }`;
+
   const [previousLoaded, previousPokemon] = useFetch(previousPokemonUrl, [
     props.pokemon.id,
   ]);
@@ -28,12 +29,14 @@ export default function PokemonController(props) {
     previousPokemon &&
     followingPokemon && (
       <div className="button-container">
-        <button
-          className="button previous"
-          onClick={() => selectPokemon(previousPokemon.data)}
-        >
-          <span>{capitalizeText(previousPokemon.data.name)}</span>
-        </button>
+        {props.pokemon.id > 1 && (
+          <button
+            className="button previous"
+            onClick={() => selectPokemon(previousPokemon.data)}
+          >
+            <span>{capitalizeText(previousPokemon.data.name)}</span>
+          </button>
+        )}
         <div className="pokemon-name">{capitalizeText(props.pokemon.name)}</div>
         <div className="pokemon-id">{convertId(props.pokemon.id)}</div>
         <button
