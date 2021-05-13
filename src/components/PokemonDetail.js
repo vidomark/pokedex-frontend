@@ -26,15 +26,21 @@ export default function PokemonDetail({
     flying: flyingTypeImage,
   };
 
+  const containerClassName = card
+    ? "detail-container"
+    : "detail-container profile";
+
+  const detailClassName = card ? "detail-name" : "detail-name profile";
+
   return (
-    <div className="detail-container">
+    <div className={containerClassName}>
       {card && <div className="detail-id">{convertId(id)}</div>}
       <div className="detail-title">{capitalizeText(title)}</div>
       <div className="detail-detail">
         {details.map((detail) => (
           <div
             key={detail.type.name}
-            className="detail-name"
+            className={detailClassName}
             style={{ backgroundImage: `url(${image[detail.type.name]})` }}
           >
             {capitalizeText(detail.type.name)}

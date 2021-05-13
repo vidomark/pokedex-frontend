@@ -1,10 +1,10 @@
 .profile-picture {
-  color: white;
+  color: #fff;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   max-width: 400px;
-  background-color: grey;
+  background-image: url("../images/pokemon-background-image.png");
   border-radius: 15px;
 }
 
@@ -24,21 +24,17 @@
 }
 
 .pokeball {
-  max-width: 130px;
-  transition: all linear 0.35s;
+  margin-top: 15%;
+  max-width: 300px;
 }
 
-.pokeball.hover-img {
+.pokeball.caught {
+  width: 70%;
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0;
-}
-.box:hover .pokeball {
-  opacity: 0;
-}
-.box:hover .pokeball.hover-img {
   opacity: 1;
+  max-width: 180px;
 }
 
 .pokemon-id {
@@ -65,11 +61,10 @@
   border-radius: 0.3em;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: "Roboto", sans-serif;
   font-weight: bold;
   color: #ffffff;
   text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-  background-color: #2b5bb0;
+  background-color: #6787e7;
   text-align: center;
   transition: all 0.15s;
 }
@@ -97,7 +92,45 @@
 /* pokemon table */
 
 .pokemon-table {
-  background-color: #2b5bb0;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #6787e7;
+  border-radius: 10px;
+  width: 100%;
   color: #ffffff;
-  margin-bottom: 30%;
+}
+
+td {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+th {
+  font-weight: normal;
+}
+
+th,
+td {
+  padding: 4px;
+
+  color: #fff;
+}
+
+th {
+  text-align: left;
+}
+
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+tbody td:hover {
+  content: "";
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+  top: -9999px;
+  bottom: -9999px;
 }

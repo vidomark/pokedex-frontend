@@ -55,7 +55,11 @@ const createDataset = (stats) => {
 
 export default function ProfilePage(props) {
   const [pokemon, setPokemon] = useState(props.pokemon);
-  console.log(pokemon);
+  const [caught, setCaught] = useState(false); // for catching pokemon
+  const pokeballImageSource = caught
+    ? "https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"
+    : "https://freepngimg.com/thumb/pokemon/20092-1-pokeball-transparent-image.png?fbclid=IwAR0JGJhEi7QaA8jYcrOLpCuEglKkIYpKw7Tr8vuhOAUT2MKcUoy3-sVRmDI";
+  const pokeballImageClass = caught ? "pokeball caught" : "pokeball";
   const classes = useStyles();
   const dataset = createDataset(pokemon.stats);
   const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
@@ -71,9 +75,9 @@ export default function ProfilePage(props) {
           <Paper className={classes.Paper}>
             <div>
               <img
-                className={"profile-picture"}
+                className="profile-picture"
                 src={convertPicture(pokemon.id)}
-                alt=""
+                alt="pokemon"
               />
             </div>
           </Paper>
@@ -100,14 +104,10 @@ export default function ProfilePage(props) {
         <Grid item xs={12} md={6}>
           <div className={"box"}>
             <img
-              className="pokeball"
-              src="https://freepngimg.com/thumb/pokemon/20092-1-pokeball-transparent-image.png?fbclid=IwAR0JGJhEi7QaA8jYcrOLpCuEglKkIYpKw7Tr8vuhOAUT2MKcUoy3-sVRmDI"
-              alt="open pokeball"
-            />
-            <img
-              className={"pokeball hover-img"}
-              src="https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"
-              alt="closed pokeball"
+              src={pokeballImageSource}
+              className={pokeballImageClass}
+              onClick={() => setCaught(true)}
+              alt="pokeball"
             />
           </div>
         </Grid>

@@ -122,7 +122,21 @@
   padding: 0px 5%;
 }
 
+.detail-name.profile {
+  margin-left: 30px;
+}
+
 .detail-id {
   margin-left: 23px;
   color: grey;
+}
+
+.detail-container {
+  color: #bbb;
+}
+
+.detail-container.profile {
+  margin-top: 14px;
+  color: #fff;
+  background-color: #6787e7;
 }

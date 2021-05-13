@@ -7,29 +7,31 @@ export default function PokemonTable({ pokemon }) {
     <table className="pokemon-table">
       <tbody>
         <tr>
-          <th>Species</th>
-          <th>Base experience</th>
+          <td>Species</td>
+          <td>Base experience</td>
         </tr>
         <tr>
-          <td>{capitalizeText(pokemon.species.name)}</td>
-          <td>{pokemon.base_experience}</td>
+          <th>{capitalizeText(pokemon.species.name)}</th>
+          <th>{pokemon.base_experience}</th>
         </tr>
         <tr>
-          <th>Height</th>
-          <th>Weight</th>
+          <td>Height</td>
+          <td>Weight</td>
         </tr>
         <tr>
-          <td>{pokemon.height}</td>
-          <td>{pokemon.weight}</td>
+          <th>{pokemon.height}</th>
+          <th>{pokemon.weight}</th>
         </tr>
         <tr>
-          <th>Abilities</th>
+          <td>Abilities</td>
+          <td></td>
         </tr>
         {pokemon.abilities.map((ability) => {
           ability = ability.ability;
           return (
             <tr key={ability.name}>
-              <td>{capitalizeText(ability.name)}</td>
+              <th>{capitalizeText(ability.name)}</th>
+              <th></th>
             </tr>
           );
         })}
