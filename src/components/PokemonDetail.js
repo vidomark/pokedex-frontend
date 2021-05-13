@@ -1,7 +1,13 @@
 import React from "react";
+import { convertId } from "../util/idConverter";
 
 // array of details
-export default function PokemonDetail({ title, details }) {
+export default function PokemonDetail({
+  title,
+  details,
+  card = true,
+  id = null,
+}) {
   const capitalizeText = (title) => {
     return title.charAt(0).toUpperCase() + title.slice(1);
   };
@@ -30,7 +36,7 @@ export default function PokemonDetail({ title, details }) {
         {details.map((detail) => (
           <div
             key={detail.type.name}
-            className="detail-name"
+            className={detailClassName}
             style={{ backgroundColor: color[detail.type.name] }}
           >
             {capitalizeText(detail.type.name)}
