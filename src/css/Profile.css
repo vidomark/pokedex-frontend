@@ -12,17 +12,39 @@
   width: 100%;
 }
 
-.pokeball {
-  color: white;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  max-width: 100px;
-  background-color: white;
-  border-radius: 15px;
+.box {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 15px;
+  border: 2px solid #fff;
 }
 
-.pokemon-name {
+.pokeball {
+  max-width: 130px;
+  transition: all linear 0.35s;
+}
+.pokeball.hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.box:hover .pokeball {
+  opacity: 0;
+}
+.box:hover .pokeball.hover-img {
+  opacity: 1;
+}
+.button {
+  border: 1px solid green;
+  backdrop-filter: blur(10px);
+  height: 50px;
+  width: 200px;
+  position: relative;
   display: inline-block;
   font-size: 40px;
   font-weight: bolder;

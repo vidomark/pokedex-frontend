@@ -80,6 +80,7 @@ export default function ProfilePage(props) {
         </Grid>
         <Grid item container xs={12} md={6} direction={"column"} spacing={2000}>
           <Grid item>
+<<<<<<< HEAD
             <Paper className={classes.Paper + " pokemon-table"}>
               <PokemonTable pokemon={pokemon} />
             </Paper>
@@ -91,6 +92,14 @@ export default function ProfilePage(props) {
               details={pokemon.types}
               card={false}
             />
+=======
+            <Paper className={classes.Paper}>
+              <PokemonTable  pokemon={pokemon} />
+            </Paper>
+          </Grid>
+          <Grid item spacing={20}>
+            <PokemonDetail title={"Type"} details={pokemon.types} card={false} />
+>>>>>>> profileV2
           </Grid>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -99,11 +108,18 @@ export default function ProfilePage(props) {
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
+<<<<<<< HEAD
           <img
             className={"pokeball"}
             src="https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"
             alt="pokeball"
           />
+=======
+          <div className={"box"}>
+            <img className="pokeball" src="https://freepngimg.com/thumb/pokemon/20092-1-pokeball-transparent-image.png?fbclid=IwAR0JGJhEi7QaA8jYcrOLpCuEglKkIYpKw7Tr8vuhOAUT2MKcUoy3-sVRmDI" alt="open pokeball"/>
+            <img className={"pokeball hover-img"} src="https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE" alt="closed pokeball"/>
+          </div>        
+>>>>>>> profileV2
         </Grid>
       </Grid>
     </div>

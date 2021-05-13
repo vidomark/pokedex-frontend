@@ -1,5 +1,6 @@
 import React from "react";
 import { capitalizeText } from "../util/textCapitalizer";
+import "../css/App.css";
 
 export default function PokemonTable({ pokemon }) {
   return (
