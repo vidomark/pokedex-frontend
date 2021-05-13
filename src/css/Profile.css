@@ -27,6 +27,7 @@
   max-width: 130px;
   transition: all linear 0.35s;
 }
+
 .pokeball.hover-img {
   position: absolute;
   top: 0;
@@ -39,22 +40,20 @@
 .box:hover .pokeball.hover-img {
   opacity: 1;
 }
-.button {
-  border: 1px solid green;
-  backdrop-filter: blur(10px);
-  height: 50px;
-  width: 200px;
-  position: relative;
-  display: inline-block;
-  font-size: 40px;
-  font-weight: bolder;
-}
 
 .pokemon-id {
   display: inline-block;
   font-size: 40px;
   font-weight: bolder;
   margin-left: 35px;
+  color: #bbbbbb;
+}
+
+.pokemon-name {
+  display: inline;
+  font-size: 40px;
+  color: #bbbbbb;
+  font-weight: bolder;
 }
 
 /* button */
@@ -67,10 +66,10 @@
   box-sizing: border-box;
   text-decoration: none;
   font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  color: grey;
+  font-weight: bold;
+  color: #ffffff;
   text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-  background-color: #009dff;
+  background-color: #2b5bb0;
   text-align: center;
   transition: all 0.15s;
 }
@@ -98,5 +97,7 @@
 /* pokemon table */
 
 .pokemon-table {
-  background-color: #009dff;
+  background-color: #2b5bb0;
+  color: #ffffff;
+  margin-bottom: 30%;
 }

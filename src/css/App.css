@@ -1,14 +1,14 @@
 * {
-  font-family: 'Itim', cursive;
-
+  font-family: "Itim", cursive;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: #bbbbbb;
 }
 
 .App {
   text-align: center;
-  background-image: url('../images/background.jpg');
+  background-image: url("../images/background.jpg");
 }
 
 .App-logo {
@@ -59,7 +59,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background: '#f3f3f3';
+  background: "#f3f3f3";
   color: black;
   text-align: center;
 }
