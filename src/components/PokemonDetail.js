@@ -1,5 +1,8 @@
 import React from "react";
 import { convertId } from "../util/idConverter";
+import { capitalizeText } from "../util/textCapitalizer";
+import { color } from "../util/hexColors";
+import { Link } from "react-router-dom";
 
 // array of details
 export default function PokemonDetail({
@@ -7,32 +10,8 @@ export default function PokemonDetail({
   details,
   card = true,
   id = null,
+  selectType,
 }) {
-  const capitalizeText = (title) => {
-    return title.charAt(0).toUpperCase() + title.slice(1);
-  };
-
-  const color = {
-    water: "#001687",
-    fire: "#b32100",
-    grass: "#456613",
-    normal: "#c678dd",
-    bug: "#111111",
-    poison: "#60397f",
-    flying: "#f4d600",
-    electric: "#0892d0",
-    ground: "#61370f",
-    fairy: "#f7d8ba",
-    fighting: "#4c0013",
-    psychic: "#0c1c1c",
-    rock: "#8c9399",
-    ice: "#a5f2f3",
-    ghost: "#333333",
-    dragon: "#377455",
-    steel: "#43464b",
-    dark: "#000000",
-  };
-
   const containerClassName = card
     ? "detail-container"
     : "detail-container profile";
@@ -49,6 +28,7 @@ export default function PokemonDetail({
             key={detail.type.name}
             className={detailClassName}
             style={{ backgroundColor: color[detail.type.name] }}
+            onClick={() => !card && selectType(detail.type.name)}
           >
             {capitalizeText(detail.type.name)}
           </div>

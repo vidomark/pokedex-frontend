@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 import { convertPicture } from "../util/pictureConverter";
 import { capitalizeText } from "../util/textCapitalizer";
+import { createDataset } from "../util/datasetCreator";
 import PokemonDetail from "./PokemonDetail";
 import PokemonController from "./PokemonController";
 import PokemonTable from "./PokemonTable";
@@ -23,36 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const createDataset = (stats) => {
-  const statValues = stats.map((stat) => stat.base_stat);
-  const statStyle = {
-    backgroundColor: [
-      "rgba(255, 99, 132, 0.6)",
-      "rgba(54, 162, 235, 0.6)",
-      "rgba(255, 206, 86, 0.6)",
-      "rgba(75, 192, 192, 0.6)",
-      "rgba(153, 102, 255, 0.6)",
-      "rgba(255, 159, 64, 0.6)",
-      "rgba(255, 99, 132, 0.6)",
-    ],
-    borderWidth: 2,
-    borderColor: "#777",
-    hoverBorderWidth: 3,
-    hoverBorderColor: "#000",
-  };
-  return [
-    {
-      label: "Statistics",
-      data: statValues,
-      backgroundColor: statStyle.backgroundColor,
-      borderWidth: statStyle.borderWidth,
-      borderColor: statStyle.borderColor,
-      hoverBorderWidth: statStyle.hoverBorderWidth,
-      hoverBorderColor: statStyle.hoverBorderColor,
-    },
-  ];
-};
-
 export default function ProfilePage(props) {
   const [pokemon, setPokemon] = useState(props.pokemon);
   const [caught, setCaught] = useState(false); // for catching pokemon
@@ -65,6 +36,9 @@ export default function ProfilePage(props) {
   const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
   const selectPokemon = (pokemon) => {
     setPokemon(pokemon);
+  };
+  const selectType = (type) => {
+    props.selectType(type);
   };
 
   return (
@@ -93,6 +67,7 @@ export default function ProfilePage(props) {
               title={"Type"}
               details={pokemon.types}
               card={false}
+              selectType={selectType}
             />
           </Grid>
         </Grid>

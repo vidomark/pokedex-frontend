@@ -6,39 +6,15 @@ import { useFetch } from "../hooks/useFetch";
 import axios from "axios";
 
 export default function MainComponent(props) {
-  const [pokemonList, setPokemonList] = useState(null);
-  const [pokemonUrl, setPokemonUrl] = useState(
-    "https://pokeapi.co/api/v2/pokemon?offset=0&limit=18"
-  );
-
-  const fetchPokemons = (url) => {
-    axios.get(url).then((result) => setPokemonList(result));
-  };
-
-  const selectPokemon = (pokemon) => {
-    props.selectPokemon(pokemon);
-  };
-
-  const nextPage = () => {
-    fetchPokemons(pokemonList.data.next);
-  };
-
-  const previousPage = () => {
-    fetchPokemons(pokemonList.data.previous);
-  };
-
-  useEffect(() => {
-    fetchPokemons(pokemonUrl);
-  }, [pokemonUrl]);
-
+  const { pokemonData, selectPokemon, nextPage, previousPage, type } = props;
   return (
-    pokemonList && (
+    pokemonData && (
       <div>
         <div>
           <Pagination nextPage={nextPage} previousPage={previousPage} />
         </div>
         <Container className="main-container">
-          {pokemonList.data.results.map((pokemonData) => (
+          {pokemonData.data.results.map((pokemonData) => (
             <Pokemon
               key={pokemonData.name}
               pokemonData={pokemonData}
@@ -49,4 +25,12 @@ export default function MainComponent(props) {
       </div>
     )
   );
+}
+
+{
+  /* <Pokemon
+                key={pokemonData.pokemon.name}
+                pokemonData={pokemonData.pokemon}
+                selectPokemon={selectPokemon}
+              /> */
 }
