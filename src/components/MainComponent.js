@@ -26,11 +26,3 @@ export default function MainComponent(props) {
     )
   );
 }
-
-{
-  /* <Pokemon
-                key={pokemonData.pokemon.name}
-                pokemonData={pokemonData.pokemon}
-                selectPokemon={selectPokemon}
-              /> */
-}

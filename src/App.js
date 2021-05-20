@@ -10,19 +10,17 @@ import MainComponent from "./components/MainComponent";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useFetch } from "./hooks/useFetch";
 
 function App() {
-  const [pokemonData, setPokemonData] = useState(null);
   const [pokemon, setPokemon] = useState(null);
   const [type, setType] = useState(null);
-
+  const [offset, setOffset] = useState(0);
   const [pokemonUrl, setPokemonUrl] = useState(
     "https://pokeapi.co/api/v2/pokemon?offset=0&limit=18"
   );
 
-  const fetchPokemons = (url) => {
-    axios.get(url).then((result) => setPokemonData(result));
-  };
+  const [isLoaded, pokemonData] = useFetch(pokemonUrl, [pokemonUrl]);
 
   const selectPokemon = (pokemon) => {
     setPokemon(pokemon);
@@ -34,36 +32,39 @@ function App() {
   };
 
   const nextPage = () => {
-    fetchPokemons(pokemonData.data.next);
+    setOffset((prev) => {
+      prev = prev + 20;
+      const newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${prev}&limit=18`;
+      setPokemonUrl(newUrl);
+      return prev;
+    });
   };
 
   const previousPage = () => {
-    fetchPokemons(pokemonData.data.previous);
+    setOffset((prev) => {
+      prev = prev - 20;
+      const newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${prev}&limit=18`;
+      setPokemonUrl(newUrl);
+      return prev;
+    });
   };
-
-  useEffect(() => {
-    fetchPokemons(pokemonUrl);
-  }, [pokemonUrl]);
 
   return (
     <Router>
       <div className="App">
         <Header />
 
-        {pokemonData && (
+        {isLoaded && (
           <Route
             exact
             path="/"
             render={(props) => (
-              <React.Fragment>
-                <MainComponent
-                  pokemonData={pokemonData}
-                  selectPokemon={selectPokemon}
-                  nextPage={nextPage}
-                  previousPage={previousPage}
-                  type={type}
-                />
-              </React.Fragment>
+              <MainComponent
+                pokemonData={pokemonData}
+                selectPokemon={selectPokemon}
+                nextPage={nextPage}
+                previousPage={previousPage}
+              />
             )}
           />
         )}
