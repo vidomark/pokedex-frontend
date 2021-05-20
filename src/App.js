@@ -19,7 +19,6 @@ function App() {
   const [pokemonUrl, setPokemonUrl] = useState(
     "https://pokeapi.co/api/v2/pokemon?offset=0&limit=18"
   );
-
   const [isLoaded, pokemonData] = useFetch(pokemonUrl, [pokemonUrl]);
 
   const selectPokemon = (pokemon) => {
@@ -33,19 +32,19 @@ function App() {
 
   const nextPage = () => {
     setOffset((prev) => {
-      prev = prev + 20;
-      const newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${prev}&limit=18`;
+      const newOffset = prev + 20;
+      const newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${newOffset}&limit=18`;
       setPokemonUrl(newUrl);
-      return prev;
+      return newOffset;
     });
   };
 
   const previousPage = () => {
     setOffset((prev) => {
-      prev = prev - 20;
-      const newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${prev}&limit=18`;
+      const newOffset = prev - 20;
+      const newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${newOffset}&limit=18`;
       setPokemonUrl(newUrl);
-      return prev;
+      return newOffset;
     });
   };
 
