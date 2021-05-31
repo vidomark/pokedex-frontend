@@ -30,7 +30,13 @@ function App() {
     setPokemonUrl(newUrl);
   };
 
+  const test = () => {
+    const url = "http://localhost:8080/";
+    axios.get(url).then((result) => console.log(result));
+  };
+
   const nextPage = () => {
+    test();
     setOffset((prev) => {
       const newOffset = prev + 20;
       const newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${newOffset}&limit=18`;

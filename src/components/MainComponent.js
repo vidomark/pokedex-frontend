@@ -7,6 +7,7 @@ import axios from "axios";
 
 export default function MainComponent(props) {
   const { pokemonData, selectPokemon, nextPage, previousPage, type } = props;
+
   return (
     pokemonData && (
       <div>
