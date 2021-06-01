@@ -75,3 +75,8 @@
   margin-bottom: 150px;
   padding-bottom: 40px;
 }
+
+.pagination-button-container {
+  margin: auto;
+  margin-top: 3em;
+}

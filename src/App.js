@@ -1,7 +1,6 @@
 import "./css/App.css";
 import "./css/Card.css";
 import "./css/Profile.css";
-import "./css/Pagination.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -14,7 +13,6 @@ import { useFetch } from "./hooks/useFetch";
 function App() {
   const [pokemon, setPokemon] = useState(null);
   const [type, setType] = useState(null);
-  const [offset, setOffset] = useState(0);
   const [pokemonUrl, setPokemonUrl] = useState("http://localhost:8080");
   const [isLoaded, pokemonData] = useFetch(pokemonUrl, [pokemonUrl]);
 
@@ -25,24 +23,6 @@ function App() {
     setType(type);
     const newUrl = `https://pokeapi.co/api/v2/type/${type}`;
     setPokemonUrl(newUrl);
-  };
-
-  const nextPage = () => {
-    setOffset((prev) => {
-      const newOffset = prev + 20;
-      const newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${newOffset}&limit=18`;
-      setPokemonUrl(newUrl);
-      return newOffset;
-    });
-  };
-
-  const previousPage = () => {
-    setOffset((prev) => {
-      const newOffset = prev - 20;
-      const newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${newOffset}&limit=18`;
-      setPokemonUrl(newUrl);
-      return newOffset;
-    });
   };
 
   return (
@@ -58,8 +38,6 @@ function App() {
               <MainComponent
                 pokemonData={pokemonData}
                 selectPokemon={selectPokemon}
-                nextPage={nextPage}
-                previousPage={previousPage}
               />
             )}
           />
