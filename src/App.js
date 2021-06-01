@@ -17,7 +17,8 @@ function App() {
   const [type, setType] = useState(null);
   const [offset, setOffset] = useState(0);
   const [pokemonUrl, setPokemonUrl] = useState(
-    "https://pokeapi.co/api/v2/pokemon?offset=0&limit=18"
+    //"https://pokeapi.co/api/v2/pokemon?offset=0&limit=18"
+    "http://localhost:8080"
   );
   const [isLoaded, pokemonData] = useFetch(pokemonUrl, [pokemonUrl]);
 
@@ -30,13 +31,7 @@ function App() {
     setPokemonUrl(newUrl);
   };
 
-  const test = () => {
-    const url = "http://localhost:8080/";
-    axios.get(url).then((result) => console.log(result));
-  };
-
   const nextPage = () => {
-    test();
     setOffset((prev) => {
       const newOffset = prev + 20;
       const newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${newOffset}&limit=18`;
