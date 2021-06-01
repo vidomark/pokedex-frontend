@@ -12,7 +12,7 @@ export default function PokemonTable({ pokemon }) {
         </tr>
         <tr>
           <th>{capitalizeText(pokemon.species.name)}</th>
-          <th>{pokemon.base_experience}</th>
+          <th>{pokemon.baseExperience}</th>
         </tr>
         <tr>
           <td>Height</td>
