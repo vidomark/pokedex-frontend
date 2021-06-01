@@ -72,7 +72,7 @@ function App() {
         {pokemon && (
           <Route
             exact
-            path={`/profile/${pokemon.id}`}
+            path={`/pokemon/${pokemon.id}`}
             render={() => (
               <ProfilePage selectType={selectType} pokemon={pokemon} />
             )}

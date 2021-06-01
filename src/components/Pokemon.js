@@ -10,14 +10,13 @@ export default function Pokemon(props) {
     props.selectPokemon(pokemon);
   };
   const { pokemonData } = props;
-  console.log(pokemonData);
   return (
     <div className="card">
       <Link
         className="card_image"
-        to={`/profile/${pokemonData.id}`}
+        to={`/pokemon/${pokemonData.id}`}
         style={card}
-        //onClick={() => selectPokemon(pokemon.data)}
+        onClick={() => selectPokemon(pokemonData)}
       >
         <img src={convertPicture(pokemonData.id)} alt="" />
       </Link>
