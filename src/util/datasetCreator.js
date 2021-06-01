@@ -1,5 +1,5 @@
 export const createDataset = (stats) => {
-  const statValues = stats.map((stat) => stat.base_stat);
+  const statValues = stats.map((stat) => stat.baseStat);
   const statStyle = {
     backgroundColor: [
       "rgba(255, 99, 132, 0.6)",

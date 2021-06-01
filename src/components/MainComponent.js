@@ -6,7 +6,8 @@ import { useFetch } from "../hooks/useFetch";
 import axios from "axios";
 
 export default function MainComponent(props) {
-  const { pokemonData, selectPokemon, nextPage, previousPage, type } = props;
+  const { selectPokemon, nextPage, previousPage, type } = props;
+  const pokemonData = props.pokemonData;
   return (
     pokemonData && (
       <div>
@@ -14,10 +15,10 @@ export default function MainComponent(props) {
           <Pagination nextPage={nextPage} previousPage={previousPage} />
         </div>
         <Container className="main-container">
-          {pokemonData.data.results.map((pokemonData) => (
+          {pokemonData.data.map((pokemon) => (
             <Pokemon
-              key={pokemonData.name}
-              pokemonData={pokemonData}
+              key={pokemon.name}
+              pokemonData={pokemon}
               selectPokemon={selectPokemon}
             />
           ))}

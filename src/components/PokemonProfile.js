@@ -40,7 +40,6 @@ export default function ProfilePage(props) {
   const selectType = (type) => {
     props.selectType(type);
   };
-
   return (
     <div className="main-container">
       <PokemonController pokemon={pokemon} selectPokemon={selectPokemon} />

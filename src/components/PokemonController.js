@@ -4,18 +4,16 @@ import { convertId } from "../util/idConverter";
 import { useFetch } from "../hooks/useFetch";
 
 export default function PokemonController(props) {
-  const previousPokemonUrl = `https://pokeapi.co/api/v2/pokemon/${
-    props.pokemon.id - 1
-  }`;
-  const followingPokemonUrl = `https://pokeapi.co/api/v2/pokemon/${
-    props.pokemon.id + 1
-  }`;
+  const pokemon = props.pokemon;
+  const previousPokemonUrl = `http://localhost:8080/${pokemon.id - 1}`;
+  const followingPokemonUrl = `http://localhost:8080/${pokemon.id + 1}`;
 
   const [previousLoaded, previousPokemon] = useFetch(previousPokemonUrl, [
-    props.pokemon.id,
+    pokemon.id,
   ]);
+
   const [followingLoaded, followingPokemon] = useFetch(followingPokemonUrl, [
-    props.pokemon.id,
+    pokemon.id,
   ]);
 
   const selectPokemon = (pokemon) => {
@@ -28,7 +26,7 @@ export default function PokemonController(props) {
     previousPokemon &&
     followingPokemon && (
       <div className="button-container">
-        {props.pokemon.id > 1 && (
+        {pokemon.id > 1 && (
           <button
             className="button previous"
             onClick={() => selectPokemon(previousPokemon.data)}
@@ -39,8 +37,8 @@ export default function PokemonController(props) {
             </span>
           </button>
         )}
-        <div className="pokemon-name">{capitalizeText(props.pokemon.name)}</div>
-        <div className="pokemon-id">{convertId(props.pokemon.id)}</div>
+        <div className="pokemon-name">{capitalizeText(pokemon.name)}</div>
+        <div className="pokemon-id">{convertId(pokemon.id)}</div>
         <button
           className="button following"
           onClick={() => selectPokemon(followingPokemon.data)}
