@@ -38,7 +38,8 @@ export default function ProfilePage(props) {
     setPokemon(pokemon);
   };
   const selectType = (type) => {
-    props.selectType(type);
+    console.log(type);
+    //props.selectType(type);
   };
   return (
     <div className="main-container">

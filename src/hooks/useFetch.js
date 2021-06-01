@@ -10,7 +10,7 @@ export const useFetch = (url, dependencies) => {
     axios
       .get(url)
       .then((data) => setFetchedData(data))
-      .catch((error) => console.error(error));
+      .catch(console.error());
   };
 
   useEffect(() => {

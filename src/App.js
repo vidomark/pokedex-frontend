@@ -7,36 +7,53 @@ import Footer from "./components/Footer";
 import PokemonProfile from "./components/PokemonProfile";
 import MainComponent from "./components/MainComponent";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import React, { useState } from "react";
-import { useFetch } from "./hooks/useFetch";
+import React, { useState, useCallback, useEffect } from "react";
+import axios from "axios";
 
 function App() {
   const [pokemon, setPokemon] = useState(null);
-  const [type, setType] = useState(null);
   const [pokemonUrl, setPokemonUrl] = useState("http://localhost:8080");
-  const [isLoaded, pokemonData] = useFetch(pokemonUrl, [pokemonUrl]);
+  const [pokemonList, setPokemonList] = useState(null);
+
+  const getPokemons = useCallback(() => {
+    axios
+      .get(pokemonUrl)
+      .then((result) => setPokemonList(result.data))
+      .catch(console.error());
+  }, [pokemonUrl]);
+
+  const postType = useCallback((type) => {
+    const url = `http://localhost:8080/type/${type.name}`;
+    axios
+      .post(url, type)
+      .then((result) => setPokemonList(result.data))
+      .catch(console.error());
+  }, []);
 
   const selectPokemon = (pokemon) => {
     setPokemon(pokemon);
   };
+
   const selectType = (type) => {
-    setType(type);
-    const newUrl = `https://pokeapi.co/api/v2/type/${type}`;
-    setPokemonUrl(newUrl);
+    postType(type);
   };
+
+  useEffect(() => {
+    getPokemons();
+  }, [pokemonUrl]);
 
   return (
     <Router>
       <div className="App">
         <Header />
 
-        {isLoaded && (
+        {pokemonList && (
           <Route
             exact
             path="/"
             render={(props) => (
               <MainComponent
-                pokemonData={pokemonData}
+                pokemonList={pokemonList}
                 selectPokemon={selectPokemon}
               />
             )}

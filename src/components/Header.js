@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <div>
+    <div onClick={() => window.location.reload()}>
       <Link to={"/"}>
         <img style={headerStyle} src={imagePath} alt="pokemon" />
       </Link>

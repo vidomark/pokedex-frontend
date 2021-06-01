@@ -1,6 +1,5 @@
 import React from "react";
 import { convertPicture } from "../util/pictureConverter";
-import { useFetch } from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 import { card } from "../css/App.css";
 import PokemonDetail from "./PokemonDetail";
