@@ -7,8 +7,7 @@ import Footer from "./components/Footer";
 import PokemonProfile from "./components/PokemonProfile";
 import MainComponent from "./components/MainComponent";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { useFetch } from "./hooks/useFetch";
 
 function App() {
