@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 import { convertPicture } from "../util/pictureConverter";
@@ -8,6 +8,7 @@ import PokemonDetail from "./PokemonDetail";
 import PokemonController from "./PokemonController";
 import PokemonTable from "./PokemonTable";
 import Chart from "./Chart";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -34,14 +35,17 @@ export default function ProfilePage(props) {
   const classes = useStyles();
   const dataset = createDataset(pokemon.stats);
   const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
+
   const selectPokemon = (pokemon) => {
     setPokemon(pokemon);
   };
+
   const selectType = (typeObject) => {
     const type = typeObject.type;
     const url = `http://localhost:8080/type/${type.name}`;
     props.selectType(url, type);
   };
+
   return (
     <div className="main-container">
       <PokemonController pokemon={pokemon} selectPokemon={selectPokemon} />

@@ -10,11 +10,12 @@ export const useFetch = (url, dependencies) => {
     axios
       .get(url)
       .then((data) => setFetchedData(data))
+      .then(setIsLoaded(true))
       .catch(console.error());
   };
 
   useEffect(() => {
-    setIsLoaded(true);
+    setIsLoaded(false);
     fetchData(url);
   }, dependencies);
 
