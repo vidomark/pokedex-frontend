@@ -37,7 +37,8 @@ export default function ProfilePage(props) {
   const selectPokemon = (pokemon) => {
     setPokemon(pokemon);
   };
-  const selectType = (type) => {
+  const selectType = (typeObject) => {
+    const type = typeObject.type;
     props.selectType(type);
   };
   return (

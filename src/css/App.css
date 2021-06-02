@@ -80,3 +80,13 @@
   margin: auto;
   margin-top: 3em;
 }
+
+a:-webkit-any-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:-webkit-any-link:hover {
+  text-decoration: none;
+  color: inherit;
+}

@@ -24,14 +24,15 @@ export default function PokemonDetail({
       <div className="detail-title">{capitalizeText(title)}</div>
       <div className="detail-detail">
         {details.map((detail) => (
-          <div
+          <Link
+            to={`/`}
             key={detail.type.name}
             className={detailClassName}
             style={{ backgroundColor: color[detail.type.name] }}
-            onClick={() => !card && selectType(detail.type.name)}
+            onClick={() => !card && selectType(detail)}
           >
             {capitalizeText(detail.type.name)}
-          </div>
+          </Link>
         ))}
       </div>
     </div>

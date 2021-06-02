@@ -5,8 +5,8 @@ import { useFetch } from "../hooks/useFetch";
 
 export default function PokemonController(props) {
   const pokemon = props.pokemon;
-  const previousPokemonUrl = `http://localhost:8080/${pokemon.id - 1}`;
-  const followingPokemonUrl = `http://localhost:8080/${pokemon.id + 1}`;
+  const previousPokemonUrl = `http://localhost:8080/pokemon/${pokemon.id - 1}`;
+  const followingPokemonUrl = `http://localhost:8080/pokemon/${pokemon.id + 1}`;
 
   const [previousLoaded, previousPokemon] = useFetch(previousPokemonUrl, [
     pokemon.id,
