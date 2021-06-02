@@ -1,7 +1,8 @@
 import React from "react";
 import { capitalizeText } from "../util/textCapitalizer";
 import { color } from "../util/hexColors";
-import { Nav, NavDropdown } from "react-bootstrap";
+import { NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 
 export default function Search({ postData }) {
@@ -46,10 +47,11 @@ export default function Search({ postData }) {
               style={{ backgroundColor: color[type.name] }}
               onClick={() => selectType(type)}
             >
-              {capitalizeText(type.name)}
+              <Link to="/">{capitalizeText(type.name)}</Link>
             </NavDropdown.Item>
           ))}
         </div>
+
         <div className="ability-search">
           <NavDropdown
             title={<div className="ability-search-title">Ability</div>}
@@ -61,7 +63,7 @@ export default function Search({ postData }) {
                 style={abilityStyle}
                 onClick={() => selectAbility(ability)}
               >
-                {capitalizeText(ability.name)}
+                <Link to="/">{capitalizeText(ability.name)}</Link>
               </NavDropdown.Item>
             ))}
           </NavDropdown>
