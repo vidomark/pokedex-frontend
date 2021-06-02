@@ -1,0 +1,70 @@
+.navbar {
+  margin-bottom: 8em;
+  background-color: #222;
+  z-index: 1000;
+}
+
+.navbar-picture {
+  max-height: 80px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  font-size: 25px;
+  margin: 0 1em;
+  color: #fff;
+  text-decoration: none;
+}
+
+.dropdown-menu {
+  background-image: url("../images/pokemon-background-image.png");
+}
+
+.nav-type {
+  background-image: url("../images/pokemon-background-image.png");
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+.dropdown-title {
+  color: #ddd;
+}
+
+.detail-name-nav {
+  margin-left: 0.5em;
+  max-width: 100px;
+}
+
+.dropdown-container {
+  display: flex;
+}
+
+/* ability */
+
+.ability-search {
+  margin-left: 3em;
+  margin-right: 2em;
+  color: #ddd;
+  font-size: 3em;
+  min-width: 400px;
+  max-height: 350px;
+}
+
+.ability-dropdown {
+}
+
+.ability {
+  color: red;
+}
+
+.ability-search-title {
+  color: #ddd;
+  font-size: 2em;
+  margin-left: 1em;
+}
+
+.ability-dropdown::-webkit-scrollbar {
+  display: none;
+}

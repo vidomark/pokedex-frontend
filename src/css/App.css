@@ -7,7 +7,10 @@
 
 .App {
   text-align: center;
-  background-image: url("../images/background.jpg");
+  background-image: url("../images/background.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .App-logo {
@@ -45,12 +48,10 @@
   }
 }
 
-.headerStlye {
-  position: relative;
-  width: auto;
-  background: cornflowerblue;
-  image-rendering: auto;
-  image-orientation: inherit;
+.navbar-picture {
+  max-height: 80px;
+  padding: 0;
+  margin: 0;
 }
 
 .footerStyle {

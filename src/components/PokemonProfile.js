@@ -39,7 +39,8 @@ export default function ProfilePage(props) {
   };
   const selectType = (typeObject) => {
     const type = typeObject.type;
-    props.selectType(type);
+    const url = `http://localhost:8080/type/${type.name}`;
+    props.selectType(url, type);
   };
   return (
     <div className="main-container">
