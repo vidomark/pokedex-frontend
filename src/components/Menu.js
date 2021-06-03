@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import {
   Navbar,
   NavLink,
@@ -6,7 +6,6 @@ import {
   NavDropdown,
   Form,
   FormControl,
-  Button,
 } from "react-bootstrap";
 import Search from "./Search";
 import imagePath from "../images/Pokemon_logo.svg";
@@ -15,6 +14,14 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
   const [registerHovered, setRegisterHovered] = useState(false);
   const [loginHovered, setLoginHovered] = useState(false);
   const [searchHovered, setSearchHovered] = useState(false);
+  const [unfilteredList, setUnfilteredList] = useState(pokemonList);
+  const [deleted, setDeleted] = useState(false);
+  const [name, setName] = useState("");
+  const firstUpdate = useRef(true);
+  let nameMap = {};
+  let savedLists = useMemo(() => {
+    return new Array();
+  }, []);
 
   const navLinkStyle = {
     register: {
@@ -34,12 +41,36 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
     },
   };
 
-  const searchByName = (name) => {
-    let filteredList = pokemonList.filter((pokemon) =>
-      pokemon.name.includes(name.toLowerCase())
-    );
-    setPokemonList(filteredList);
+  const searchByName = (event) => {
+    setName(event.target.value); // current search
+
+    // on backspace set deleted
+    if (event.nativeEvent.inputType === "deleteContentBackward")
+      setDeleted(true);
+    else setDeleted(false);
   };
+
+  useEffect(() => {
+    if (firstUpdate.current) firstUpdate.current = false;
+    else {
+      let filteredList = pokemonList.filter((
+        pokemon // filter pokemon list
+      ) => pokemon.name.startsWith(name.toLowerCase()));
+      setPokemonList(filteredList);
+
+      nameMap[name] = filteredList;
+      savedLists.push(nameMap); // push name tracker to list
+
+      const previousList = savedLists.find((list) => Object.keys(list) == name);
+      if (deleted) {
+        // on backspace
+        setDeleted(false);
+        name.length === 0
+          ? setPokemonList(unfilteredList)
+          : setPokemonList(previousList[name]);
+      }
+    }
+  }, [deleted, name]);
 
   return (
     <Navbar sticky="top" className="navbar" expand="lg">
@@ -83,7 +114,7 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
             type="text"
             placeholder="Enter name"
             className="mr-sm-2"
-            onChange={(event) => searchByName(event.target.value)}
+            onChange={(event) => searchByName(event)}
           />
         </Form>
       </Navbar.Collapse>
