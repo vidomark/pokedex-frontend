@@ -10,7 +10,7 @@ import PokemonTable from "./PokemonTable";
 import Chart from "./Chart";
 
 export default function ProfilePage(props) {
-  const [pokemon, setPokemon] = useState(props.pokemon);
+  const [pokemon, setPokemon] = useState(props.selectedPokemon);
   const [caught, setCaught] = useState(false); // for catching pokemon
   const pokeballImageSource = caught
     ? "https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"

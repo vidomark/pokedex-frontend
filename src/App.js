@@ -12,16 +12,19 @@ import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-  const [pokemon, setPokemon] = useState(null);
-  const [pokemonUrl, setPokemonUrl] = useState("http://localhost:8080");
   const [pokemonList, setPokemonList] = useState(null);
+  let selectedPokemon = null; // in case of page refresh
+  try {
+    selectedPokemon = JSON.parse(localStorage.getItem("pokemon"));
+  } catch (exception) {}
 
   const getPokemons = useCallback(() => {
+    const url = "http://localhost:8080";
     axios
-      .get(pokemonUrl)
+      .get(url)
       .then((result) => setPokemonList(result.data))
       .catch(console.error());
-  }, [pokemonUrl]);
+  }, []);
 
   const postData = useCallback((url, data) => {
     axios
@@ -31,7 +34,7 @@ function App() {
   }, []);
 
   const selectPokemon = (pokemon) => {
-    setPokemon(pokemon);
+    localStorage.setItem("pokemon", JSON.stringify(pokemon)); // in case of page refresh
   };
 
   const selectType = (url, type) => {
@@ -40,7 +43,7 @@ function App() {
 
   useEffect(() => {
     getPokemons();
-  }, [pokemonUrl]);
+  }, []);
 
   return (
     <Router>
@@ -60,12 +63,15 @@ function App() {
           />
         )}
 
-        {pokemon && (
+        {selectedPokemon && ( // pass id instead od pokemon
           <Route
             exact
-            path={`/pokemon/${pokemon.id}`}
+            path={`/pokemon/${selectedPokemon.id}`}
             render={() => (
-              <PokemonProfile selectType={selectType} pokemon={pokemon} />
+              <PokemonProfile
+                selectType={selectType}
+                selectedPokemon={selectedPokemon}
+              />
             )}
           />
         )}
