@@ -1,9 +1,10 @@
 import "./css/App.css";
 import "./css/Card.css";
 import "./css/Profile.css";
+import "./css/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Menu from "./components/Menu";
 import PokemonProfile from "./components/PokemonProfile";
 import MainComponent from "./components/MainComponent";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -11,41 +12,56 @@ import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-  const [pokemon, setPokemon] = useState(null);
-  const [pokemonUrl, setPokemonUrl] = useState("http://localhost:8080");
   const [pokemonList, setPokemonList] = useState(null);
+  const [pokemon, setPokemon] = useState(null);
+
+  const getSelectedPokemon = () => {
+    try {
+      return JSON.parse(localStorage.getItem("pokemon"));
+    } catch (exception) {
+      return null;
+    }
+  };
+  let selectedPokemon = getSelectedPokemon();
 
   const getPokemons = useCallback(() => {
+    const url = "http://localhost:8080";
     axios
-      .get(pokemonUrl)
+      .get(url)
       .then((result) => setPokemonList(result.data))
       .catch(console.error());
-  }, [pokemonUrl]);
+  }, []);
 
-  const postType = useCallback((type) => {
-    const url = `http://localhost:8080/type/${type.name}`;
+  const postData = useCallback((url, data) => {
     axios
-      .post(url, type)
+      .post(url, data)
       .then((result) => setPokemonList(result.data))
       .catch(console.error());
   }, []);
 
   const selectPokemon = (pokemon) => {
     setPokemon(pokemon);
+    localStorage.setItem("pokemon", JSON.stringify(pokemon)); // in case of page refresh
   };
 
-  const selectType = (type) => {
-    postType(type);
+  const selectType = (url, type) => {
+    postData(url, type);
   };
 
   useEffect(() => {
     getPokemons();
-  }, [pokemonUrl]);
+  }, []);
 
   return (
     <Router>
       <div className="App">
-        <Header />
+        {pokemonList && (
+          <Menu
+            postData={postData}
+            pokemonList={pokemonList}
+            setPokemonList={setPokemonList}
+          />
+        )}
 
         {pokemonList && (
           <Route
@@ -60,12 +76,16 @@ function App() {
           />
         )}
 
-        {pokemon && (
+        {selectedPokemon && (
           <Route
             exact
-            path={`/pokemon/${pokemon.id}`}
+            path={`/pokemon/${selectedPokemon.id}`}
             render={() => (
-              <PokemonProfile selectType={selectType} pokemon={pokemon} />
+              <PokemonProfile
+                selectType={selectType}
+                selectedPokemon={selectedPokemon}
+                pokemon={pokemon}
+              />
             )}
           />
         )}

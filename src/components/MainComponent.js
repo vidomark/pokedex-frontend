@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Pokemon from "./Pokemon";
+import PokemonCard from "./PokemonCard";
 import { Container } from "react-bootstrap";
 
 export default function MainComponent(props) {
@@ -15,7 +15,7 @@ export default function MainComponent(props) {
       <div>
         <Container className="main-container">
           {pokemonList.slice(0, visible).map((pokemon) => (
-            <Pokemon
+            <PokemonCard
               key={pokemon.name}
               pokemonData={pokemon}
               selectPokemon={selectPokemon}

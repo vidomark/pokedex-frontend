@@ -122,6 +122,11 @@
   padding: 0px 5%;
 }
 
+.detail-name:hover {
+  transform: scale(1.04);
+  transition: 0.2s linear;
+}
+
 .detail-name.profile {
   margin-left: 30px;
 }

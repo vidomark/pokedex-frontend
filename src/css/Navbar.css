@@ -1,0 +1,88 @@
+.navbar {
+  margin-bottom: 8em;
+  background-color: #222;
+  z-index: 1000;
+}
+
+.navbar-picture {
+  max-height: 80px;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-picture:hover {
+  transform: scale(1.4);
+  transition: 0.2s linear;
+}
+
+.nav-item {
+  font-size: 25px;
+  margin: 0 1em;
+  color: #fff;
+  text-decoration: none;
+}
+
+.dropdown-menu {
+  background-image: url("../images/pokemon-background-image.png");
+}
+
+.nav-type {
+  background-image: url("../images/pokemon-background-image.png");
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+.dropdown-title {
+  color: #ddd;
+}
+
+.detail-name-nav {
+  margin-left: 0.5em;
+  max-width: 100px;
+}
+
+.dropdown-container {
+  display: flex;
+}
+
+/* ability */
+
+.ability-search {
+  margin-left: 3em;
+  margin-right: 1em;
+  color: #ddd;
+  font-size: 3em;
+}
+
+.ability {
+  color: red;
+}
+
+.ability-search-title {
+  color: #ddd;
+}
+
+.ability-dropdown::-webkit-scrollbar {
+  display: none;
+}
+
+.ability-title-button {
+  padding-right: 48px;
+}
+
+.pokeball-icon {
+  width: 50px;
+  margin-right: 30px;
+}
+
+/* input search */
+.input-search {
+  margin-top: 0.85em;
+}
+
+.search-button {
+  margin-top: 2em;
+  margin-left: 15em;
+  margin-bottom: 2em;
+}
