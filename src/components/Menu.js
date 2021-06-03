@@ -20,17 +20,17 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
     register: {
       color: registerHovered ? "white" : "#ddd",
       transform: registerHovered ? "scale(1.06)" : null,
-      transition: registerHovered ? "0.13s linear" : null,
+      transition: registerHovered ? "0.2s linear" : null,
     },
     login: {
       color: loginHovered ? "white" : "#ddd",
       transform: loginHovered ? "scale(1.06)" : null,
-      transition: loginHovered ? "0.13s linear" : null,
+      transition: loginHovered ? "0.2s linear" : null,
     },
     search: {
       color: searchHovered ? "white" : "#ddd",
       transform: searchHovered ? "scale(1.06)" : null,
-      transition: searchHovered ? "0.13s linear" : null,
+      transition: searchHovered ? "0.2s linear" : null,
     },
   };
 
@@ -85,7 +85,6 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
             className="mr-sm-2"
             onChange={(event) => searchByName(event.target.value)}
           />
-          <Button variant="outline-primary">Search</Button>
         </Form>
       </Navbar.Collapse>
     </Navbar>
