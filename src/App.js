@@ -13,10 +13,16 @@ import axios from "axios";
 
 function App() {
   const [pokemonList, setPokemonList] = useState(null);
-  let selectedPokemon = null; // in case of page refresh
-  try {
-    selectedPokemon = JSON.parse(localStorage.getItem("pokemon"));
-  } catch (exception) {}
+  const [pokemon, setPokemon] = useState(null);
+
+  const getSelectedPokemon = () => {
+    try {
+      return JSON.parse(localStorage.getItem("pokemon"));
+    } catch (exception) {
+      return null;
+    }
+  };
+  let selectedPokemon = getSelectedPokemon();
 
   const getPokemons = useCallback(() => {
     const url = "http://localhost:8080";
@@ -34,6 +40,7 @@ function App() {
   }, []);
 
   const selectPokemon = (pokemon) => {
+    setPokemon(pokemon);
     localStorage.setItem("pokemon", JSON.stringify(pokemon)); // in case of page refresh
   };
 
@@ -63,7 +70,7 @@ function App() {
           />
         )}
 
-        {selectedPokemon && ( // pass id instead od pokemon
+        {selectedPokemon && (
           <Route
             exact
             path={`/pokemon/${selectedPokemon.id}`}
@@ -71,6 +78,7 @@ function App() {
               <PokemonProfile
                 selectType={selectType}
                 selectedPokemon={selectedPokemon}
+                pokemon={pokemon}
               />
             )}
           />

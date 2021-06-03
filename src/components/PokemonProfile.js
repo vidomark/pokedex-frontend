@@ -10,7 +10,9 @@ import PokemonTable from "./PokemonTable";
 import Chart from "./Chart";
 
 export default function ProfilePage(props) {
-  const [pokemon, setPokemon] = useState(props.selectedPokemon);
+  let [pokemon, setPokemon] = useState(props.selectedPokemon);
+  const localStoragePokemon = JSON.parse(localStorage.getItem("pokemon"));
+  pokemon = localStoragePokemon == null ? test : localStoragePokemon;
   const [caught, setCaught] = useState(false); // for catching pokemon
   const pokeballImageSource = caught
     ? "https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"
@@ -22,6 +24,7 @@ export default function ProfilePage(props) {
 
   const selectPokemon = (pokemon) => {
     setPokemon(pokemon);
+    localStorage.setItem("pokemon", JSON.stringify(pokemon));
   };
 
   const selectType = (typeObject) => {
