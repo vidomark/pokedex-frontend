@@ -33,7 +33,7 @@ export default function ProfilePage(props) {
     const url = `http://localhost:8080/type/${type.name}`;
     props.selectType(url, type);
   };
-
+  console.log(pokemon);
   return (
     <div className="main-container">
       <PokemonController pokemon={pokemon} selectPokemon={selectPokemon} />
