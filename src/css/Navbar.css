@@ -10,6 +10,11 @@
   margin: 0;
 }
 
+.navbar-picture:hover {
+  transform: scale(1.4);
+  transition: 0.2s linear;
+}
+
 .nav-item {
   font-size: 25px;
   margin: 0 1em;

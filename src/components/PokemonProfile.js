@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useStyles } from "../util/profileGrid";
+import { useStyles } from "../util/style";
 import { Grid, Paper } from "@material-ui/core";
 import { convertPicture } from "../util/pictureConverter";
 import { capitalizeText } from "../util/textCapitalizer";
@@ -13,7 +13,7 @@ export default function ProfilePage(props) {
   let [pokemon, setPokemon] = useState(props.selectedPokemon);
   const localStoragePokemon = JSON.parse(localStorage.getItem("pokemon"));
   pokemon = localStoragePokemon == null ? test : localStoragePokemon;
-
+  console.log(pokemon);
   const [caught, setCaught] = useState(false); // for catching pokemon
   const pokeballImageSource = caught
     ? "https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"
