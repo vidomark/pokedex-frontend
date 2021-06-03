@@ -13,7 +13,7 @@ import imagePath from "../images/Pokemon_logo.svg";
 
 export default function Menu({ postData }) {
   return (
-    <Navbar classname="navbar" expand="lg">
+    <Navbar className="navbar" expand="lg">
       <Navbar.Brand href="/">
         <img className="navbar-picture" src={imagePath} alt="pokemon" />
       </Navbar.Brand>

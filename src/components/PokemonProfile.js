@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
+import { useStyles } from "../util/profileGrid";
 import { Grid, Paper } from "@material-ui/core";
 import { convertPicture } from "../util/pictureConverter";
 import { capitalizeText } from "../util/textCapitalizer";
@@ -8,22 +8,6 @@ import PokemonDetail from "./PokemonDetail";
 import PokemonController from "./PokemonController";
 import PokemonTable from "./PokemonTable";
 import Chart from "./Chart";
-import axios from "axios";
-
-const useStyles = makeStyles((theme) => ({
-  grid: {
-    width: "100%",
-    margin: "0px",
-  },
-  paper: {
-    width: "100px",
-    height: "100px",
-    padding: theme.spacing(4),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-    background: theme.palette.success.light,
-  },
-}));
 
 export default function ProfilePage(props) {
   const [pokemon, setPokemon] = useState(props.pokemon);
@@ -49,7 +33,7 @@ export default function ProfilePage(props) {
   return (
     <div className="main-container">
       <PokemonController pokemon={pokemon} selectPokemon={selectPokemon} />
-      <Grid container spacing={4} className="classes.grid">
+      <Grid container className="classes.grid">
         <Grid item xs={12} md={6}>
           <Paper className={classes.Paper}>
             <div>
@@ -61,13 +45,13 @@ export default function ProfilePage(props) {
             </div>
           </Paper>
         </Grid>
-        <Grid item container xs={12} md={6} direction={"column"} spacing={2000}>
+        <Grid item container xs={12} md={6} direction={"column"}>
           <Grid item>
             <Paper className={classes.Paper}>
               <PokemonTable pokemon={pokemon} />
             </Paper>
           </Grid>
-          <Grid item spacing={20}>
+          <Grid item>
             <PokemonDetail
               title={"Type"}
               details={pokemon.types}
