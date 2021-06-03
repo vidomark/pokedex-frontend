@@ -45,7 +45,7 @@
 
 .ability-search {
   margin-left: 3em;
-  margin-right: 2em;
+  margin-right: 1em;
   color: #ddd;
   font-size: 3em;
 }
@@ -69,4 +69,15 @@
 .pokeball-icon {
   width: 50px;
   margin-right: 30px;
+}
+
+/* input search */
+.input-search {
+  margin-top: 0.85em;
+}
+
+.search-button {
+  margin-top: 2em;
+  margin-left: 15em;
+  margin-bottom: 2em;
 }

@@ -55,7 +55,13 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Menu postData={postData} />
+        {pokemonList && (
+          <Menu
+            postData={postData}
+            pokemonList={pokemonList}
+            setPokemonList={setPokemonList}
+          />
+        )}
 
         {pokemonList && (
           <Route

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { capitalizeText } from "../util/textCapitalizer";
 import { color } from "../util/hexColors";
-import { NavDropdown, DropdownButton, Dropdown } from "react-bootstrap";
+import {
+  NavDropdown,
+  DropdownButton,
+  Dropdown,
+  Form,
+  Button,
+  FormControl,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import pokeball from "../images/pokeball-icon.svg";
@@ -18,7 +25,7 @@ export default function Search({ postData }) {
 
   const [selectedAbility, setSelectedAbility] = useState(null);
 
-  const abilityStyle = {
+  const dropdownItemStyle = {
     color: "#ddd",
     fontSize: "19px",
     marginRight: "10%",
@@ -42,6 +49,7 @@ export default function Search({ postData }) {
     fetchedTypes &&
     abilitiesLoaded &&
     fetchedAbilities && (
+      /* type search */
       <div className="dropdown-container">
         <div className="nav-type">
           {fetchedTypes.data.map((type) => (
@@ -56,8 +64,9 @@ export default function Search({ postData }) {
           ))}
         </div>
 
+        {/* ability search */}
         <div className="ability-search">
-          <div className="ability-search-title">Ability</div>
+          <div className="search-title">Ability</div>
           <DropdownButton
             variant="outline-primary"
             title={
@@ -75,7 +84,7 @@ export default function Search({ postData }) {
               {fetchedAbilities.data.map((ability) => (
                 <Dropdown.Item
                   key={ability.name}
-                  style={abilityStyle}
+                  style={dropdownItemStyle}
                   onClick={() => selectAbility(ability)}
                 >
                   <Link to="/">{capitalizeText(ability.name)}</Link>
@@ -83,6 +92,20 @@ export default function Search({ postData }) {
               ))}
             </div>
           </DropdownButton>
+
+          {/* input search */}
+          {/* <div className="input-search">
+            <div className="search-title">Name</div>
+            <Form inline>
+              <FormControl
+                type="text"
+                placeholder="Enter name"
+                className="mr-sm-2"
+                onChange={(event) => searchByName(event.target.value)}
+              />
+              <Button variant="outline-primary">Search</Button>
+            </Form>
+          </div> */}
         </div>
       </div>
     )

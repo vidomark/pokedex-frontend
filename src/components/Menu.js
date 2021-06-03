@@ -11,7 +11,17 @@ import {
 import Search from "./Search";
 import imagePath from "../images/Pokemon_logo.svg";
 
-export default function Menu({ postData }) {
+export default function Menu({ postData, pokemonList, setPokemonList }) {
+  const searchByName = (name) => {
+    /* pokemonList.forEach((pokemon) => {
+      if (pokemon.name.includes(name.toLowerCase())) console.log(pokemon);
+    }); */
+    let filteredList = pokemonList.filter((pokemon) =>
+      pokemon.name.includes(name.toLowerCase())
+    );
+    setPokemonList(filteredList);
+  };
+
   return (
     <Navbar className="navbar" expand="lg">
       <Navbar.Brand href="/">
@@ -37,8 +47,13 @@ export default function Menu({ postData }) {
           </NavDropdown>
         </Nav>
         <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-success">Search</Button>
+          <FormControl
+            type="text"
+            placeholder="Enter name"
+            className="mr-sm-2"
+            onChange={(event) => searchByName(event.target.value)}
+          />
+          <Button variant="outline-primary">Search</Button>
         </Form>
       </Navbar.Collapse>
     </Navbar>
