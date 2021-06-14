@@ -52,7 +52,6 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
 
   useEffect(() => {
     if (firstUpdate.current) firstUpdate.current = false;
-    // don't update pokemons on first render
     else {
       let filteredList = pokemonList.filter((
         pokemon // filter pokemon list
@@ -63,8 +62,8 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
       savedLists.push(nameMap); // push name tracker to list
 
       const previousList = savedLists.find((list) => Object.keys(list) == name);
-      // on backspace
       if (deleted) {
+        // on backspace
         setDeleted(false);
         name.length === 0
           ? setPokemonList(unfilteredList)
