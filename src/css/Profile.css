@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  max-width: 400px;
+  max-width: 310px;
   background-image: url("../images/pokemon-background-image.png");
   border-radius: 15px;
   margin-top: 20px;
@@ -73,7 +73,6 @@
   text-align: center;
   transition: all 0.15s;
 }
-
 .button:hover {
   text-shadow: 0 0 2em rgba(255, 255, 255, 1);
   color: #ffffff;
@@ -155,4 +154,5 @@ tbody td:hover {
 
 .chart {
   margin-top: 30px;
+  padding-right: 5%;
 }
