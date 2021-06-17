@@ -5,7 +5,6 @@ import { Container } from "react-bootstrap";
 export default function MainComponent(props) {
   const { selectPokemon, pokemonList } = props;
   const [visible, setVisible] = useState(18);
-
   const loadPokemons = () => {
     setVisible((previous) => previous + 18);
   };
@@ -14,7 +13,7 @@ export default function MainComponent(props) {
     pokemonList && (
       <div>
         <Container className="main-container">
-          {pokemonList.slice(0, visible).map((pokemon) => (
+          {pokemonList.slice(0, visible).map((pokemon, index) => (
             <PokemonCard
               key={pokemon.name}
               pokemonData={pokemon}

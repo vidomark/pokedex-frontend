@@ -41,8 +41,6 @@
 .main-container {
   display: flex;
   flex-wrap: wrap;
-  justify-items: center;
-  align-items: center;
   background-color: #fff;
   border-radius: 10px;
   max-width: 90%;
