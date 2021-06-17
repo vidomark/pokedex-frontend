@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/reactnative,visualstudiocode,windows,macos,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=reactnative,visualstudiocode,windows,macos,linux
 
+**/node
+
 ### Linux ###
 *~
 
@@ -371,6 +373,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+node
+node/npm
 
 # End of https://www.toptal.com/developers/gitignore/api/reactnative,visualstudiocode,windows,macos,linux
 package-lock.json

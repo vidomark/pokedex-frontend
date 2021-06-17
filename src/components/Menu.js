@@ -26,18 +26,12 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
   const navLinkStyle = {
     register: {
       color: registerHovered ? "white" : "#ddd",
-      transform: registerHovered ? "scale(1.06)" : null,
-      transition: registerHovered ? "0.2s linear" : null,
     },
     login: {
       color: loginHovered ? "white" : "#ddd",
-      transform: loginHovered ? "scale(1.06)" : null,
-      transition: loginHovered ? "0.2s linear" : null,
     },
     search: {
       color: searchHovered ? "white" : "#ddd",
-      transform: searchHovered ? "scale(1.06)" : null,
-      transition: searchHovered ? "0.2s linear" : null,
     },
   };
 
@@ -98,10 +92,16 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
           </NavLink>
 
           <NavDropdown
-            onMouseEnter={() => setSearchHovered(true)}
-            onMouseLeave={() => setSearchHovered(false)}
-            style={navLinkStyle.search}
-            title={<span className="dropdown-title">Advanced search</span>}
+            title={
+              <span
+                onMouseEnter={() => setSearchHovered(true)}
+                onMouseLeave={() => setSearchHovered(false)}
+                style={navLinkStyle.search}
+                className="dropdown-title"
+              >
+                Advanced search
+              </span>
+            }
             id="basic-nav-dropdown"
             variant="primary"
             className="nav-dropdown nav-item"
