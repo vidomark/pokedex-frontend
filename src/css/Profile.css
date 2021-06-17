@@ -6,6 +6,7 @@
   max-width: 400px;
   background-image: url("../images/pokemon-background-image.png");
   border-radius: 15px;
+  margin-top: 20px;
 }
 
 .button-container {
@@ -24,17 +25,17 @@
 }
 
 .pokeball {
-  margin-top: 15%;
+  margin-top: 5%;
   max-width: 300px;
 }
 
 .pokeball.caught {
+  margin-bottom: 0;
   width: 70%;
-  position: absolute;
   top: 0;
   left: 0;
   opacity: 1;
-  max-width: 180px;
+  max-width: 140px;
 }
 
 .pokemon-id {
@@ -96,7 +97,14 @@
 
 /* pokemon table */
 
+.pokemon-table-contrainer {
+  margin-right: 30px;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
 .pokemon-table {
+  justify-content: center;
   border-collapse: collapse;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -104,6 +112,10 @@
   border-radius: 10px;
   width: 100%;
   color: #ffffff;
+}
+
+.pokemon-table-row {
+  width: 100%;
 }
 
 td {
@@ -118,7 +130,6 @@ th {
 th,
 td {
   padding: 4px;
-
   color: #fff;
 }
 
@@ -138,4 +149,10 @@ tbody td:hover {
   z-index: -1;
   top: -9999px;
   bottom: -9999px;
+}
+
+/* chart */
+
+.chart {
+  margin-top: 30px;
 }

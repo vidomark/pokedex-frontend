@@ -151,7 +151,9 @@
 }
 
 .detail-container.profile {
-  margin-top: 14px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 30px;
   color: #fff;
   background-color: #6787e7;
 }

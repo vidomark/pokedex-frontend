@@ -7,7 +7,7 @@ export default function Chart({ labels, datasets }) {
     datasets,
   };
   return (
-    <div>
+    <div className="chart">
       <Bar
         data={chartData}
         options={{
