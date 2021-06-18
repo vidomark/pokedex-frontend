@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 import { capitalizeText } from "../util/textCapitalizer";
 import { color } from "../util/hexColors";
-import {
-  NavDropdown,
-  DropdownButton,
-  Dropdown,
-  Form,
-  Button,
-  FormControl,
-} from "react-bootstrap";
+import { NavDropdown, DropdownButton, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import pokeball from "../images/pokeball-icon.svg";
 
 export default function Search({ postData }) {
   const [typesLoaded, fetchedTypes] = useFetch(
-    "http://localhost:8080/types",
+    "http://localhost:8080/pokemon/types",
     []
   );
   const [abilitiesLoaded, fetchedAbilities] = useFetch(
-    "http://localhost:8080/abilities",
+    "http://localhost:8080//pokemon/abilities",
     []
   );
 
@@ -34,12 +27,12 @@ export default function Search({ postData }) {
   };
 
   const selectType = (type) => {
-    const url = `http://localhost:8080/type/${type.name}`;
+    const url = `http://localhost:8080/pokemon?typeName=${type.name}`;
     postData(url, type);
   };
 
   const selectAbility = (ability) => {
-    const url = `http://localhost:8080/ability/${ability.name}`;
+    const url = `http://localhost:8080/pokemon?abilityName=${ability.name}`;
     setSelectedAbility(ability);
     postData(url, ability);
   };
@@ -59,7 +52,9 @@ export default function Search({ postData }) {
               style={{ backgroundColor: color[type.name] }}
               onClick={() => selectType(type)}
             >
-              <Link to="/">{capitalizeText(type.name)}</Link>
+              <Link to={`/pokemon?typeName=${type.name}`}>
+                {capitalizeText(type.name)}
+              </Link>
             </NavDropdown.Item>
           ))}
         </div>
@@ -87,7 +82,9 @@ export default function Search({ postData }) {
                   style={dropdownItemStyle}
                   onClick={() => selectAbility(ability)}
                 >
-                  <Link to="/">{capitalizeText(ability.name)}</Link>
+                  <Link to={`/pokemon?abilityName=${ability.name}`}>
+                    {capitalizeText(ability.name)}
+                  </Link>
                 </Dropdown.Item>
               ))}
             </div>

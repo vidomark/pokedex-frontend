@@ -12,7 +12,6 @@ export default function ProfilePage(props) {
   let [pokemon, setPokemon] = useState(props.selectedPokemon);
   const localStoragePokemon = JSON.parse(localStorage.getItem("pokemon"));
   pokemon = localStoragePokemon == null ? test : localStoragePokemon;
-  console.log(pokemon);
   const [caught, setCaught] = useState(false); // for catching pokemon
   const pokeballImageSource = caught
     ? "https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"
@@ -26,10 +25,8 @@ export default function ProfilePage(props) {
     localStorage.setItem("pokemon", JSON.stringify(pokemon));
   };
 
-  const selectType = (typeObject) => {
-    const type = typeObject.type;
-    const url = `http://localhost:8080/type/${type.name}`;
-    props.selectType(url, type);
+  const postData = (url, type) => {
+    props.postData(url, type.type);
   };
 
   return (
@@ -58,7 +55,7 @@ export default function ProfilePage(props) {
             title={"Type"}
             details={pokemon.types}
             card={false}
-            selectType={selectType}
+            postData={postData}
           />
 
           <img

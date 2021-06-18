@@ -8,12 +8,13 @@ import Menu from "./components/Menu";
 import PokemonProfile from "./components/PokemonProfile";
 import MainComponent from "./components/MainComponent";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import axios from "axios";
 
 function App() {
   const [pokemonList, setPokemonList] = useState(null);
   const [pokemon, setPokemon] = useState(null);
+  const everyPokemon = useRef(true);
 
   const getSelectedPokemon = () => {
     try {
@@ -25,7 +26,7 @@ function App() {
   let selectedPokemon = getSelectedPokemon();
 
   const getPokemons = useCallback(() => {
-    const url = "http://localhost:8080";
+    const url = "http://localhost:8080/pokemon";
     axios
       .get(url)
       .then((result) => setPokemonList(result.data))
@@ -33,6 +34,8 @@ function App() {
   }, []);
 
   const postData = useCallback((url, data) => {
+    everyPokemon.current = false; // to not load every pokemon
+
     axios
       .post(url, data)
       .then((result) => setPokemonList(result.data))
@@ -44,12 +47,8 @@ function App() {
     localStorage.setItem("pokemon", JSON.stringify(pokemon)); // in case of page refresh
   };
 
-  const selectType = (url, type) => {
-    postData(url, type);
-  };
-
   useEffect(() => {
-    getPokemons();
+    if (everyPokemon.current === true) getPokemons();
   }, []);
 
   return (
@@ -57,21 +56,19 @@ function App() {
       <div className="App">
         {pokemonList && (
           <Menu
-            postData={postData}
-            pokemonList={pokemonList}
-            setPokemonList={setPokemonList}
+            {...{ postData }}
+            {...{ pokemonList }}
+            {...{ selectPokemon }}
+            {...{ setPokemonList }}
           />
         )}
 
         {pokemonList && (
           <Route
             exact
-            path="/"
+            path={"/pokemon"}
             render={(props) => (
-              <MainComponent
-                pokemonList={pokemonList}
-                selectPokemon={selectPokemon}
-              />
+              <MainComponent {...{ pokemonList }} {...{ selectPokemon }} />
             )}
           />
         )}
@@ -82,9 +79,9 @@ function App() {
             path={`/pokemon/${selectedPokemon.id}`}
             render={() => (
               <PokemonProfile
-                selectType={selectType}
-                selectedPokemon={selectedPokemon}
-                pokemon={pokemon}
+                {...{ selectedPokemon }}
+                {...{ pokemon }}
+                {...{ postData }}
               />
             )}
           />
