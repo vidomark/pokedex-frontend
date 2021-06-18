@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { capitalizeText } from "../util/textCapitalizer";
 import { color } from "../util/hexColors";
-import {
-  NavDropdown,
-  DropdownButton,
-  Dropdown,
-  Form,
-  Button,
-  FormControl,
-} from "react-bootstrap";
+import { NavDropdown, DropdownButton, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import pokeball from "../images/pokeball-icon.svg";
@@ -59,7 +52,9 @@ export default function Search({ postData }) {
               style={{ backgroundColor: color[type.name] }}
               onClick={() => selectType(type)}
             >
-              <Link to="/">{capitalizeText(type.name)}</Link>
+              <Link to={`/pokemon?typeName=${type.name}`}>
+                {capitalizeText(type.name)}
+              </Link>
             </NavDropdown.Item>
           ))}
         </div>
@@ -87,7 +82,9 @@ export default function Search({ postData }) {
                   style={dropdownItemStyle}
                   onClick={() => selectAbility(ability)}
                 >
-                  <Link to="/">{capitalizeText(ability.name)}</Link>
+                  <Link to={`/pokemon?abilityName=${ability.name}`}>
+                    {capitalizeText(ability.name)}
+                  </Link>
                 </Dropdown.Item>
               ))}
             </div>

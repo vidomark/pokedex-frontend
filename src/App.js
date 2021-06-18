@@ -14,11 +14,7 @@ import axios from "axios";
 function App() {
   const [pokemonList, setPokemonList] = useState(null);
   const [pokemon, setPokemon] = useState(null);
-  const [postedData, setPostedData] = useState(null);
-  const [url, setUrl] = useState("/");
-  const [fetchUrl, setFetchUrl] = useState("http://localhost:8080/pokemon");
   const everyPokemon = useRef(true);
-  const render = useRef(false);
 
   const getSelectedPokemon = () => {
     try {
@@ -29,15 +25,17 @@ function App() {
   };
   let selectedPokemon = getSelectedPokemon();
 
-  const getPokemons = useCallback((fetchUrl) => {
+  const getPokemons = useCallback(() => {
     const url = "http://localhost:8080/pokemon";
     axios
-      .get(fetchUrl)
+      .get(url)
       .then((result) => setPokemonList(result.data))
       .catch(console.error());
   }, []);
 
   const postData = useCallback((url, data) => {
+    everyPokemon.current = false; // to not load every pokemon
+
     axios
       .post(url, data)
       .then((result) => setPokemonList(result.data))
@@ -49,24 +47,8 @@ function App() {
     localStorage.setItem("pokemon", JSON.stringify(pokemon)); // in case of page refresh
   };
 
-  const selectType = (url, type) => {
-    setPostedData(type);
-    setFetchUrl(url);
-    render.current = false;
-    everyPokemon.current = false;
-    postData(url, type);
-    const newUrl = url.split("http://localhost:8080")[1];
-    setUrl(newUrl);
-  };
-
   useEffect(() => {
-    if (everyPokemon.current === true) {
-      getPokemons(fetchUrl);
-      //render.current = true;
-    } else {
-      //postData(fetchUrl, postedData);
-      //render.current = true;
-    }
+    if (everyPokemon.current === true) getPokemons();
   }, []);
 
   return (
@@ -77,7 +59,6 @@ function App() {
             {...{ postData }}
             {...{ pokemonList }}
             {...{ selectPokemon }}
-            {...{ selectType }}
             {...{ setPokemonList }}
           />
         )}
@@ -85,7 +66,7 @@ function App() {
         {pokemonList && (
           <Route
             exact
-            path={url}
+            path={"/pokemon"}
             render={(props) => (
               <MainComponent {...{ pokemonList }} {...{ selectPokemon }} />
             )}
@@ -98,9 +79,9 @@ function App() {
             path={`/pokemon/${selectedPokemon.id}`}
             render={() => (
               <PokemonProfile
-                {...{ selectType }}
                 {...{ selectedPokemon }}
                 {...{ pokemon }}
+                {...{ postData }}
               />
             )}
           />

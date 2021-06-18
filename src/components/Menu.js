@@ -20,7 +20,7 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
   const firstUpdate = useRef(true);
   let nameMap = {};
   let savedLists = useMemo(() => {
-    return new Array();
+    return [];
   }, []);
 
   const navLinkStyle = {
@@ -64,11 +64,11 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
           : setPokemonList(previousList[name]);
       }
     }
-  }, [deleted, name]);
+  }, [name]);
 
   return (
     <Navbar sticky="top" className="navbar" expand="lg">
-      <Navbar.Brand href="/">
+      <Navbar.Brand href="/pokemon">
         <img className="navbar-picture" src={imagePath} alt="pokemon" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

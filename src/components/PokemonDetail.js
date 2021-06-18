@@ -10,7 +10,7 @@ export default function PokemonDetail({
   details,
   card = true,
   id = null,
-  selectType,
+  postData,
 }) {
   const containerClassName = card
     ? "detail-container"
@@ -25,11 +25,17 @@ export default function PokemonDetail({
       <div className="detail-detail">
         {details.map((detail) => (
           <Link
-            to={`/`}
+            to={`/pokemon?typeName=${detail.type.name}`}
             key={detail.type.name}
             className={detailClassName}
             style={{ backgroundColor: color[detail.type.name] }}
-            onClick={() => !card && selectType(detail)}
+            onClick={() =>
+              !card &&
+              postData(
+                `http://localhost:8080/pokemon?typeName=${detail.type.name}`,
+                detail
+              )
+            }
           >
             {capitalizeText(detail.type.name)}
           </Link>
