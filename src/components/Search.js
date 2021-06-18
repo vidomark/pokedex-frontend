@@ -15,11 +15,11 @@ import pokeball from "../images/pokeball-icon.svg";
 
 export default function Search({ postData }) {
   const [typesLoaded, fetchedTypes] = useFetch(
-    "http://localhost:8080/types",
+    "http://localhost:8080/pokemon/types",
     []
   );
   const [abilitiesLoaded, fetchedAbilities] = useFetch(
-    "http://localhost:8080/abilities",
+    "http://localhost:8080//pokemon/abilities",
     []
   );
 
@@ -34,12 +34,12 @@ export default function Search({ postData }) {
   };
 
   const selectType = (type) => {
-    const url = `http://localhost:8080/type/${type.name}`;
+    const url = `http://localhost:8080/pokemon?typeName=${type.name}`;
     postData(url, type);
   };
 
   const selectAbility = (ability) => {
-    const url = `http://localhost:8080/ability/${ability.name}`;
+    const url = `http://localhost:8080/pokemon?abilityName=${ability.name}`;
     setSelectedAbility(ability);
     postData(url, ability);
   };
