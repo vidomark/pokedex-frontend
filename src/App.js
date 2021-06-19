@@ -36,7 +36,7 @@ function App() {
 
   const postData = useCallback((url, data) => {
     everyPokemon.current = false; // to not load every pokemon
-
+    console.log(data);
     axios
       .post(url, data)
       .then((result) => setPokemonList(result.data))
@@ -71,7 +71,11 @@ function App() {
             exact
             path={"/pokemon"}
             render={(props) => (
-              <MainComponent {...{ pokemonList }} {...{ selectPokemon }} />
+              <MainComponent
+                {...{ pokemonList }}
+                {...{ selectPokemon }}
+                {...{ postData }}
+              />
             )}
           />
         )}

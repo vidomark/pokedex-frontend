@@ -7,7 +7,7 @@ export default function Pokemon(props) {
   const selectPokemon = (pokemon) => {
     props.selectPokemon(pokemon);
   };
-  const { pokemonData } = props;
+  const { pokemonData, postData } = props;
 
   return (
     <article
@@ -31,6 +31,7 @@ export default function Pokemon(props) {
           title={pokemonData.name}
           details={pokemonData.types}
           id={pokemonData.id}
+          {...{ postData }}
         />
       </div>
     </article>

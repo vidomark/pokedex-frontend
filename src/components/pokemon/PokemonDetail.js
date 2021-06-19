@@ -34,10 +34,9 @@ export default function PokemonDetail({
                 className={detailNameClassName}
                 style={{ backgroundColor: color[detail.type.name] }}
                 onClick={() =>
-                  !card &&
                   postData(
                     `http://localhost:8080/pokemon?typeName=${detail.type.name}`,
-                    detail
+                    detail.type
                   )
                 }
               >

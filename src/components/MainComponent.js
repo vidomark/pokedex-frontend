@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import { Grid } from "@material-ui/core";
 
 export default function MainComponent(props) {
-  const { selectPokemon, pokemonList } = props;
+  const { selectPokemon, pokemonList, postData } = props;
   const [visible, setVisible] = useState(18);
   const loadPokemons = () => {
     setVisible((previous) => previous + 18);
@@ -18,6 +18,7 @@ export default function MainComponent(props) {
             key={pokemon.name}
             pokemonData={pokemon}
             {...{ selectPokemon }}
+            {...{ postData }}
           />
         ))}
         <Grid container justify="center">
