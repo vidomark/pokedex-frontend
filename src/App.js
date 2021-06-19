@@ -9,13 +9,13 @@ import PokemonProfile from "./components/pokemon/PokemonProfile";
 import MainComponent from "./components/MainComponent";
 import Index from "./components/Index";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 
 function App() {
   const [pokemonList, setPokemonList] = useState(null);
   const [pokemon, setPokemon] = useState(null);
-  const everyPokemon = useRef(true);
+  const [pokemonNumber, setPokemonNumber] = useState(18);
 
   const getSelectedPokemon = () => {
     try {
@@ -26,8 +26,8 @@ function App() {
   };
   let selectedPokemon = getSelectedPokemon();
 
-  const getPokemons = useCallback(() => {
-    const url = "http://localhost:8080/pokemon";
+  const getPokemons = useCallback((pokemonNumber) => {
+    const url = `http://localhost:8080/pokemon?limit=${pokemonNumber}`;
     axios
       .get(url)
       .then((result) => setPokemonList(result.data))
@@ -35,8 +35,6 @@ function App() {
   }, []);
 
   const postData = useCallback((url, data) => {
-    everyPokemon.current = false; // to not load every pokemon
-    console.log(data);
     axios
       .post(url, data)
       .then((result) => setPokemonList(result.data))
@@ -49,8 +47,8 @@ function App() {
   };
 
   useEffect(() => {
-    if (everyPokemon.current === true) getPokemons();
-  }, []);
+    getPokemons(pokemonNumber);
+  }, [pokemonNumber]);
 
   return (
     <Router>
@@ -69,12 +67,14 @@ function App() {
         {pokemonList && (
           <Route
             exact
-            path={"/pokemon"}
+            path="/pokemon"
             render={(props) => (
               <MainComponent
                 {...{ pokemonList }}
                 {...{ selectPokemon }}
                 {...{ postData }}
+                {...{ setPokemonNumber }}
+                {...{ pokemonNumber }}
               />
             )}
           />
