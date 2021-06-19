@@ -1,7 +1,7 @@
 import React from "react";
 import { convertPicture } from "../../util/pictureConverter";
 import { Link } from "react-router-dom";
-import { card } from "../../css/App.css";
+import { card } from "../../css/app.css";
 import PokemonDetail from "./PokemonDetail";
 
 export default function Pokemon(props) {

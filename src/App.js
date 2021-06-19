@@ -1,7 +1,7 @@
-import "./css/App.css";
-import "./css/Card.css";
-import "./css/Profile.css";
-import "./css/Navbar.css";
+import "./css/app.css";
+import "./css/card.css";
+import "./css/profile.css";
+import "./css/navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 import Menu from "./components/Menu";
