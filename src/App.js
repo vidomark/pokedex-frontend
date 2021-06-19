@@ -5,8 +5,9 @@ import "./css/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 import Menu from "./components/Menu";
-import PokemonProfile from "./components/PokemonProfile";
+import PokemonProfile from "./components/pokemon/PokemonProfile";
 import MainComponent from "./components/MainComponent";
+import Index from "./components/Index";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import axios from "axios";
@@ -62,6 +63,8 @@ function App() {
             {...{ setPokemonList }}
           />
         )}
+
+        <Route exact path="/" component={Index} />
 
         {pokemonList && (
           <Route

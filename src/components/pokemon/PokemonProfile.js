@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
-import { convertPicture } from "../util/pictureConverter";
-import { capitalizeText } from "../util/textCapitalizer";
-import { createDataset } from "../util/datasetCreator";
+import { convertPicture } from "../../util/pictureConverter";
+import { capitalizeText } from "../../util/textCapitalizer";
+import { createDataset } from "../../util/datasetCreator";
 import PokemonDetail from "./PokemonDetail";
 import PokemonController from "./PokemonController";
 import PokemonTable from "./PokemonTable";
-import Chart from "./Chart";
+import Chart from "../Chart";
 
 export default function ProfilePage(props) {
   let [pokemon, setPokemon] = useState(props.selectedPokemon);
@@ -44,7 +44,7 @@ export default function ProfilePage(props) {
         </Grid>
         <Grid item container xs={12} md={6} direction={"column"}>
           <Grid item>
-            <PokemonTable pokemon={pokemon} />
+            <PokemonTable {...{ pokemon }} />
           </Grid>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -55,7 +55,7 @@ export default function ProfilePage(props) {
             title={"Type"}
             details={pokemon.types}
             card={false}
-            postData={postData}
+            {...{ postData }}
           />
 
           <img
