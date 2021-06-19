@@ -3,6 +3,7 @@ import { convertId } from "../../util/idConverter";
 import { capitalizeText } from "../../util/textCapitalizer";
 import { color } from "../../util/hexColors";
 import { Link } from "react-router-dom";
+import { Grid } from "@material-ui/core";
 
 // array of details
 export default function PokemonDetail({
@@ -12,35 +13,40 @@ export default function PokemonDetail({
   id = null,
   postData,
 }) {
-  const containerClassName = card
-    ? "detail-container"
-    : "detail-container profile";
-
-  const detailClassName = card ? "detail-name" : "detail-name profile";
+  const containerClassName = card ? null : "detail-container-profile";
+  const detailTitleClassName = card ? "detail-title" : "detail-title-profile";
+  const detailNameClassName = card ? "detail-name" : "detail-name-profile";
+  const detailClassName = card ? "detail-detail" : "detail-detail-profile";
 
   return (
-    <div className={containerClassName}>
-      {card && <div className="detail-id">{convertId(id)}</div>}
-      <div className="detail-title">{capitalizeText(title)}</div>
-      <div className="detail-detail">
-        {details.map((detail) => (
-          <Link
-            to={`/pokemon?typeName=${detail.type.name}`}
-            key={detail.type.name}
-            className={detailClassName}
-            style={{ backgroundColor: color[detail.type.name] }}
-            onClick={() =>
-              !card &&
-              postData(
-                `http://localhost:8080/pokemon?typeName=${detail.type.name}`,
-                detail
-              )
-            }
-          >
-            {capitalizeText(detail.type.name)}
-          </Link>
-        ))}
+    <Grid container>
+      <div className={containerClassName}>
+        <Grid item>
+          {card && <div className="detail-id">{convertId(id)}</div>}
+          <div className={detailTitleClassName}>{capitalizeText(title)}</div>
+        </Grid>
+        <Grid>
+          <div className={detailClassName}>
+            {details.map((detail) => (
+              <Link
+                to={`/pokemon?typeName=${detail.type.name}`}
+                key={detail.type.name}
+                className={detailNameClassName}
+                style={{ backgroundColor: color[detail.type.name] }}
+                onClick={() =>
+                  !card &&
+                  postData(
+                    `http://localhost:8080/pokemon?typeName=${detail.type.name}`,
+                    detail
+                  )
+                }
+              >
+                {capitalizeText(detail.type.name)}
+              </Link>
+            ))}
+          </div>
+        </Grid>
       </div>
-    </div>
+    </Grid>
   );
 }

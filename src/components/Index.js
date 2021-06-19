@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import pokeballs from "../images/pokeballs.png";
 import aboutPicture from "../images/about.jpg";
 import "../css/index.css";
