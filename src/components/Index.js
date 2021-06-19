@@ -37,6 +37,10 @@ export default function Index() {
         </Grid>
 
         <Grid item>
+          <div className="divider"></div>
+        </Grid>
+
+        <Grid item>
           <div
             class="index-card"
             style={{
