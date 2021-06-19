@@ -1,7 +1,7 @@
 import React from "react";
-import { capitalizeText } from "../util/textCapitalizer";
-import { convertId } from "../util/idConverter";
-import { useFetch } from "../hooks/useFetch";
+import { capitalizeText } from "../../util/textCapitalizer";
+import { convertId } from "../../util/idConverter";
+import { useFetch } from "../../hooks/useFetch";
 
 export default function PokemonController(props) {
   const pokemon = props.pokemon;

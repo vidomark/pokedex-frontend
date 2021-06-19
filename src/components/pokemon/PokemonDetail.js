@@ -1,7 +1,7 @@
 import React from "react";
-import { convertId } from "../util/idConverter";
-import { capitalizeText } from "../util/textCapitalizer";
-import { color } from "../util/hexColors";
+import { convertId } from "../../util/idConverter";
+import { capitalizeText } from "../../util/textCapitalizer";
+import { color } from "../../util/hexColors";
 import { Link } from "react-router-dom";
 
 // array of details

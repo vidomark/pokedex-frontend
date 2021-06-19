@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PokemonCard from "./PokemonCard";
+import PokemonCard from "./pokemon/PokemonCard";
 import { Container } from "react-bootstrap";
 
 export default function MainComponent(props) {
@@ -17,13 +17,13 @@ export default function MainComponent(props) {
             <PokemonCard
               key={pokemon.name}
               pokemonData={pokemon}
-              selectPokemon={selectPokemon}
+              {...{ selectPokemon }}
             />
           ))}
           {visible < pokemonList.length ? (
             <div className="pagination-button-container">
               <button onClick={() => loadPokemons()} className="button">
-                Load more...
+                Show more...
               </button>
             </div>
           ) : null}

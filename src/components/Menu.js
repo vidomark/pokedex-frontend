@@ -68,7 +68,7 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
 
   return (
     <Navbar sticky="top" className="navbar" expand="lg">
-      <Navbar.Brand href="/pokemon">
+      <Navbar.Brand href="/">
         <img className="navbar-picture" src={imagePath} alt="pokemon" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
