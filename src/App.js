@@ -9,13 +9,14 @@ import PokemonProfile from "./components/pokemon/PokemonProfile";
 import MainComponent from "./components/MainComponent";
 import Index from "./components/Index";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { loadedPokemonNumber } from "./util/pokemonConfig";
 import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 
 function App() {
   const [pokemonList, setPokemonList] = useState(null);
   const [pokemon, setPokemon] = useState(null);
-  const [pokemonNumber, setPokemonNumber] = useState(18);
+  const [currentPokemonNumber, setCurrentPokemonNumber] = useState(loadedPokemonNumber);
 
   const getSelectedPokemon = () => {
     try {
@@ -47,8 +48,8 @@ function App() {
   };
 
   useEffect(() => {
-    getPokemons(pokemonNumber);
-  }, [pokemonNumber]);
+    getPokemons(currentPokemonNumber);
+  }, [currentPokemonNumber]);
 
   return (
     <Router>
@@ -73,8 +74,8 @@ function App() {
                 {...{ pokemonList }}
                 {...{ selectPokemon }}
                 {...{ postData }}
-                {...{ setPokemonNumber }}
-                {...{ pokemonNumber }}
+                {...{ setCurrentPokemonNumber }}
+                {...{ currentPokemonNumber }}
               />
             )}
           />

@@ -27,12 +27,12 @@ export default function Search({ postData }) {
   };
 
   const selectType = (type) => {
-    const url = `http://localhost:8080/pokemon?typeName=${type.name}`;
+    const url = `http://localhost:8080/pokemon?type=${type.name}`;
     postData(url, type);
   };
 
   const selectAbility = (ability) => {
-    const url = `http://localhost:8080/pokemon?abilityName=${ability.name}`;
+    const url = `http://localhost:8080/pokemon?ability=${ability.name}`;
     setSelectedAbility(ability);
     postData(url, ability);
   };
@@ -52,7 +52,7 @@ export default function Search({ postData }) {
               style={{ backgroundColor: color[type.name] }}
               onClick={() => selectType(type)}
             >
-              <Link to={`/pokemon?typeName=${type.name}`}>
+              <Link to={`/pokemon?type=${type.name}`}>
                 {capitalizeText(type.name)}
               </Link>
             </NavDropdown.Item>
@@ -82,27 +82,13 @@ export default function Search({ postData }) {
                   style={dropdownItemStyle}
                   onClick={() => selectAbility(ability)}
                 >
-                  <Link to={`/pokemon?abilityName=${ability.name}`}>
+                  <Link to={`/pokemon?ability=${ability.name}`}>
                     {capitalizeText(ability.name)}
                   </Link>
                 </Dropdown.Item>
               ))}
             </div>
           </DropdownButton>
-
-          {/* input search */}
-          {/* <div className="input-search">
-            <div className="search-title">Name</div>
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Enter name"
-                className="mr-sm-2"
-                onChange={(event) => searchByName(event.target.value)}
-              />
-              <Button variant="outline-primary">Search</Button>
-            </Form>
-          </div> */}
         </div>
       </div>
     )
