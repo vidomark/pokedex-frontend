@@ -29,13 +29,13 @@ export default function PokemonDetail({
           <div className={detailClassName}>
             {details.map((detail) => (
               <Link
-                to={`/pokemon?typeName=${detail.type.name}`}
+                to={`/pokemon?type=${detail.type.name}`}
                 key={detail.type.name}
                 className={detailNameClassName}
                 style={{ backgroundColor: color[detail.type.name] }}
                 onClick={() =>
                   postData(
-                    `http://localhost:8080/pokemon?typeName=${detail.type.name}`,
+                    `http://localhost:8080/pokemon?type=${detail.type.name}`,
                     detail.type
                   )
                 }

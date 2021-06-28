@@ -37,21 +37,3 @@ export default function Pokemon(props) {
     </article>
   );
 }
-
-{
-  /* <div className="card">
-  <Link
-    className="card_image"
-    to={`/pokemon/${pokemonData.id}`}
-    style={card}
-    onClick={() => selectPokemon(pokemonData)}
-  >
-    <img src={convertPicture(pokemonData.id)} alt="" />
-  </Link>
-  <PokemonDetail
-    title={pokemonData.name}
-    details={pokemonData.types}
-    id={pokemonData.id}
-  />
-</div>; */
-}

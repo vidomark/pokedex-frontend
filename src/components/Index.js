@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import pokeballs from "../images/pokeballs.png";
 import aboutPicture from "../images/about.jpg";
+import { loadedPokemonNumber } from "../util/pokemonConfig";
 import "../css/index.css";
 
 export default function Index() {
@@ -29,7 +30,7 @@ export default function Index() {
             <div class="info">
               <h1 className="index-card-title">Pokemons</h1>
               <p>Checkout the list of available pokemons.</p>
-              <Link to="pokemon">
+              <Link to={`pokemon?limit=${loadedPokemonNumber}`}>
                 <button>Show more</button>
               </Link>
             </div>
