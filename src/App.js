@@ -16,7 +16,8 @@ import axios from "axios";
 function App() {
   const [pokemonList, setPokemonList] = useState(null);
   const [pokemon, setPokemon] = useState(null);
-  const [currentPokemonNumber, setCurrentPokemonNumber] = useState(loadedPokemonNumber);
+  const [currentPokemonNumber, setCurrentPokemonNumber] =
+    useState(loadedPokemonNumber);
 
   const getSelectedPokemon = () => {
     try {
@@ -25,7 +26,6 @@ function App() {
       return null;
     }
   };
-  let selectedPokemon = getSelectedPokemon();
 
   const getPokemons = useCallback((pokemonNumber) => {
     const url = `http://localhost:8080/pokemon?limit=${pokemonNumber}`;
@@ -46,6 +46,8 @@ function App() {
     setPokemon(pokemon);
     localStorage.setItem("pokemon", JSON.stringify(pokemon)); // in case of page refresh
   };
+
+  let selectedPokemon = getSelectedPokemon();
 
   useEffect(() => {
     getPokemons(currentPokemonNumber);

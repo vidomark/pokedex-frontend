@@ -18,10 +18,13 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
   const [deleted, setDeleted] = useState(false);
   const [name, setName] = useState("");
   const firstUpdate = useRef(true);
-  let nameMap = {};
+  const unfilteredPokemons = useMemo(() => {
+    return pokemonList;
+  }, []);
   let savedLists = useMemo(() => {
     return [];
   }, []);
+  let nameMap = {};
 
   const navLinkStyle = {
     register: {
@@ -47,20 +50,23 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
   useEffect(() => {
     if (firstUpdate.current) firstUpdate.current = false;
     else {
-      let filteredList = pokemonList.filter((
-        pokemon // filter pokemon list
-      ) => pokemon.name.startsWith(name.toLowerCase()));
+      const filteredList = pokemonList.filter((pokemon) =>
+        pokemon.name.startsWith(name.toLowerCase())
+      );
       setPokemonList(filteredList);
 
       nameMap[name] = filteredList;
       savedLists.push(nameMap); // push name tracker to list
 
-      const previousList = savedLists.find((list) => Object.keys(list) == name);
       if (deleted) {
         // on backspace
+        const previousList = savedLists.find(
+          (list) => Object.keys(list) == name
+        );
         setDeleted(false);
+
         name.length === 0
-          ? setPokemonList(unfilteredList)
+          ? setPokemonList(unfilteredPokemons)
           : setPokemonList(previousList[name]);
       }
     }
