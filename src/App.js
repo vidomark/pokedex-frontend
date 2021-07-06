@@ -14,9 +14,8 @@ import Login from "./components/Login";
 import ConfirmationTokenProvider from "./contexts/ConfirmationTokenProvider";
 import PokemonListProvider from "./contexts/PokemonListProvider";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { loadedPokemonNumber } from "./util/pokemonConfig";
-import React, { useState, useCallback, useEffect } from "react";
-import axios from "axios";
+import UrlProvider from "./contexts/UrlProvider";
+import React, { useState } from "react";
 
 function App() {
   const [pokemon, setPokemon] = useState(null);
@@ -37,45 +36,47 @@ function App() {
 
   return (
     <PokemonListProvider>
-      <ConfirmationTokenProvider>
-        <Router>
-          <div className="App">
-            <Menu /* {...{ postData }} */ {...{ selectPokemon }} />
+      <UrlProvider>
+        <ConfirmationTokenProvider>
+          <Router>
+            <div className="App">
+              <Menu /* {...{ postData }} */ {...{ selectPokemon }} />
 
-            <Route exact path="/" component={Index} />
+              <Route exact path="/" component={Index} />
 
-            <Route exact path="/registration" component={Registration} />
+              <Route exact path="/registration" component={Registration} />
 
-            <Route exact path="/login" component={Login} />
+              <Route exact path="/login" component={Login} />
 
-            <Route
-              exact
-              path="/pokemon"
-              render={(props) => (
-                <PokemonComponent
-                  {...{ selectPokemon }}
-                  /* {...{ postData }} */
-                />
-              )}
-            />
-
-            {selectedPokemon && (
               <Route
                 exact
-                path={`/pokemon/${selectedPokemon.id}`}
-                render={() => (
-                  <PokemonProfile
-                    {...{ selectedPokemon }}
-                    {...{ pokemon }}
+                path="/pokemon"
+                render={(props) => (
+                  <PokemonComponent
+                    {...{ selectPokemon }}
                     /* {...{ postData }} */
                   />
                 )}
               />
-            )}
-            <Footer />
-          </div>
-        </Router>
-      </ConfirmationTokenProvider>
+
+              {selectedPokemon && (
+                <Route
+                  exact
+                  path={`/pokemon/${selectedPokemon.id}`}
+                  render={() => (
+                    <PokemonProfile
+                      {...{ selectedPokemon }}
+                      {...{ pokemon }}
+                      /* {...{ postData }} */
+                    />
+                  )}
+                />
+              )}
+              <Footer />
+            </div>
+          </Router>
+        </ConfirmationTokenProvider>
+      </UrlProvider>
     </PokemonListProvider>
   );
 }

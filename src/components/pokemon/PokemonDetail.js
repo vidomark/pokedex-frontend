@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import axios from "axios";
 import { useSetPokemons } from "../../contexts/PokemonListProvider";
+import { useSetUrl, useUrl } from "../../contexts/UrlProvider";
 
 // array of details
 export default function PokemonDetail({
@@ -19,6 +20,8 @@ export default function PokemonDetail({
   const detailNameClassName = card ? "detail-name" : "detail-name-profile";
   const detailClassName = card ? "detail-detail" : "detail-detail-profile";
   const setPokemons = useSetPokemons();
+  const setUrl = useSetUrl();
+  const url = useUrl();
 
   const filterPokemons = (url, data) => {
     axios
@@ -42,12 +45,15 @@ export default function PokemonDetail({
                 key={detail.type.name}
                 className={detailNameClassName}
                 style={{ backgroundColor: color[detail.type.name] }}
-                onClick={() =>
+                onClick={() => {
+                  setUrl(
+                    `http://localhost:8080/pokemon?type=${detail.type.name}`
+                  );
                   filterPokemons(
                     `http://localhost:8080/pokemon?type=${detail.type.name}`,
                     detail.type
-                  )
-                }
+                  );
+                }}
               >
                 {capitalizeText(detail.type.name)}
               </Link>

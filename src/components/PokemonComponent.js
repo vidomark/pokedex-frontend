@@ -1,24 +1,30 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import PokemonCard from "./pokemon/PokemonCard";
 import Pagination from "./Pagination";
 import { Container } from "react-bootstrap";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
+import { useUrl, useSetUrl } from "../contexts/UrlProvider";
 import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
 import { useEffect } from "react";
 import axios from "axios";
 
-export default function PokemonComponent(props) {
-  const { selectPokemon, postData } = props;
-  const [currentPokemonNumber, setCurrentPokemonNumber] =
-    useState(loadedPokemonNumber);
-
+export default function PokemonComponent({ selectPokemon }) {
   const pokemons = usePokemons();
   const setPokemons = useSetPokemons();
+  const url = useUrl();
+  const setUrl = useSetUrl();
+
+  const [currentPokemonNumber, setCurrentPokemonNumber] =
+    useState(loadedPokemonNumber);
   const loadPokemons = () => {
     setCurrentPokemonNumber((previous) => previous + loadedPokemonNumber);
+    setUrl(
+      `http://localhost:8080/pokemon?limit=${
+        currentPokemonNumber + loadedPokemonNumber
+      }`
+    );
   };
-  const fetchPokemons = (limit) => {
-    const url = `http://localhost:8080/pokemon?limit=${limit}`;
+  const fetchPokemons = () => {
     axios
       .get(url)
       .then((result) => setPokemons(result.data))
@@ -26,8 +32,7 @@ export default function PokemonComponent(props) {
   };
 
   useEffect(() => {
-    console.log("render");
-    fetchPokemons(currentPokemonNumber);
+    fetchPokemons();
   }, [currentPokemonNumber]);
 
   return (
@@ -38,7 +43,6 @@ export default function PokemonComponent(props) {
             key={pokemon.name}
             pokemonData={pokemon}
             {...{ selectPokemon }}
-            {...{ postData }}
           />
         ))}
         <Pagination {...{ currentPokemonNumber, loadPokemons }} />
