@@ -7,6 +7,7 @@ import {
   Form,
   FormControl,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Search from "./Search";
 import imagePath from "../images/Pokemon_logo.svg";
 
@@ -14,7 +15,6 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
   const [registerHovered, setRegisterHovered] = useState(false);
   const [loginHovered, setLoginHovered] = useState(false);
   const [searchHovered, setSearchHovered] = useState(false);
-  const [unfilteredList, setUnfilteredList] = useState(pokemonList);
   const [deleted, setDeleted] = useState(false);
   const [name, setName] = useState("");
   const firstUpdate = useRef(true);
@@ -86,7 +86,7 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
             style={navLinkStyle.register}
             className="nav-item"
           >
-            Register
+            <Link to="/registration">Registration</Link>
           </NavLink>
           <NavLink
             onMouseEnter={() => setLoginHovered(true)}
@@ -94,7 +94,7 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
             className="nav-item"
             style={navLinkStyle.login}
           >
-            Login
+            <Link to="/login">Login</Link>
           </NavLink>
 
           <NavDropdown

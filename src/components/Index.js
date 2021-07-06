@@ -62,17 +62,3 @@ export default function Index() {
     </div>
   );
 }
-
-{
-  /* <div class="property-card">
-            <Link to="/pokemon">
-              <div class="property-image">
-                <div class="property-image-title"></div>
-              </div>
-            </Link>
-            <div class="property-description">
-              <h5>Pokemons</h5>
-              <p></p>
-            </div>
-          </div> */
-}
