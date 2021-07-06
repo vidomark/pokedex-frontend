@@ -40,7 +40,7 @@ function App() {
         <ConfirmationTokenProvider>
           <Router>
             <div className="App">
-              <Menu /* {...{ postData }} */ {...{ selectPokemon }} />
+              <Menu {...{ selectPokemon }} />
 
               <Route exact path="/" component={Index} />
 
@@ -51,12 +51,7 @@ function App() {
               <Route
                 exact
                 path="/pokemon"
-                render={(props) => (
-                  <PokemonComponent
-                    {...{ selectPokemon }}
-                    /* {...{ postData }} */
-                  />
-                )}
+                render={(props) => <PokemonComponent {...{ selectPokemon }} />}
               />
 
               {selectedPokemon && (
@@ -64,11 +59,7 @@ function App() {
                   exact
                   path={`/pokemon/${selectedPokemon.id}`}
                   render={() => (
-                    <PokemonProfile
-                      {...{ selectedPokemon }}
-                      {...{ pokemon }}
-                      /* {...{ postData }} */
-                    />
+                    <PokemonProfile {...{ selectedPokemon }} {...{ pokemon }} />
                   )}
                 />
               )}

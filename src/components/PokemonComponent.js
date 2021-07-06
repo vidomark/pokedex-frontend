@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PokemonCard from "./pokemon/PokemonCard";
 import Pagination from "./Pagination";
-import { Container } from "react-bootstrap";
+import { Container, Alert } from "react-bootstrap";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
 import { useUrl, useSetUrl } from "../contexts/UrlProvider";
 import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
@@ -13,6 +13,8 @@ export default function PokemonComponent({ selectPokemon }) {
   const setPokemons = useSetPokemons();
   const url = useUrl();
   const setUrl = useSetUrl();
+  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const [currentPokemonNumber, setCurrentPokemonNumber] =
     useState(loadedPokemonNumber);
@@ -28,7 +30,10 @@ export default function PokemonComponent({ selectPokemon }) {
     axios
       .get(url)
       .then((result) => setPokemons(result.data))
-      .catch(console.error());
+      .catch(() => {
+        setError("danger");
+        setMessage("Unauthorized request, please sign in!");
+      });
   };
 
   useEffect(() => {
@@ -36,17 +41,20 @@ export default function PokemonComponent({ selectPokemon }) {
   }, [currentPokemonNumber]);
 
   return (
-    pokemons && (
-      <Container className="main-container">
-        {pokemons.map((pokemon) => (
+    <Container className="main-container">
+      {pokemons ? (
+        pokemons.map((pokemon) => (
           <PokemonCard
             key={pokemon.name}
             pokemonData={pokemon}
             {...{ selectPokemon }}
           />
-        ))}
-        <Pagination {...{ currentPokemonNumber, loadPokemons }} />
-      </Container>
-    )
+        ))
+      ) : (
+        <Alert style={{ marginTop: "60px" }} variant={error}>
+          {message}
+        </Alert>
+      )}
+    </Container>
   );
 }
