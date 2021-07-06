@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 import Menu from "./components/Menu";
 import PokemonProfile from "./components/pokemon/PokemonProfile";
-import MainComponent from "./components/MainComponent";
+import PokemonComponent from "./components/PokemonComponent";
 import Index from "./components/Index";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { loadedPokemonNumber } from "./util/pokemonConfig";
@@ -36,6 +36,7 @@ function App() {
   }, []);
 
   const postData = useCallback((url, data) => {
+    console.log(data);
     axios
       .post(url, data)
       .then((result) => setPokemonList(result.data))
@@ -72,7 +73,7 @@ function App() {
             exact
             path="/pokemon"
             render={(props) => (
-              <MainComponent
+              <PokemonComponent
                 {...{ pokemonList }}
                 {...{ selectPokemon }}
                 {...{ postData }}

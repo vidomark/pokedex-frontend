@@ -12,7 +12,7 @@ export default function Search({ postData }) {
     []
   );
   const [abilitiesLoaded, fetchedAbilities] = useFetch(
-    "http://localhost:8080//pokemon/abilities",
+    "http://localhost:8080/pokemon/abilities",
     []
   );
 

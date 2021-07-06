@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import PokemonCard from "./pokemon/PokemonCard";
 import { Container } from "react-bootstrap";
 import { Grid } from "@material-ui/core";
-import {loadedPokemonNumber} from "../../src/util/pokemonConfig"
+import { loadedPokemonNumber } from "../util/pokemonConfig";
 
-export default function MainComponent(props) {
+export default function PokemonComponent(props) {
   const {
     selectPokemon,
     pokemonList,
     postData,
     setCurrentPokemonNumber,
-    currentPokemonNumber
+    currentPokemonNumber,
   } = props;
 
   const [visible, setVisible] = useState(loadedPokemonNumber);
@@ -34,7 +34,11 @@ export default function MainComponent(props) {
         <Grid container justify="center">
           <Grid item>
             <div className="pagination-button-container">
-              <Link to={`/pokemon?limit=${currentPokemonNumber + loadedPokemonNumber}`}>
+              <Link
+                to={`/pokemon?limit=${
+                  currentPokemonNumber + loadedPokemonNumber
+                }`}
+              >
                 <button onClick={() => loadPokemons()} className="button">
                   Load more...
                 </button>
