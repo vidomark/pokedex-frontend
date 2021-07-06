@@ -1,29 +1,39 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useCallback } from "react";
 import PokemonCard from "./pokemon/PokemonCard";
+import Pagination from "./Pagination";
 import { Container } from "react-bootstrap";
-import { Grid } from "@material-ui/core";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
+import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function PokemonComponent(props) {
-  const {
-    selectPokemon,
-    pokemonList,
-    postData,
-    setCurrentPokemonNumber,
-    currentPokemonNumber,
-  } = props;
+  const { selectPokemon, postData } = props;
+  const [currentPokemonNumber, setCurrentPokemonNumber] =
+    useState(loadedPokemonNumber);
 
-  const [visible, setVisible] = useState(loadedPokemonNumber);
+  const pokemons = usePokemons();
+  const setPokemons = useSetPokemons();
   const loadPokemons = () => {
     setCurrentPokemonNumber((previous) => previous + loadedPokemonNumber);
-    setVisible((previous) => previous + loadedPokemonNumber);
+  };
+  const fetchPokemons = (limit) => {
+    const url = `http://localhost:8080/pokemon?limit=${limit}`;
+    axios
+      .get(url)
+      .then((result) => setPokemons(result.data))
+      .catch(console.error());
   };
 
+  useEffect(() => {
+    console.log("render");
+    fetchPokemons(currentPokemonNumber);
+  }, [currentPokemonNumber]);
+
   return (
-    pokemonList && (
+    pokemons && (
       <Container className="main-container">
-        {pokemonList.slice(0, visible).map((pokemon, index) => (
+        {pokemons.map((pokemon) => (
           <PokemonCard
             key={pokemon.name}
             pokemonData={pokemon}
@@ -31,21 +41,7 @@ export default function PokemonComponent(props) {
             {...{ postData }}
           />
         ))}
-        <Grid container justify="center">
-          <Grid item>
-            <div className="pagination-button-container">
-              <Link
-                to={`/pokemon?limit=${
-                  currentPokemonNumber + loadedPokemonNumber
-                }`}
-              >
-                <button onClick={() => loadPokemons()} className="button">
-                  Load more...
-                </button>
-              </Link>
-            </div>
-          </Grid>
-        </Grid>
+        <Pagination {...{ currentPokemonNumber, loadPokemons }} />
       </Container>
     )
   );

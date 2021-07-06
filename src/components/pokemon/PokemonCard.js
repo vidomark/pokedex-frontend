@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import PokemonDetail from "./PokemonDetail";
 
 export default function Pokemon(props) {
+  const { pokemonData, postData } = props;
   const selectPokemon = (pokemon) => {
     props.selectPokemon(pokemon);
   };
-  const { pokemonData, postData } = props;
 
   return (
     <article

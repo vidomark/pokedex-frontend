@@ -25,10 +25,6 @@ export default function ProfilePage(props) {
     localStorage.setItem("pokemon", JSON.stringify(pokemon));
   };
 
-  const postData = (url, type) => {
-    props.postData(url, type.type);
-  };
-
   return (
     <div className="main-container">
       <PokemonController pokemon={pokemon} selectPokemon={selectPokemon} />
@@ -51,12 +47,7 @@ export default function ProfilePage(props) {
           <Chart labels={statNames} datasets={dataset} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PokemonDetail
-            title={"Type"}
-            details={pokemon.types}
-            card={false}
-            {...{ postData }}
-          />
+          <PokemonDetail title={"Type"} details={pokemon.types} card={false} />
 
           <img
             src={pokeballImageSource}

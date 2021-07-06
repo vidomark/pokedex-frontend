@@ -4,6 +4,8 @@ import { capitalizeText } from "../../util/textCapitalizer";
 import { color } from "../../util/hexColors";
 import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
+import axios from "axios";
+import { useSetPokemons } from "../../contexts/PokemonListProvider";
 
 // array of details
 export default function PokemonDetail({
@@ -11,12 +13,19 @@ export default function PokemonDetail({
   details,
   card = true,
   id = null,
-  postData,
 }) {
   const containerClassName = card ? null : "detail-container-profile";
   const detailTitleClassName = card ? "detail-title" : "detail-title-profile";
   const detailNameClassName = card ? "detail-name" : "detail-name-profile";
   const detailClassName = card ? "detail-detail" : "detail-detail-profile";
+  const setPokemons = useSetPokemons();
+
+  const filterPokemons = (url, data) => {
+    axios
+      .post(url, data)
+      .then((result) => setPokemons(result.data))
+      .catch(console.error());
+  };
 
   return (
     <Grid container>
@@ -34,7 +43,7 @@ export default function PokemonDetail({
                 className={detailNameClassName}
                 style={{ backgroundColor: color[detail.type.name] }}
                 onClick={() =>
-                  postData(
+                  filterPokemons(
                     `http://localhost:8080/pokemon?type=${detail.type.name}`,
                     detail.type
                   )

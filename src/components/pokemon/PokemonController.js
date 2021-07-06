@@ -11,21 +11,14 @@ export default function PokemonController(props) {
   const previousPokemonUrl = `http://localhost:8080/pokemon/${previousId}`;
   const followingPokemonUrl = `http://localhost:8080/pokemon/${followingId}`;
 
-  const [previousLoaded, previousPokemon] = useFetch(previousPokemonUrl, [
-    pokemon.id,
-  ]);
-
-  const [followingLoaded, followingPokemon] = useFetch(followingPokemonUrl, [
-    pokemon.id,
-  ]);
+  const previousPokemon = useFetch(previousPokemonUrl, [pokemon.id]);
+  const followingPokemon = useFetch(followingPokemonUrl, [pokemon.id]);
 
   const selectPokemon = (pokemon) => {
     props.selectPokemon(pokemon);
   };
 
   return (
-    previousLoaded &&
-    followingLoaded &&
     previousPokemon &&
     followingPokemon && (
       <div className="button-container">
