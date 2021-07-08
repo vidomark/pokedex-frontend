@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { capitalizeText } from "../../util/textCapitalizer";
 import { convertId } from "../../util/idConverter";
-import { useFetch } from "../../hooks/useFetch";
 import { fetchData } from "../../util/apiGet";
 
 export default function PokemonController(props) {
@@ -14,9 +13,6 @@ export default function PokemonController(props) {
 
   const previousPokemonUrl = `http://localhost:8080/pokemon/${previousId}`;
   const followingPokemonUrl = `http://localhost:8080/pokemon/${followingId}`;
-
-  /*   let previousPokemon = useFetch(previousPokemonUrl, [pokemon.id]);
-  let followingPokemon = useFetch(followingPokemonUrl, [pokemon.id]); */
 
   const selectPokemon = (pokemon) => {
     props.selectPokemon(pokemon);

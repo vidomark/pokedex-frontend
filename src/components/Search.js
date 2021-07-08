@@ -1,20 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { capitalizeText } from "../util/textCapitalizer";
 import { color } from "../util/hexColors";
 import { NavDropdown, DropdownButton, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
 import pokeball from "../images/pokeball-icon.svg";
 import { useSetPokemons } from "../contexts/PokemonListProvider";
+import { useEffect } from "react";
+import { fetchData } from "../util/apiGet";
 
 export default function Search() {
   const setPokemons = useSetPokemons();
-  const fetchedTypes = useFetch("http://localhost:8080/pokemon/types", []);
-  const fetchedAbilities = useFetch(
-    "http://localhost:8080/pokemon/abilities",
-    []
-  );
+  const [types, setTypes] = useState(null);
+  const [abilites, setAbilites] = useState(null);
 
   const dropdownItemStyle = {
     color: "#ddd",
@@ -31,13 +29,25 @@ export default function Search() {
       .catch(console.error());
   };
 
+  useEffect(() => {
+    const typesUrl = "http://localhost:8080/pokemon/types";
+    fetchData(typesUrl)
+      .then((result) => setTypes(result))
+      .catch((error) => console.log(error));
+
+    const abilitiesUrl = "http://localhost:8080/pokemon/abilities";
+    fetchData(abilitiesUrl)
+      .then((result) => setAbilites(result))
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
-    fetchedTypes &&
-    fetchedAbilities && (
+    types &&
+    abilites && (
       /* type search */
       <div className="dropdown-container">
         <div className="nav-type">
-          {fetchedTypes.data.map((type) => (
+          {types.map((type) => (
             <NavDropdown.Item
               key={type.name}
               className="detail-name detail-name-nav"
@@ -67,7 +77,7 @@ export default function Search() {
             }
           >
             <div style={{ height: "300px", overflowY: "auto" }}>
-              {fetchedAbilities.data.map((ability) => (
+              {abilites.map((ability) => (
                 <Dropdown.Item
                   key={ability.name}
                   style={dropdownItemStyle}
