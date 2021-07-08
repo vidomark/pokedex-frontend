@@ -3,8 +3,7 @@ import { capitalizeText } from "../../util/textCapitalizer";
 import { convertId } from "../../util/idConverter";
 import { fetchData } from "../../util/apiGet";
 
-export default function PokemonController(props) {
-  const pokemon = props.pokemon;
+export default function PokemonController({ pokemon, setPokemon }) {
   const [previousPokemon, setPreviousPokemon] = useState(null);
   const [followingPokemon, setFollowingPokemon] = useState(null);
 
@@ -13,11 +12,6 @@ export default function PokemonController(props) {
 
   const previousPokemonUrl = `http://localhost:8080/pokemon/${previousId}`;
   const followingPokemonUrl = `http://localhost:8080/pokemon/${followingId}`;
-
-  const selectPokemon = (pokemon) => {
-    localStorage.setItem("pokemon", JSON.stringify(pokemon));
-    props.selectPokemon(pokemon);
-  };
 
   useEffect(() => {
     fetchData(previousPokemonUrl)
@@ -36,7 +30,7 @@ export default function PokemonController(props) {
         {pokemon.id > 1 && (
           <button
             className="button previous"
-            onClick={() => selectPokemon(previousPokemon)}
+            onClick={() => setPokemon(previousPokemon)}
           >
             <span>{capitalizeText(previousPokemon.name)}</span>
             <span className="pokemon-change-id">
@@ -48,7 +42,7 @@ export default function PokemonController(props) {
         <div className="pokemon-id">{convertId(pokemon.id)}</div>
         <button
           className="button following"
-          onClick={() => selectPokemon(followingPokemon)}
+          onClick={() => setPokemon(followingPokemon)}
         >
           <span>{capitalizeText(followingPokemon.name)}</span>
           <span className="pokemon-change-id">

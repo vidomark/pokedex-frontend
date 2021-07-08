@@ -51,7 +51,7 @@ function App() {
               <Route
                 exact
                 path="/pokemon"
-                render={(props) => <PokemonComponent {...{ selectPokemon }} />}
+                render={() => <PokemonComponent {...{ selectPokemon }} />}
               />
 
               <Route
