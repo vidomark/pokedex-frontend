@@ -15,6 +15,7 @@ export default function PokemonController(props) {
   const followingPokemonUrl = `http://localhost:8080/pokemon/${followingId}`;
 
   const selectPokemon = (pokemon) => {
+    localStorage.setItem("pokemon", JSON.stringify(pokemon));
     props.selectPokemon(pokemon);
   };
 

@@ -13,6 +13,7 @@ import Registration from "./components/Registration";
 import Login from "./components/Login";
 import ConfirmationTokenProvider from "./contexts/ConfirmationTokenProvider";
 import PokemonListProvider from "./contexts/PokemonListProvider";
+import PokemonProvider from "./contexts/PokemonProvider";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import GetUrlProvider from "./contexts/UrlProvider";
 import React, { useState } from "react";
@@ -36,25 +37,27 @@ function App() {
 
   return (
     <PokemonListProvider>
-      <GetUrlProvider>
-        <ConfirmationTokenProvider>
-          <Router>
-            <div className="App">
-              <Menu {...{ selectPokemon }} />
+      <PokemonProvider>
+        <GetUrlProvider>
+          <ConfirmationTokenProvider>
+            <Router>
+              <div className="App">
+                <Menu {...{ selectPokemon }} />
 
-              <Route exact path="/" component={Index} />
+                <Route exact path="/" component={Index} />
 
-              <Route exact path="/registration" component={Registration} />
+                <Route exact path="/registration" component={Registration} />
 
-              <Route exact path="/login" component={Login} />
+                <Route exact path="/login" component={Login} />
 
-              <Route
-                exact
-                path="/pokemon"
-                render={(props) => <PokemonComponent {...{ selectPokemon }} />}
-              />
+                <Route
+                  exact
+                  path="/pokemon"
+                  render={(props) => (
+                    <PokemonComponent {...{ selectPokemon }} />
+                  )}
+                />
 
-              {selectedPokemon && (
                 <Route
                   exact
                   path={`/pokemon/${selectedPokemon.id}`}
@@ -62,12 +65,13 @@ function App() {
                     <PokemonProfile {...{ selectedPokemon }} {...{ pokemon }} />
                   )}
                 />
-              )}
-              <Footer />
-            </div>
-          </Router>
-        </ConfirmationTokenProvider>
-      </GetUrlProvider>
+
+                <Footer />
+              </div>
+            </Router>
+          </ConfirmationTokenProvider>
+        </GetUrlProvider>
+      </PokemonProvider>
     </PokemonListProvider>
   );
 }

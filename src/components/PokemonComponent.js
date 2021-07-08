@@ -44,7 +44,7 @@ export default function PokemonComponent({ selectPokemon }) {
         pokemons.map((pokemon) => (
           <PokemonCard
             key={pokemon.name}
-            pokemonData={pokemon}
+            pokemon={pokemon}
             {...{ selectPokemon }}
           />
         ))
