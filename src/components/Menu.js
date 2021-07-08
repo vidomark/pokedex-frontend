@@ -67,6 +67,7 @@ export default function Menu() {
       // on backspace
       if (deleted) {
         const previousList = savedLists.find(
+          /* eslint-disable */
           (list) => Object.keys(list) == name
         );
         setDeleted(false);

@@ -5,8 +5,8 @@ import { Container, Alert } from "react-bootstrap";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
 import { useUrl, useSetUrl } from "../contexts/UrlProvider";
 import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
+import { fetchData } from "../util/apiGet";
 import { useEffect } from "react";
-import axios from "axios";
 
 export default function PokemonComponent({ selectPokemon }) {
   const pokemons = usePokemons();
@@ -26,18 +26,15 @@ export default function PokemonComponent({ selectPokemon }) {
       }`
     );
   };
-  const fetchPokemons = () => {
-    axios
-      .get(url)
-      .then((result) => setPokemons(result.data))
-      .catch(() => {
-        setError("danger");
-        setMessage("Unauthorized request, please sign in!");
-      });
-  };
 
   useEffect(() => {
-    fetchPokemons();
+    fetchData(url)
+      .then((result) => setPokemons(result))
+      .catch((error) => {
+        console.log(error);
+        setError("error");
+        setMessage("Unauthorized request. Please sign in.");
+      });
   }, [currentPokemonNumber]);
 
   return (
@@ -54,6 +51,9 @@ export default function PokemonComponent({ selectPokemon }) {
         <Alert style={{ marginTop: "60px" }} variant={error}>
           {message}
         </Alert>
+      )}
+      {!error && (
+        <Pagination {...{ currentPokemonNumber }} {...{ loadPokemons }} />
       )}
     </Container>
   );
