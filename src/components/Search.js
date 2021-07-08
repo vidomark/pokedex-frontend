@@ -8,19 +8,12 @@ import pokeball from "../images/pokeball-icon.svg";
 import { useSetPokemons } from "../contexts/PokemonListProvider";
 import { useEffect } from "react";
 import { fetchData } from "../util/apiGet";
+import { dropdownItemStyle } from "../util/style";
 
 export default function Search() {
   const setPokemons = useSetPokemons();
   const [types, setTypes] = useState(null);
   const [abilites, setAbilites] = useState(null);
-
-  const dropdownItemStyle = {
-    color: "#ddd",
-    fontSize: "19px",
-    marginRight: "10%",
-    marginBottom: "10%",
-    borderRadius: "10px",
-  };
 
   const filterPokemons = (url, data) => {
     axios

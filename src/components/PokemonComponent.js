@@ -35,7 +35,8 @@ export default function PokemonComponent({ selectPokemon }) {
         setError("error");
         setMessage("Unauthorized request. Please sign in.");
       });
-  }, [currentPokemonNumber]);
+    /* eslint-disable */
+  }, [url]);
 
   return (
     <Container className="main-container">

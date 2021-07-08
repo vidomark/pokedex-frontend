@@ -14,7 +14,7 @@ import Login from "./components/Login";
 import ConfirmationTokenProvider from "./contexts/ConfirmationTokenProvider";
 import PokemonListProvider from "./contexts/PokemonListProvider";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import UrlProvider from "./contexts/UrlProvider";
+import GetUrlProvider from "./contexts/UrlProvider";
 import React, { useState } from "react";
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <PokemonListProvider>
-      <UrlProvider>
+      <GetUrlProvider>
         <ConfirmationTokenProvider>
           <Router>
             <div className="App">
@@ -67,7 +67,7 @@ function App() {
             </div>
           </Router>
         </ConfirmationTokenProvider>
-      </UrlProvider>
+      </GetUrlProvider>
     </PokemonListProvider>
   );
 }

@@ -7,8 +7,11 @@ import PokemonDetail from "./PokemonDetail";
 import PokemonController from "./PokemonController";
 import PokemonTable from "./PokemonTable";
 import Chart from "../Chart";
+import { useSetPokemons } from "../../contexts/PokemonListProvider";
 
 export default function ProfilePage(props) {
+  const setPokemons = useSetPokemons();
+  setPokemons(null);
   let [pokemon, setPokemon] = useState(props.selectedPokemon);
   const localStoragePokemon = JSON.parse(localStorage.getItem("pokemon"));
   pokemon = localStoragePokemon == null ? test : localStoragePokemon;
