@@ -9,13 +9,23 @@ import PokemonController from "./PokemonController";
 import PokemonTable from "./PokemonTable";
 import Chart from "../Chart";
 
-export default function ProfilePage(props) {
+export default function ProfilePage({
+  pokemon,
+  localStoragePokemon,
+  selectPokemon,
+}) {
+  // Nullify pokemons to disable search function
   const setPokemons = useSetPokemons();
   setPokemons(null);
-  const [pokemon, setPokemon] = useState(props.selectedPokemon);
+
+  pokemon = pokemon == null ? localStoragePokemon : pokemon; // In case of page refresh
   const [caught, setCaught] = useState(false); // For catching pokemon
+
+  // Creating dataset for chart
   const dataset = createDataset(pokemon.stats);
   const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
+
+  // For catching pokemons
   const pokeballImageSource = caught
     ? "https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"
     : "https://freepngimg.com/thumb/pokemon/20092-1-pokeball-transparent-image.png?fbclid=IwAR0JGJhEi7QaA8jYcrOLpCuEglKkIYpKw7Tr8vuhOAUT2MKcUoy3-sVRmDI";
@@ -23,7 +33,7 @@ export default function ProfilePage(props) {
 
   return (
     <div className="main-container">
-      <PokemonController pokemon={pokemon} setPokemon={setPokemon} />
+      <PokemonController {...{ pokemon }} {...{ selectPokemon }} />
       <Grid container className="classes.grid">
         <Grid item xs={12} md={6}>
           <div>

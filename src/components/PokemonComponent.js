@@ -31,7 +31,6 @@ export default function PokemonComponent({ selectPokemon }) {
     fetchData(url)
       .then((result) => setPokemons(result))
       .catch((error) => {
-        console.log(error);
         setError("error");
         setMessage("Unauthorized request. Please sign in.");
       });

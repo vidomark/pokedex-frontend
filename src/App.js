@@ -19,7 +19,13 @@ import React, { useState } from "react";
 
 function App() {
   const [pokemon, setPokemon] = useState(null);
-  const getSelectedPokemon = () => {
+
+  const selectPokemon = (pokemon) => {
+    setPokemon(pokemon);
+    localStorage.setItem("pokemon", JSON.stringify(pokemon)); // In case of page refresh
+  };
+
+  const getPokemon = () => {
     try {
       return JSON.parse(localStorage.getItem("pokemon"));
     } catch (exception) {
@@ -27,12 +33,7 @@ function App() {
     }
   };
 
-  const selectPokemon = (pokemon) => {
-    setPokemon(pokemon);
-    localStorage.setItem("pokemon", JSON.stringify(pokemon)); // in case of page refresh
-  };
-
-  let selectedPokemon = getSelectedPokemon();
+  let localStoragePokemon = getPokemon();
 
   return (
     <PokemonListProvider>
@@ -54,13 +55,19 @@ function App() {
                 render={() => <PokemonComponent {...{ selectPokemon }} />}
               />
 
-              <Route
-                exact
-                path={`/pokemon/${selectedPokemon.id}`}
-                render={() => (
-                  <PokemonProfile {...{ selectedPokemon }} {...{ pokemon }} />
-                )}
-              />
+              {localStoragePokemon && (
+                <Route
+                  exact
+                  path={`/pokemon/${localStoragePokemon.id}`}
+                  render={() => (
+                    <PokemonProfile
+                      {...{ localStoragePokemon }}
+                      {...{ selectPokemon }}
+                      {...{ pokemon }}
+                    />
+                  )}
+                />
+              )}
 
               <Footer />
             </div>

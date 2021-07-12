@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { capitalizeText } from "../../util/textCapitalizer";
 import { convertId } from "../../util/idConverter";
 import { fetchData } from "../../util/api";
 
-export default function PokemonController({ pokemon, setPokemon }) {
+export default function PokemonController({
+  pokemon,
+  setPokemon,
+  selectPokemon,
+}) {
   const [previousPokemon, setPreviousPokemon] = useState(null);
   const [followingPokemon, setFollowingPokemon] = useState(null);
 
@@ -28,27 +33,31 @@ export default function PokemonController({ pokemon, setPokemon }) {
     followingPokemon && (
       <div className="button-container">
         {pokemon.id > 1 && (
-          <button
-            className="button previous"
-            onClick={() => setPokemon(previousPokemon)}
-          >
-            <span>{capitalizeText(previousPokemon.name)}</span>
-            <span className="pokemon-change-id">
-              {convertId(previousPokemon.id)}
-            </span>
-          </button>
+          <Link to={`/pokemon/${previousPokemon.id}`}>
+            <button
+              className="button previous"
+              onClick={() => selectPokemon(previousPokemon)}
+            >
+              <span>{capitalizeText(previousPokemon.name)}</span>
+              <span className="pokemon-change-id">
+                {convertId(previousPokemon.id)}
+              </span>
+            </button>
+          </Link>
         )}
         <div className="pokemon-name">{capitalizeText(pokemon.name)}</div>
         <div className="pokemon-id">{convertId(pokemon.id)}</div>
-        <button
-          className="button following"
-          onClick={() => setPokemon(followingPokemon)}
-        >
-          <span>{capitalizeText(followingPokemon.name)}</span>
-          <span className="pokemon-change-id">
-            {convertId(followingPokemon.id)}
-          </span>
-        </button>
+        <Link to={`/pokemon/${followingPokemon.id}`}>
+          <button
+            className="button following"
+            onClick={() => selectPokemon(followingPokemon)}
+          >
+            <span>{capitalizeText(followingPokemon.name)}</span>
+            <span className="pokemon-change-id">
+              {convertId(followingPokemon.id)}
+            </span>
+          </button>
+        </Link>
       </div>
     )
   );
