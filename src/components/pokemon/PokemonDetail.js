@@ -4,9 +4,9 @@ import { capitalizeText } from "../../util/textCapitalizer";
 import { color } from "../../util/hexColors";
 import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
-import axios from "axios";
 import { useSetPokemons } from "../../contexts/PokemonListProvider";
 import { useSetUrl } from "../../contexts/UrlProvider";
+import { postData } from "../../util/api";
 
 // array of details
 export default function PokemonDetail({
@@ -24,10 +24,7 @@ export default function PokemonDetail({
 
   const filterPokemons = (url, data) => {
     setUrl(url);
-    axios
-      .post(url, data)
-      .then((result) => setPokemons(result.data))
-      .catch(console.error());
+    postData(url, data).then((result) => setPokemons(result));
   };
 
   return (

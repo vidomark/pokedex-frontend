@@ -22,3 +22,9 @@ export const dropdownItemStyle = {
   marginBottom: "10%",
   borderRadius: "10px",
 };
+
+export const gridStyle = {
+  spacing: null,
+  justify: "space-evenly",
+  alignItems: "center",
+};

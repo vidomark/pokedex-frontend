@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { capitalizeText } from "../util/textCapitalizer";
 import { color } from "../util/hexColors";
 import { NavDropdown, DropdownButton, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import pokeball from "../images/pokeball-icon.svg";
 import { useSetPokemons } from "../contexts/PokemonListProvider";
 import { useEffect } from "react";
-import { fetchData } from "../util/apiGet";
+import { fetchData } from "../util/api";
 import { dropdownItemStyle } from "../util/style";
+import { postData } from "../util/api";
+import pokeball from "../images/pokeball-icon.svg";
 
 export default function Search() {
   const setPokemons = useSetPokemons();
@@ -16,18 +16,17 @@ export default function Search() {
   const [abilites, setAbilites] = useState(null);
 
   const filterPokemons = (url, data) => {
-    axios
-      .post(url, data)
-      .then((result) => setPokemons(result.data))
-      .catch(console.error());
+    postData(url, data).then((result) => setPokemons(result));
   };
 
   useEffect(() => {
+    // Every type
     const typesUrl = "http://localhost:8080/pokemon/types";
     fetchData(typesUrl)
       .then((result) => setTypes(result))
       .catch((error) => console.log(error));
 
+    // Every ability
     const abilitiesUrl = "http://localhost:8080/pokemon/abilities";
     fetchData(abilitiesUrl)
       .then((result) => setAbilites(result))

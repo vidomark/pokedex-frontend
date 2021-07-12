@@ -5,7 +5,7 @@ import { Container, Alert } from "react-bootstrap";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
 import { useUrl, useSetUrl } from "../contexts/UrlProvider";
 import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
-import { fetchData } from "../util/apiGet";
+import { fetchData } from "../util/api";
 import { useEffect } from "react";
 
 export default function PokemonComponent({ selectPokemon }) {

@@ -3,23 +3,23 @@ import { Grid } from "@material-ui/core";
 import { convertPicture } from "../../util/pictureConverter";
 import { capitalizeText } from "../../util/textCapitalizer";
 import { createDataset } from "../../util/datasetCreator";
+import { useSetPokemons } from "../../contexts/PokemonListProvider";
 import PokemonDetail from "./PokemonDetail";
 import PokemonController from "./PokemonController";
 import PokemonTable from "./PokemonTable";
 import Chart from "../Chart";
-import { useSetPokemons } from "../../contexts/PokemonListProvider";
 
 export default function ProfilePage(props) {
   const setPokemons = useSetPokemons();
   setPokemons(null);
   const [pokemon, setPokemon] = useState(props.selectedPokemon);
-  const [caught, setCaught] = useState(false); // for catching pokemon
+  const [caught, setCaught] = useState(false); // For catching pokemon
+  const dataset = createDataset(pokemon.stats);
+  const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
   const pokeballImageSource = caught
     ? "https://freepngimg.com/thumb/pokemon/20148-3-pokeball-file.png?fbclid=IwAR22x7PCkYNuTRG6Bhd5tepQ8u03vHwyaoD59cttXRZMYU-rzPdyfdcdyJE"
     : "https://freepngimg.com/thumb/pokemon/20092-1-pokeball-transparent-image.png?fbclid=IwAR0JGJhEi7QaA8jYcrOLpCuEglKkIYpKw7Tr8vuhOAUT2MKcUoy3-sVRmDI";
   const pokeballImageClass = caught ? "pokeball caught" : "pokeball";
-  const dataset = createDataset(pokemon.stats);
-  const statNames = pokemon.stats.map((stat) => capitalizeText(stat.stat.name));
 
   return (
     <div className="main-container">

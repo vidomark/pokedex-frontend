@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Form, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSetConfirmationToken } from "../contexts/ConfirmationTokenProvider";
+import { postData } from "../util/api";
 
 export default function Registration() {
   const setConfirmationToken = useSetConfirmationToken();
@@ -20,16 +20,17 @@ export default function Registration() {
 
   const sendRegistration = () => {
     const url = "http://localhost:8080/registration";
-    axios
-      .post(url, formData)
+
+    postData(url, formData)
       .then((result) => {
         setConfirmationToken(result.data);
         setRegistrationState("success");
-        setMessage("Please confirm your email");
+        setMessage("Please confirm your email!");
       })
       .catch((error) => {
+        console.log(error);
         setRegistrationState("danger");
-        setMessage("Invalid registration");
+        setMessage("Email, username or password already taken!");
       });
   };
 

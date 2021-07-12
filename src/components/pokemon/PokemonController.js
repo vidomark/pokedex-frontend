@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { capitalizeText } from "../../util/textCapitalizer";
 import { convertId } from "../../util/idConverter";
-import { fetchData } from "../../util/apiGet";
+import { fetchData } from "../../util/api";
 
 export default function PokemonController({ pokemon, setPokemon }) {
   const [previousPokemon, setPreviousPokemon] = useState(null);
