@@ -4,6 +4,9 @@ import { capitalizeText } from "../../util/textCapitalizer";
 import { color } from "../../util/hexColors";
 import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
+import { useSetPokemons } from "../../contexts/PokemonListProvider";
+import { useSetUrl } from "../../contexts/UrlProvider";
+import { postData } from "../../util/api";
 
 // array of details
 export default function PokemonDetail({
@@ -11,12 +14,18 @@ export default function PokemonDetail({
   details,
   card = true,
   id = null,
-  postData,
 }) {
   const containerClassName = card ? null : "detail-container-profile";
   const detailTitleClassName = card ? "detail-title" : "detail-title-profile";
   const detailNameClassName = card ? "detail-name" : "detail-name-profile";
   const detailClassName = card ? "detail-detail" : "detail-detail-profile";
+  const setPokemons = useSetPokemons();
+  const setUrl = useSetUrl();
+
+  const filterPokemons = (url, data) => {
+    setUrl(url);
+    postData(url, data).then((result) => setPokemons(result));
+  };
 
   return (
     <Grid container>
@@ -33,12 +42,12 @@ export default function PokemonDetail({
                 key={detail.type.name}
                 className={detailNameClassName}
                 style={{ backgroundColor: color[detail.type.name] }}
-                onClick={() =>
-                  postData(
+                onClick={() => {
+                  filterPokemons(
                     `http://localhost:8080/pokemon?type=${detail.type.name}`,
                     detail.type
-                  )
-                }
+                  );
+                }}
               >
                 {capitalizeText(detail.type.name)}
               </Link>

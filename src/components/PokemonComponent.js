@@ -1,52 +1,60 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import PokemonCard from "./pokemon/PokemonCard";
-import { Container } from "react-bootstrap";
-import { Grid } from "@material-ui/core";
+import Pagination from "./Pagination";
+import { Container, Alert } from "react-bootstrap";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
+import { useUrl, useSetUrl } from "../contexts/UrlProvider";
+import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
+import { fetchData } from "../util/api";
+import { useEffect } from "react";
 
-export default function PokemonComponent(props) {
-  const {
-    selectPokemon,
-    pokemonList,
-    postData,
-    setCurrentPokemonNumber,
-    currentPokemonNumber,
-  } = props;
+export default function PokemonComponent({ selectPokemon }) {
+  const pokemons = usePokemons();
+  const setPokemons = useSetPokemons();
+  const url = useUrl();
+  const setUrl = useSetUrl();
+  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
 
-  const [visible, setVisible] = useState(loadedPokemonNumber);
+  const [currentPokemonNumber, setCurrentPokemonNumber] =
+    useState(loadedPokemonNumber);
   const loadPokemons = () => {
     setCurrentPokemonNumber((previous) => previous + loadedPokemonNumber);
-    setVisible((previous) => previous + loadedPokemonNumber);
+    setUrl(
+      `http://localhost:8080/pokemon?limit=${
+        currentPokemonNumber + loadedPokemonNumber
+      }`
+    );
   };
 
+  useEffect(() => {
+    fetchData(url)
+      .then((result) => setPokemons(result))
+      .catch((error) => {
+        setError("error");
+        setMessage("Unauthorized request. Please sign in.");
+      });
+    /* eslint-disable */
+  }, [url]);
+
   return (
-    pokemonList && (
-      <Container className="main-container">
-        {pokemonList.slice(0, visible).map((pokemon, index) => (
+    <Container className="main-container">
+      {pokemons ? (
+        pokemons.map((pokemon) => (
           <PokemonCard
             key={pokemon.name}
-            pokemonData={pokemon}
+            pokemon={pokemon}
             {...{ selectPokemon }}
-            {...{ postData }}
           />
-        ))}
-        <Grid container justify="center">
-          <Grid item>
-            <div className="pagination-button-container">
-              <Link
-                to={`/pokemon?limit=${
-                  currentPokemonNumber + loadedPokemonNumber
-                }`}
-              >
-                <button onClick={() => loadPokemons()} className="button">
-                  Load more...
-                </button>
-              </Link>
-            </div>
-          </Grid>
-        </Grid>
-      </Container>
-    )
+        ))
+      ) : (
+        <Alert style={{ marginTop: "60px" }} variant={error}>
+          {message}
+        </Alert>
+      )}
+      {!error && (
+        <Pagination {...{ currentPokemonNumber }} {...{ loadPokemons }} />
+      )}
+    </Container>
   );
 }

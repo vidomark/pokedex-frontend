@@ -14,3 +14,17 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.success.light,
   },
 }));
+
+export const dropdownItemStyle = {
+  color: "#ddd",
+  fontSize: "19px",
+  marginRight: "10%",
+  marginBottom: "10%",
+  borderRadius: "10px",
+};
+
+export const gridStyle = {
+  spacing: null,
+  justify: "space-evenly",
+  alignItems: "center",
+};

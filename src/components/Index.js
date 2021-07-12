@@ -1,18 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
+import { loadedPokemonNumber } from "../util/pokemonConfig";
+import { gridStyle } from "../util/style";
 import pokeballs from "../images/pokeballs.png";
 import aboutPicture from "../images/about.jpg";
-import { loadedPokemonNumber } from "../util/pokemonConfig";
 import "../css/index.css";
 
 export default function Index() {
-  const gridStyle = {
-    spacing: null,
-    justify: "space-evenly",
-    alignItems: "center",
-  };
-
   return (
     <div className="main-container">
       {/* pokemon card */}
@@ -61,18 +56,4 @@ export default function Index() {
       </Grid>
     </div>
   );
-}
-
-{
-  /* <div class="property-card">
-            <Link to="/pokemon">
-              <div class="property-image">
-                <div class="property-image-title"></div>
-              </div>
-            </Link>
-            <div class="property-description">
-              <h5>Pokemons</h5>
-              <p></p>
-            </div>
-          </div> */
 }

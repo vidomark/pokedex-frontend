@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   Navbar,
   NavLink,
@@ -7,20 +7,24 @@ import {
   Form,
   FormControl,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
 import Search from "./Search";
 import imagePath from "../images/Pokemon_logo.svg";
+import { useRef } from "react";
 
-export default function Menu({ postData, pokemonList, setPokemonList }) {
+export default function Menu() {
   const [registerHovered, setRegisterHovered] = useState(false);
   const [loginHovered, setLoginHovered] = useState(false);
   const [searchHovered, setSearchHovered] = useState(false);
-  const [unfilteredList, setUnfilteredList] = useState(pokemonList);
+
+  const pokemons = usePokemons();
+  const setPokemons = useSetPokemons();
+
   const [deleted, setDeleted] = useState(false);
   const [name, setName] = useState("");
-  const firstUpdate = useRef(true);
-  const unfilteredPokemons = useMemo(() => {
-    return pokemonList;
-  }, []);
+
+  let unfilteredPokemons = useRef(null);
   let savedLists = useMemo(() => {
     return [];
   }, []);
@@ -48,28 +52,31 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
   };
 
   useEffect(() => {
-    if (firstUpdate.current) firstUpdate.current = false;
-    else {
-      const filteredList = pokemonList.filter((pokemon) =>
+    if (pokemons) {
+      // save unfiltered pokemons
+      if (!savedLists.length) unfilteredPokemons.current = pokemons;
+
+      const filteredPokemons = pokemons.filter((pokemon) =>
         pokemon.name.startsWith(name.toLowerCase())
       );
-      setPokemonList(filteredList);
+      setPokemons(filteredPokemons);
 
-      nameMap[name] = filteredList;
+      nameMap[name] = filteredPokemons;
       savedLists.push(nameMap); // push name tracker to list
 
+      // on backspace
       if (deleted) {
-        // on backspace
         const previousList = savedLists.find(
+          /* eslint-disable */
           (list) => Object.keys(list) == name
         );
         setDeleted(false);
-
         name.length === 0
-          ? setPokemonList(unfilteredPokemons)
-          : setPokemonList(previousList[name]);
+          ? setPokemons(unfilteredPokemons.current)
+          : setPokemons(previousList[name]);
       }
     }
+    /* eslint-disable */
   }, [name]);
 
   return (
@@ -86,7 +93,7 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
             style={navLinkStyle.register}
             className="nav-item"
           >
-            Register
+            <Link to="/registration">Registration</Link>
           </NavLink>
           <NavLink
             onMouseEnter={() => setLoginHovered(true)}
@@ -94,35 +101,40 @@ export default function Menu({ postData, pokemonList, setPokemonList }) {
             className="nav-item"
             style={navLinkStyle.login}
           >
-            Login
+            <Link to="/login">Login</Link>
           </NavLink>
 
-          <NavDropdown
-            title={
-              <span
-                onMouseEnter={() => setSearchHovered(true)}
-                onMouseLeave={() => setSearchHovered(false)}
-                style={navLinkStyle.search}
-                className="dropdown-title"
-              >
-                Advanced search
-              </span>
-            }
-            id="basic-nav-dropdown"
-            variant="primary"
-            className="nav-dropdown nav-item"
-          >
-            <Search postData={postData} />
-          </NavDropdown>
+          {pokemons && (
+            <NavDropdown
+              title={
+                <span
+                  onMouseEnter={() => setSearchHovered(true)}
+                  onMouseLeave={() => setSearchHovered(false)}
+                  style={navLinkStyle.search}
+                  className="dropdown-title"
+                >
+                  Advanced search
+                </span>
+              }
+              id="basic-nav-dropdown"
+              variant="primary"
+              className="nav-dropdown nav-item"
+            >
+              <Search />
+            </NavDropdown>
+          )}
         </Nav>
-        <Form inline>
-          <FormControl
-            type="text"
-            placeholder="Enter name"
-            className="mr-sm-2"
-            onChange={(event) => searchByName(event)}
-          />
-        </Form>
+
+        {pokemons && (
+          <Form inline>
+            <FormControl
+              type="text"
+              placeholder="Enter name"
+              className="mr-sm-2"
+              onChange={(event) => searchByName(event)}
+            />
+          </Form>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );

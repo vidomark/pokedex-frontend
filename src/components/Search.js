@@ -3,54 +3,51 @@ import { capitalizeText } from "../util/textCapitalizer";
 import { color } from "../util/hexColors";
 import { NavDropdown, DropdownButton, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
+import { useSetPokemons } from "../contexts/PokemonListProvider";
+import { useEffect } from "react";
+import { fetchData } from "../util/api";
+import { dropdownItemStyle } from "../util/style";
+import { postData } from "../util/api";
 import pokeball from "../images/pokeball-icon.svg";
 
-export default function Search({ postData }) {
-  const [typesLoaded, fetchedTypes] = useFetch(
-    "http://localhost:8080/pokemon/types",
-    []
-  );
-  const [abilitiesLoaded, fetchedAbilities] = useFetch(
-    "http://localhost:8080/pokemon/abilities",
-    []
-  );
+export default function Search() {
+  const setPokemons = useSetPokemons();
+  const [types, setTypes] = useState(null);
+  const [abilites, setAbilites] = useState(null);
 
-  const [selectedAbility, setSelectedAbility] = useState(null);
-
-  const dropdownItemStyle = {
-    color: "#ddd",
-    fontSize: "19px",
-    marginRight: "10%",
-    marginBottom: "10%",
-    borderRadius: "10px",
+  const filterPokemons = (url, data) => {
+    postData(url, data).then((result) => setPokemons(result));
   };
 
-  const selectType = (type) => {
-    const url = `http://localhost:8080/pokemon?type=${type.name}`;
-    postData(url, type);
-  };
+  useEffect(() => {
+    // Every type
+    const typesUrl = "http://localhost:8080/pokemon/types";
+    fetchData(typesUrl)
+      .then((result) => setTypes(result))
+      .catch((error) => console.log(error));
 
-  const selectAbility = (ability) => {
-    const url = `http://localhost:8080/pokemon?ability=${ability.name}`;
-    setSelectedAbility(ability);
-    postData(url, ability);
-  };
+    // Every ability
+    const abilitiesUrl = "http://localhost:8080/pokemon/abilities";
+    fetchData(abilitiesUrl)
+      .then((result) => setAbilites(result))
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
-    typesLoaded &&
-    fetchedTypes &&
-    abilitiesLoaded &&
-    fetchedAbilities && (
+    types &&
+    abilites && (
       /* type search */
       <div className="dropdown-container">
         <div className="nav-type">
-          {fetchedTypes.data.map((type) => (
+          {types.map((type) => (
             <NavDropdown.Item
               key={type.name}
               className="detail-name detail-name-nav"
               style={{ backgroundColor: color[type.name] }}
-              onClick={() => selectType(type)}
+              onClick={() => {
+                const url = `http://localhost:8080/pokemon?type=${type.name}`;
+                filterPokemons(url, type);
+              }}
             >
               <Link to={`/pokemon?type=${type.name}`}>
                 {capitalizeText(type.name)}
@@ -67,20 +64,19 @@ export default function Search({ postData }) {
             title={
               <span>
                 <img src={pokeball} className="pokeball-icon" alt="pokeball" />
-                <span className="ability-title-button">
-                  {selectedAbility
-                    ? capitalizeText(selectedAbility.name)
-                    : "All"}
-                </span>
+                <span className="ability-title-button">Abilities</span>
               </span>
             }
           >
             <div style={{ height: "300px", overflowY: "auto" }}>
-              {fetchedAbilities.data.map((ability) => (
+              {abilites.map((ability) => (
                 <Dropdown.Item
                   key={ability.name}
                   style={dropdownItemStyle}
-                  onClick={() => selectAbility(ability)}
+                  onClick={() => {
+                    const url = `http://localhost:8080/pokemon?ability=${ability.name}`;
+                    filterPokemons(url, ability);
+                  }}
                 >
                   <Link to={`/pokemon?ability=${ability.name}`}>
                     {capitalizeText(ability.name)}
