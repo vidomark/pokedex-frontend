@@ -4,6 +4,7 @@ import "./css/profile.css";
 import "./css/navbar.css";
 import "./css/form.css";
 import "./css/index.css";
+import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 import Menu from "./components/Menu";

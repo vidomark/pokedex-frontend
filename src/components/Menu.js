@@ -10,11 +10,19 @@ import {
 import { Link, withRouter } from "react-router-dom";
 import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
 import { useRef } from "react";
+import { toast } from "react-toastify";
 import imagePath from "../images/Pokemon_logo.svg";
-import auth from "../util/authentication";
+import token from "../util/token";
 import Search from "./Search";
 
 function Menu(props) {
+  toast.configure();
+  const notify = () =>
+    toast.success("You have been successfully logged out!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000,
+    });
+
   const [linkOneHovered, setLinkOneHovered] = useState(false);
   const [linkTwoHovered, setLinkTwoHovered] = useState(false);
   const [searchHovered, setSearchHovered] = useState(false);
@@ -53,7 +61,8 @@ function Menu(props) {
   };
 
   const logout = () => {
-    auth.logout(() => props.history.push("/"));
+    token.logout(() => props.history.push("/"));
+    notify();
   };
 
   useEffect(() => {
@@ -98,10 +107,8 @@ function Menu(props) {
             style={navLinkStyle.linkOne}
             className="nav-item"
           >
-            {auth.isAuthenticated() && <Link to="/profile">Profile</Link>}
-            {!auth.isAuthenticated() && (
-              <Link to="/registration">Registration</Link>
-            )}
+            {token.available() && <Link to="/profile">Profile</Link>}
+            {!token.available() && <Link to="/registration">Registration</Link>}
           </NavLink>
 
           <NavLink
@@ -110,12 +117,12 @@ function Menu(props) {
             className="nav-item"
             style={navLinkStyle.linkTwo}
           >
-            {auth.isAuthenticated() && (
+            {token.available() && (
               <Link to="/" onClick={() => logout()}>
                 Logout
               </Link>
             )}
-            {!auth.isAuthenticated() && <Link to="/login">Login</Link>}
+            {!token.available() && <Link to="/login">Login</Link>}
           </NavLink>
 
           {pokemons && (

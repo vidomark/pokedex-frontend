@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PokemonCard from "./pokemon/PokemonCard";
 import Pagination from "./Pagination";
-import auth from "../util/authentication";
+import auth from "../util/token";
 import { Container, Alert } from "react-bootstrap";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
 import { useUrl, useSetUrl } from "../contexts/UrlProvider";

@@ -3,20 +3,12 @@ import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
 import { gridStyle } from "../util/style";
-import { Alert } from "react-bootstrap";
-import auth from "../util/authentication";
 import pokeballs from "../images/pokeballs.png";
 import aboutPicture from "../images/about.jpg";
 
 export default function Index() {
   return (
     <div className="main-container">
-      {auth.redirect && (
-        <Alert className="mt-3 mb-0" variant="success">
-          {auth.message}
-        </Alert>
-      )}
-
       {/* pokemon card */}
       <Grid
         container

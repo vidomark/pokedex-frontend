@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import auth from "../util/authentication";
+import React, { useEffect } from "react";
+import token from "../util/token";
+import { toast } from "react-toastify";
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -7,6 +8,12 @@ import { postData } from "../util/api";
 import { Alert } from "react-bootstrap";
 
 export default function Login(props) {
+  toast.configure();
+  const notify = () =>
+    toast.success("You have been successfully logged in!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000,
+    });
   const [invalidLogin, setInvalidLogin] = useState(false);
   const [formData, setFormData] = useState({
     username: null,
@@ -22,8 +29,9 @@ export default function Login(props) {
     postData(url, formData).then((result) => {
       // Successfull authentication
       if (result.headers.authorization) {
-        const token = result.headers.authorization.slice(7);
-        auth.login(() => props.history.push("/"), token);
+        const jwt = result.headers.authorization.slice(7);
+        token.login(() => props.history.push("/"), jwt);
+        notify();
       } else {
         setInvalidLogin(true);
       }
