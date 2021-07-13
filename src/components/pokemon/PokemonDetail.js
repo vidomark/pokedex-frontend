@@ -24,7 +24,7 @@ export default function PokemonDetail({
 
   const filterPokemons = (url, data) => {
     setUrl(url);
-    postData(url, data).then((result) => setPokemons(result));
+    postData(url, data).then((result) => setPokemons(result.data));
   };
 
   return (

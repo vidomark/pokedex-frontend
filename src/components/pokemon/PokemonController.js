@@ -16,11 +16,11 @@ export default function PokemonController({ pokemon, selectPokemon }) {
 
   useEffect(() => {
     fetchData(previousPokemonUrl)
-      .then((result) => setPreviousPokemon(result))
+      .then((result) => setPreviousPokemon(result.data))
       .catch((error) => console.log(error));
 
     fetchData(followingPokemonUrl)
-      .then((result) => setFollowingPokemon(result))
+      .then((result) => setFollowingPokemon(result.data))
       .catch((error) => console.log(error));
   }, [followingPokemonUrl, previousPokemonUrl]);
 

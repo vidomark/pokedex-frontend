@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PokemonCard from "./pokemon/PokemonCard";
 import Pagination from "./Pagination";
-import auth from "../util/token";
+import token from "../util/token";
 import { Container, Alert } from "react-bootstrap";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
 import { useUrl, useSetUrl } from "../contexts/UrlProvider";
@@ -27,8 +27,11 @@ export default function PokemonComponent({ selectPokemon }) {
   };
 
   useEffect(() => {
-    if (auth.isAuthenticated())
-      fetchData(url).then((result) => setPokemons(result.data));
+    fetchData(url).then((result) => {
+      try {
+        setPokemons(result.data);
+      } catch (exception) {}
+    });
     /* eslint-disable */
   }, [url]);
 
@@ -47,7 +50,7 @@ export default function PokemonComponent({ selectPokemon }) {
           Unauthorized request. Please sign in.
         </Alert>
       )}
-      {!auth.isAuthenticated && (
+      {token.available() && (
         <Pagination {...{ currentPokemonNumber }} {...{ loadPokemons }} />
       )}
     </Container>
