@@ -10,6 +10,6 @@ export const fetchData = (url) => {
 export const postData = (url, data) => {
   return axios
     .post(url, data)
-    .then((result) => result.data)
+    .then((result) => result)
     .catch((error) => console.log(error));
 };

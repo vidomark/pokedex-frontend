@@ -4,11 +4,7 @@ import { capitalizeText } from "../../util/textCapitalizer";
 import { convertId } from "../../util/idConverter";
 import { fetchData } from "../../util/api";
 
-export default function PokemonController({
-  pokemon,
-  setPokemon,
-  selectPokemon,
-}) {
+export default function PokemonController({ pokemon, selectPokemon }) {
   const [previousPokemon, setPreviousPokemon] = useState(null);
   const [followingPokemon, setFollowingPokemon] = useState(null);
 
@@ -33,6 +29,7 @@ export default function PokemonController({
     followingPokemon && (
       <div className="button-container">
         {pokemon.id > 1 && (
+          /* Previous pokemon */
           <Link to={`/pokemon/${previousPokemon.id}`}>
             <button
               className="button previous"
@@ -45,8 +42,12 @@ export default function PokemonController({
             </button>
           </Link>
         )}
+
+        {/* Current pokemon */}
         <div className="pokemon-name">{capitalizeText(pokemon.name)}</div>
         <div className="pokemon-id">{convertId(pokemon.id)}</div>
+
+        {/* Following pokemon */}
         <Link to={`/pokemon/${followingPokemon.id}`}>
           <button
             className="button following"

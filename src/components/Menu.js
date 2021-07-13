@@ -7,15 +7,16 @@ import {
   Form,
   FormControl,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
-import Search from "./Search";
-import imagePath from "../images/Pokemon_logo.svg";
 import { useRef } from "react";
+import imagePath from "../images/Pokemon_logo.svg";
+import auth from "../util/authentication";
+import Search from "./Search";
 
-export default function Menu() {
-  const [registerHovered, setRegisterHovered] = useState(false);
-  const [loginHovered, setLoginHovered] = useState(false);
+function Menu(props) {
+  const [linkOneHovered, setLinkOneHovered] = useState(false);
+  const [linkTwoHovered, setLinkTwoHovered] = useState(false);
   const [searchHovered, setSearchHovered] = useState(false);
 
   const pokemons = usePokemons();
@@ -31,11 +32,11 @@ export default function Menu() {
   let nameMap = {};
 
   const navLinkStyle = {
-    register: {
-      color: registerHovered ? "white" : "#ddd",
+    linkOne: {
+      color: linkOneHovered ? "white" : "#ddd",
     },
-    login: {
-      color: loginHovered ? "white" : "#ddd",
+    linkTwo: {
+      color: linkTwoHovered ? "white" : "#ddd",
     },
     search: {
       color: searchHovered ? "white" : "#ddd",
@@ -49,6 +50,10 @@ export default function Menu() {
     if (event.nativeEvent.inputType === "deleteContentBackward")
       setDeleted(true);
     else setDeleted(false);
+  };
+
+  const logout = () => {
+    auth.logout(() => props.history.push("/"));
   };
 
   useEffect(() => {
@@ -88,20 +93,29 @@ export default function Menu() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <NavLink
-            onMouseEnter={() => setRegisterHovered(true)}
-            onMouseLeave={() => setRegisterHovered(false)}
-            style={navLinkStyle.register}
+            onMouseEnter={() => setLinkOneHovered(true)}
+            onMouseLeave={() => setLinkOneHovered(false)}
+            style={navLinkStyle.linkOne}
             className="nav-item"
           >
-            <Link to="/registration">Registration</Link>
+            {auth.isAuthenticated() && <Link to="/profile">Profile</Link>}
+            {!auth.isAuthenticated() && (
+              <Link to="/registration">Registration</Link>
+            )}
           </NavLink>
+
           <NavLink
-            onMouseEnter={() => setLoginHovered(true)}
-            onMouseLeave={() => setLoginHovered(false)}
+            onMouseEnter={() => setLinkTwoHovered(true)}
+            onMouseLeave={() => setLinkTwoHovered(false)}
             className="nav-item"
-            style={navLinkStyle.login}
+            style={navLinkStyle.linkTwo}
           >
-            <Link to="/login">Login</Link>
+            {auth.isAuthenticated() && (
+              <Link to="/" onClick={() => logout()}>
+                Logout
+              </Link>
+            )}
+            {!auth.isAuthenticated() && <Link to="/login">Login</Link>}
           </NavLink>
 
           {pokemons && (
@@ -139,3 +153,5 @@ export default function Menu() {
     </Navbar>
   );
 }
+
+export default withRouter(Menu);

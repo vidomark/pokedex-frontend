@@ -9,9 +9,9 @@ export default function Registration() {
   const [registrationState, setRegistrationState] = useState(null);
   const [message, setMessage] = useState(null);
   const [formData, setFormData] = useState({
-    email: "",
-    username: "",
-    password: "",
+    email: null,
+    username: null,
+    password: null,
   });
 
   const handleChange = (event) => {
@@ -28,7 +28,6 @@ export default function Registration() {
         setMessage("Please confirm your email!");
       })
       .catch((error) => {
-        console.log(error);
         setRegistrationState("danger");
         setMessage("Email, username or password already taken!");
       });
