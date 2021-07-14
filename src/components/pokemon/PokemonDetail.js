@@ -5,7 +5,6 @@ import { color } from "../../util/hexColors";
 import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import { useSetPokemons } from "../../contexts/PokemonListProvider";
-import { useSetUrl } from "../../contexts/UrlProvider";
 import { postData } from "../../util/api";
 
 // array of details
@@ -20,10 +19,8 @@ export default function PokemonDetail({
   const detailNameClassName = card ? "detail-name" : "detail-name-profile";
   const detailClassName = card ? "detail-detail" : "detail-detail-profile";
   const setPokemons = useSetPokemons();
-  const setUrl = useSetUrl();
 
   const filterPokemons = (url, data) => {
-    setUrl(url);
     postData(url, data).then((result) => setPokemons(result.data));
   };
 

@@ -16,7 +16,7 @@ export default function Search() {
   const [abilites, setAbilites] = useState(null);
 
   const filterPokemons = (url, data) => {
-    postData(url, data).then((result) => setPokemons(result));
+    postData(url, data).then((result) => setPokemons(result.data));
   };
 
   useEffect(() => {

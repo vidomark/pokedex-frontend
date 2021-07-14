@@ -5,7 +5,6 @@ import token from "../util/token";
 import apiController from "../util/apiController";
 import { Container, Alert } from "react-bootstrap";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
-import { useUrl, useSetUrl } from "../contexts/UrlProvider";
 import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
 import { fetchData } from "../util/api";
 import { useEffect } from "react";
@@ -13,22 +12,16 @@ import { useEffect } from "react";
 export default function PokemonComponent({ selectPokemon }) {
   const pokemons = usePokemons();
   const setPokemons = useSetPokemons();
-  const url = useUrl();
-  const setUrl = useSetUrl();
 
   const [currentPokemonNumber, setCurrentPokemonNumber] =
     useState(loadedPokemonNumber);
   const loadPokemons = () => {
     setCurrentPokemonNumber((previous) => previous + loadedPokemonNumber);
-    setUrl(
-      `http://localhost:8080/pokemon?limit=${
-        currentPokemonNumber + loadedPokemonNumber
-      }`
-    );
   };
 
   useEffect(() => {
     if (apiController.getState() === "get") {
+      const url = `http://localhost:8080/pokemon?limit=${currentPokemonNumber}`;
       fetchData(url).then((result) => {
         try {
           setPokemons(result.data);
@@ -36,7 +29,7 @@ export default function PokemonComponent({ selectPokemon }) {
       });
     }
     /* eslint-disable */
-  }, [url]);
+  }, [currentPokemonNumber]);
 
   return (
     <Container className="main-container">
