@@ -12,8 +12,8 @@ import PokemonComponent from "./components/PokemonComponent";
 import Index from "./components/Index";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
-import ConfirmationTokenProvider from "./contexts/ConfirmationTokenProvider";
 import PokemonListProvider from "./contexts/PokemonListProvider";
+import apiController from "./util/apiController";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -34,41 +34,41 @@ function App() {
   };
 
   let localStoragePokemon = getPokemon();
+  apiController.setState("get");
+
   return (
     <PokemonListProvider>
-      <ConfirmationTokenProvider>
-        <Router>
-          <div className="App">
-            <Menu />
+      <Router>
+        <div className="App">
+          <Menu />
 
-            <Route exact path="/" component={Index} />
+          <Route exact path="/" component={Index} />
 
-            <Route exact path="/registration" component={Registration} />
+          <Route exact path="/registration" component={Registration} />
 
-            <Route exact path="/login" component={Login} />
+          <Route exact path="/login" component={Login} />
 
+          <Route
+            exact
+            path="/pokemon"
+            render={() => <PokemonComponent {...{ selectPokemon }} />}
+          />
+
+          {localStoragePokemon && (
             <Route
               exact
-              path="/pokemon"
-              render={() => <PokemonComponent {...{ selectPokemon }} />}
+              path={`/pokemon/${localStoragePokemon.id}`}
+              render={() => (
+                <PokemonProfile
+                  {...{ localStoragePokemon }}
+                  {...{ selectPokemon }}
+                  {...{ pokemon }}
+                />
+              )}
             />
-
-            {localStoragePokemon && (
-              <Route
-                exact
-                path={`/pokemon/${localStoragePokemon.id}`}
-                render={() => (
-                  <PokemonProfile
-                    {...{ localStoragePokemon }}
-                    {...{ selectPokemon }}
-                    {...{ pokemon }}
-                  />
-                )}
-              />
-            )}
-          </div>
-        </Router>
-      </ConfirmationTokenProvider>
+          )}
+        </div>
+      </Router>
     </PokemonListProvider>
   );
 }

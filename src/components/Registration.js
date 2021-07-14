@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useSetConfirmationToken } from "../contexts/ConfirmationTokenProvider";
 import { postData } from "../util/api";
 
 export default function Registration() {
-  const setConfirmationToken = useSetConfirmationToken();
   const [registrationState, setRegistrationState] = useState(null);
   const [message, setMessage] = useState(null);
   const [formData, setFormData] = useState({
@@ -25,7 +23,6 @@ export default function Registration() {
     // False to not send token
     postData(url, formData, false)
       .then((result) => {
-        setConfirmationToken(result.data);
         setRegistrationState("success");
         setMessage("Please confirm your email!");
       })
