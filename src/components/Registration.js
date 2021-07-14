@@ -21,7 +21,7 @@ export default function Registration() {
   const sendRegistration = () => {
     const url = "http://localhost:8080/registration";
 
-    postData(url, formData)
+    postData(url, formData, false)
       .then((result) => {
         setConfirmationToken(result.data);
         setRegistrationState("success");
@@ -29,7 +29,7 @@ export default function Registration() {
       })
       .catch((error) => {
         setRegistrationState("danger");
-        setMessage("Email, username or password already taken!");
+        setMessage("Please check your ceredentials!");
       });
   };
 

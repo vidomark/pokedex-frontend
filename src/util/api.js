@@ -8,11 +8,13 @@ export const fetchData = (url) => {
     .catch((error) => console.log(error));
 };
 
-export const postData = (url, data) => {
+export const postData = (url, data, header = true) => {
+  const headers = header
+    ? { Authorization: `Bearer ${token.getToken()}` }
+    : null;
+
   return axios
-    .post(url, data, {
-      headers: { Authorization: `Bearer ${token.getToken()}` },
-    })
+    .post(url, data, headers)
     .then((result) => result)
     .catch((error) => console.log(error));
 };
