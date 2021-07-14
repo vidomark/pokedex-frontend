@@ -12,6 +12,7 @@ export default function Registration() {
     email: null,
     username: null,
     password: null,
+    confirmPassword: null,
   });
 
   const handleChange = (event) => {
@@ -70,6 +71,16 @@ export default function Registration() {
               type="password"
               placeholder="Password"
               name="password"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              onChange={(event) => handleChange(event)}
+              type="password"
+              placeholder="Confirm Password"
+              name="confirmPassword"
             />
           </Form.Group>
 
