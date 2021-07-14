@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PokemonCard from "./pokemon/PokemonCard";
 import Pagination from "./Pagination";
 import token from "../util/token";
+import apiController from "../util/apiController";
 import { Container, Alert } from "react-bootstrap";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
 import { useUrl, useSetUrl } from "../contexts/UrlProvider";
@@ -27,11 +28,13 @@ export default function PokemonComponent({ selectPokemon }) {
   };
 
   useEffect(() => {
-    fetchData(url).then((result) => {
-      try {
-        setPokemons(result.data);
-      } catch (exception) {}
-    });
+    if (apiController.getState() === "get") {
+      fetchData(url).then((result) => {
+        try {
+          setPokemons(result.data);
+        } catch (exception) {}
+      });
+    }
     /* eslint-disable */
   }, [url]);
 

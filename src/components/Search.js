@@ -23,13 +23,13 @@ export default function Search() {
     // Every type
     const typesUrl = "http://localhost:8080/pokemon/types";
     fetchData(typesUrl)
-      .then((result) => setTypes(result))
+      .then((result) => setTypes(result.data))
       .catch((error) => console.log(error));
 
     // Every ability
     const abilitiesUrl = "http://localhost:8080/pokemon/abilities";
     fetchData(abilitiesUrl)
-      .then((result) => setAbilites(result))
+      .then((result) => setAbilites(result.data))
       .catch((error) => console.log(error));
   }, []);
 

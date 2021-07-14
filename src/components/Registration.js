@@ -22,6 +22,7 @@ export default function Registration() {
   const sendRegistration = () => {
     const url = "http://localhost:8080/registration";
 
+    // False to not send token
     postData(url, formData, false)
       .then((result) => {
         setConfirmationToken(result.data);

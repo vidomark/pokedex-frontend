@@ -14,9 +14,9 @@ import Registration from "./components/Registration";
 import Login from "./components/Login";
 import ConfirmationTokenProvider from "./contexts/ConfirmationTokenProvider";
 import PokemonListProvider from "./contexts/PokemonListProvider";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import GetUrlProvider from "./contexts/UrlProvider";
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
   const [pokemon, setPokemon] = useState(null);
@@ -35,7 +35,6 @@ function App() {
   };
 
   let localStoragePokemon = getPokemon();
-
   return (
     <PokemonListProvider>
       <GetUrlProvider>

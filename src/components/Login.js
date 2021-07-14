@@ -26,11 +26,12 @@ export default function Login(props) {
 
   const sendLogin = () => {
     const url = "http://localhost:8080/login";
+
+    // False to not send token
     postData(url, formData, false).then((result) => {
       // Successfull authentication
       if (result.headers.authorization) {
         const jwt = result.headers.authorization.slice(7);
-        console.log(jwt);
         token.login(() => props.history.push("/"), jwt);
         notify();
       } else {
