@@ -144,8 +144,8 @@ function Menu(props) {
             </NavLink>
           )}
 
-          {/* Only render on pokemon page */}
-          {location.pathname === "/pokemon" && (
+          {/* Only render on pokemon page, when logged in */}
+          {location.pathname === "/pokemon" && pokemons && (
             <NavDropdown
               title={
                 <span
@@ -166,7 +166,8 @@ function Menu(props) {
           )}
         </Nav>
 
-        {location.pathname === "/pokemon" && (
+        {/* Only render on pokemon page, when logged in */}
+        {location.pathname === "/pokemon" && pokemons && (
           <Form inline>
             <FormControl
               type="text"
