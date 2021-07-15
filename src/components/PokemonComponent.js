@@ -12,6 +12,7 @@ import { useEffect } from "react";
 export default function PokemonComponent({ selectPokemon }) {
   const pokemons = usePokemons();
   const setPokemons = useSetPokemons();
+  const [loggedIn, setLoggedIn] = useState(null);
 
   const [currentPokemonNumber, setCurrentPokemonNumber] =
     useState(loadedPokemonNumber);
@@ -24,17 +25,54 @@ export default function PokemonComponent({ selectPokemon }) {
       const url = `http://localhost:8080/pokemon?limit=${currentPokemonNumber}`;
       const header = { Authorization: `Bearer ${token.getToken()}` };
       fetchData(url, header).then((result) => {
-        try {
+        if (result) {
+          setLoggedIn(true);
           setPokemons(result.data);
-        } catch (exception) {}
+        } else {
+          setLoggedIn(false);
+        }
       });
     }
     /* eslint-disable */
   }, [currentPokemonNumber]);
 
-  return (
-    <Container className="main-container">
-      {pokemons ? (
+  // Successful authentication
+  if (pokemons) {
+    return (
+      <Container className="main-container">
+        {pokemons.map((pokemon) => (
+          <PokemonCard
+            key={pokemon.name}
+            {...{ pokemon }}
+            {...{ selectPokemon }}
+          />
+        ))}
+        <Pagination {...{ currentPokemonNumber }} {...{ loadPokemons }} />
+      </Container>
+    );
+    // Unsuccessful authentication
+  } else if (loggedIn === false) {
+    return (
+      <Container className="main-container">
+        <Alert className="mt-5" variant="danger">
+          Unathorized request! Please sign in!
+        </Alert>
+      </Container>
+    );
+    // Fetching pokemons
+  } else {
+    return (
+      <Container className="main-container">
+        <Alert className="mt-5" variant="info">
+          Loading pokemons
+        </Alert>
+      </Container>
+    );
+  }
+}
+
+/*
+{pokemons ? (
         pokemons.map((pokemon) => (
           <PokemonCard
             key={pokemon.name}
@@ -49,7 +87,4 @@ export default function PokemonComponent({ selectPokemon }) {
       )}
       {token.available() && (
         <Pagination {...{ currentPokemonNumber }} {...{ loadPokemons }} />
-      )}
-    </Container>
-  );
-}
+      )} */

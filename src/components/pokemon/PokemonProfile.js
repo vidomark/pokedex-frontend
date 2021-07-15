@@ -3,7 +3,6 @@ import { Grid } from "@material-ui/core";
 import { convertPicture } from "../../util/pictureConverter";
 import { capitalizeText } from "../../util/textCapitalizer";
 import { createDataset } from "../../util/datasetCreator";
-import { useSetPokemons } from "../../contexts/PokemonListProvider";
 import PokemonDetail from "./PokemonDetail";
 import PokemonController from "./PokemonController";
 import PokemonTable from "./PokemonTable";
@@ -14,10 +13,6 @@ export default function ProfilePage({
   localStoragePokemon,
   selectPokemon,
 }) {
-  // Nullify pokemons to disable search function
-  const setPokemons = useSetPokemons();
-  setPokemons(null);
-
   pokemon = pokemon == null ? localStoragePokemon : pokemon; // In case of page refresh
   const [caught, setCaught] = useState(false); // For catching pokemon
 

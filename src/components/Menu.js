@@ -7,7 +7,7 @@ import {
   Form,
   FormControl,
 } from "react-bootstrap";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useLocation } from "react-router-dom";
 import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
 import { useRef } from "react";
 import { toast } from "react-toastify";
@@ -16,6 +16,8 @@ import token from "../util/token";
 import Search from "./Search";
 
 function Menu(props) {
+  const location = useLocation();
+
   toast.configure();
   const notify = () =>
     toast.success("You have been successfully logged out!", {
@@ -26,6 +28,7 @@ function Menu(props) {
   const [linkOneHovered, setLinkOneHovered] = useState(false);
   const [linkTwoHovered, setLinkTwoHovered] = useState(false);
   const [searchHovered, setSearchHovered] = useState(false);
+  const [pokemonsHovered, setPokemonsHovered] = useState(false);
 
   const pokemons = usePokemons();
   const setPokemons = useSetPokemons();
@@ -49,6 +52,9 @@ function Menu(props) {
     search: {
       color: searchHovered ? "white" : "#ddd",
     },
+    pokemons: {
+      color: pokemonsHovered ? "white" : "#ddd",
+    },
   };
 
   const searchByName = (event) => {
@@ -62,6 +68,7 @@ function Menu(props) {
 
   const logout = () => {
     token.logout(() => props.history.push("/"));
+    setPokemons(null);
     notify();
   };
 
@@ -125,7 +132,20 @@ function Menu(props) {
             {!token.available() && <Link to="/login">Login</Link>}
           </NavLink>
 
-          {pokemons && (
+          {/* Do not render on pokemon page */}
+          {location.pathname !== "/pokemon" && (
+            <NavLink
+              onMouseEnter={() => setPokemonsHovered(true)}
+              onMouseLeave={() => setPokemonsHovered(false)}
+              style={navLinkStyle.pokemons}
+              className="nav-item"
+            >
+              <Link to="/pokemon">Pokemons</Link>
+            </NavLink>
+          )}
+
+          {/* Only render on pokemon page */}
+          {location.pathname === "/pokemon" && (
             <NavDropdown
               title={
                 <span
@@ -146,7 +166,7 @@ function Menu(props) {
           )}
         </Nav>
 
-        {pokemons && (
+        {location.pathname === "/pokemon" && (
           <Form inline>
             <FormControl
               type="text"
