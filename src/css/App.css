@@ -5,21 +5,14 @@
   box-sizing: border-box;
 }
 
-.App {
+body > #root > div {
+  height: 100%;
+  overflow: auto;
   text-align: center;
   background-image: url("../images/background.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .navbar-picture {
@@ -28,13 +21,13 @@
   margin: 0;
 }
 
-.footerStyle {
+.footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   background: "#f3f3f3";
-  color: black;
+  color: #ddd;
   text-align: center;
 }
 
@@ -48,7 +41,7 @@
   margin: 0 10%;
   margin-bottom: 150px;
   padding-bottom: 40px;
-  margin-top: 8%;
+  margin-top: 130px;
 }
 
 .pagination-button-container {

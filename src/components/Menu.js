@@ -7,16 +7,28 @@ import {
   Form,
   FormControl,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter, useLocation } from "react-router-dom";
 import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
-import Search from "./Search";
-import imagePath from "../images/Pokemon_logo.svg";
 import { useRef } from "react";
+import { toast } from "react-toastify";
+import imagePath from "../images/Pokemon_logo.svg";
+import token from "../util/token";
+import Search from "./Search";
 
-export default function Menu() {
-  const [registerHovered, setRegisterHovered] = useState(false);
-  const [loginHovered, setLoginHovered] = useState(false);
+function Menu(props) {
+  const location = useLocation();
+
+  toast.configure();
+  const notify = () =>
+    toast.success("You have been successfully logged out!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000,
+    });
+
+  const [linkOneHovered, setLinkOneHovered] = useState(false);
+  const [linkTwoHovered, setLinkTwoHovered] = useState(false);
   const [searchHovered, setSearchHovered] = useState(false);
+  const [pokemonsHovered, setPokemonsHovered] = useState(false);
 
   const pokemons = usePokemons();
   const setPokemons = useSetPokemons();
@@ -31,14 +43,17 @@ export default function Menu() {
   let nameMap = {};
 
   const navLinkStyle = {
-    register: {
-      color: registerHovered ? "white" : "#ddd",
+    linkOne: {
+      color: linkOneHovered ? "white" : "#ddd",
     },
-    login: {
-      color: loginHovered ? "white" : "#ddd",
+    linkTwo: {
+      color: linkTwoHovered ? "white" : "#ddd",
     },
     search: {
       color: searchHovered ? "white" : "#ddd",
+    },
+    pokemons: {
+      color: pokemonsHovered ? "white" : "#ddd",
     },
   };
 
@@ -49,6 +64,12 @@ export default function Menu() {
     if (event.nativeEvent.inputType === "deleteContentBackward")
       setDeleted(true);
     else setDeleted(false);
+  };
+
+  const logout = () => {
+    token.logout(() => props.history.push("/"));
+    setPokemons(null);
+    notify();
   };
 
   useEffect(() => {
@@ -88,23 +109,43 @@ export default function Menu() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <NavLink
-            onMouseEnter={() => setRegisterHovered(true)}
-            onMouseLeave={() => setRegisterHovered(false)}
-            style={navLinkStyle.register}
+            onMouseEnter={() => setLinkOneHovered(true)}
+            onMouseLeave={() => setLinkOneHovered(false)}
+            style={navLinkStyle.linkOne}
             className="nav-item"
           >
-            <Link to="/registration">Registration</Link>
-          </NavLink>
-          <NavLink
-            onMouseEnter={() => setLoginHovered(true)}
-            onMouseLeave={() => setLoginHovered(false)}
-            className="nav-item"
-            style={navLinkStyle.login}
-          >
-            <Link to="/login">Login</Link>
+            {token.available() && <Link to="/profile">Profile</Link>}
+            {!token.available() && <Link to="/registration">Registration</Link>}
           </NavLink>
 
-          {pokemons && (
+          <NavLink
+            onMouseEnter={() => setLinkTwoHovered(true)}
+            onMouseLeave={() => setLinkTwoHovered(false)}
+            className="nav-item"
+            style={navLinkStyle.linkTwo}
+          >
+            {token.available() && (
+              <Link to="/" onClick={() => logout()}>
+                Logout
+              </Link>
+            )}
+            {!token.available() && <Link to="/login">Login</Link>}
+          </NavLink>
+
+          {/* Do not render on pokemon page */}
+          {location.pathname !== "/pokemon" && (
+            <NavLink
+              onMouseEnter={() => setPokemonsHovered(true)}
+              onMouseLeave={() => setPokemonsHovered(false)}
+              style={navLinkStyle.pokemons}
+              className="nav-item"
+            >
+              <Link to="/pokemon">Pokemons</Link>
+            </NavLink>
+          )}
+
+          {/* Only render on pokemon page, when logged in */}
+          {location.pathname === "/pokemon" && pokemons && (
             <NavDropdown
               title={
                 <span
@@ -125,7 +166,8 @@ export default function Menu() {
           )}
         </Nav>
 
-        {pokemons && (
+        {/* Only render on pokemon page, when logged in */}
+        {location.pathname === "/pokemon" && pokemons && (
           <Form inline>
             <FormControl
               type="text"
@@ -139,3 +181,5 @@ export default function Menu() {
     </Navbar>
   );
 }
+
+export default withRouter(Menu);

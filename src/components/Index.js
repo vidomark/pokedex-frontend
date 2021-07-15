@@ -5,7 +5,7 @@ import { loadedPokemonNumber } from "../util/pokemonConfig";
 import { gridStyle } from "../util/style";
 import pokeballs from "../images/pokeballs.png";
 import aboutPicture from "../images/about.jpg";
-import "../css/index.css";
+import apiController from "../util/apiController";
 
 export default function Index() {
   return (
@@ -25,7 +25,10 @@ export default function Index() {
             <div class="info">
               <h1 className="index-card-title">Pokemons</h1>
               <p>Checkout the list of available pokemons.</p>
-              <Link to={`pokemon?limit=${loadedPokemonNumber}`}>
+              <Link
+                to={`pokemon?limit=${loadedPokemonNumber}`}
+                onClick={() => apiController.setState("get")}
+              >
                 <button>Show more</button>
               </Link>
             </div>

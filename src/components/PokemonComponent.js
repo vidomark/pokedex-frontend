@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import PokemonCard from "./pokemon/PokemonCard";
 import Pagination from "./Pagination";
+import token from "../util/token";
+import apiController from "../util/apiController";
 import { Container, Alert } from "react-bootstrap";
 import { loadedPokemonNumber } from "../util/pokemonConfig";
-import { useUrl, useSetUrl } from "../contexts/UrlProvider";
 import { usePokemons, useSetPokemons } from "../contexts/PokemonListProvider";
 import { fetchData } from "../util/api";
 import { useEffect } from "react";
@@ -11,50 +12,79 @@ import { useEffect } from "react";
 export default function PokemonComponent({ selectPokemon }) {
   const pokemons = usePokemons();
   const setPokemons = useSetPokemons();
-  const url = useUrl();
-  const setUrl = useSetUrl();
-  const [error, setError] = useState(null);
-  const [message, setMessage] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(null);
 
   const [currentPokemonNumber, setCurrentPokemonNumber] =
     useState(loadedPokemonNumber);
   const loadPokemons = () => {
     setCurrentPokemonNumber((previous) => previous + loadedPokemonNumber);
-    setUrl(
-      `http://localhost:8080/pokemon?limit=${
-        currentPokemonNumber + loadedPokemonNumber
-      }`
-    );
   };
 
   useEffect(() => {
-    fetchData(url)
-      .then((result) => setPokemons(result))
-      .catch((error) => {
-        setError("error");
-        setMessage("Unauthorized request. Please sign in.");
+    if (apiController.getState() === "get") {
+      const url = `http://localhost:8080/pokemon?limit=${currentPokemonNumber}`;
+      const header = { Authorization: `Bearer ${token.getToken()}` };
+      fetchData(url, header).then((result) => {
+        if (result) {
+          setLoggedIn(true);
+          setPokemons(result.data);
+        } else {
+          setLoggedIn(false);
+        }
       });
+    }
     /* eslint-disable */
-  }, [url]);
+  }, [currentPokemonNumber]);
 
-  return (
-    <Container className="main-container">
-      {pokemons ? (
+  // Successful authentication
+  if (pokemons) {
+    return (
+      <Container className="main-container">
+        {pokemons.map((pokemon) => (
+          <PokemonCard
+            key={pokemon.name}
+            {...{ pokemon }}
+            {...{ selectPokemon }}
+          />
+        ))}
+        <Pagination {...{ currentPokemonNumber }} {...{ loadPokemons }} />
+      </Container>
+    );
+    // Unsuccessful authentication
+  } else if (loggedIn === false) {
+    return (
+      <Container className="main-container">
+        <Alert className="mt-5" variant="danger">
+          Unathorized request! Please sign in!
+        </Alert>
+      </Container>
+    );
+    // Fetching pokemons
+  } else {
+    return (
+      <Container className="main-container">
+        <Alert className="mt-5" variant="info">
+          Loading pokemons
+        </Alert>
+      </Container>
+    );
+  }
+}
+
+/*
+{pokemons ? (
         pokemons.map((pokemon) => (
           <PokemonCard
             key={pokemon.name}
-            pokemon={pokemon}
+            {...{ pokemon }}
             {...{ selectPokemon }}
           />
         ))
       ) : (
-        <Alert style={{ marginTop: "60px" }} variant={error}>
-          {message}
+        <Alert style={{ marginTop: "60px" }} variant="danger">
+          Unauthorized request. Please sign in.
         </Alert>
       )}
-      {!error && (
+      {token.available() && (
         <Pagination {...{ currentPokemonNumber }} {...{ loadPokemons }} />
-      )}
-    </Container>
-  );
-}
+      )} */

@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useSetConfirmationToken } from "../contexts/ConfirmationTokenProvider";
 import { postData } from "../util/api";
 
 export default function Registration() {
-  const setConfirmationToken = useSetConfirmationToken();
   const [registrationState, setRegistrationState] = useState(null);
   const [message, setMessage] = useState(null);
   const [formData, setFormData] = useState({
-    email: "",
-    username: "",
-    password: "",
+    email: null,
+    username: null,
+    password: null,
+    confirmPassword: null,
   });
 
   const handleChange = (event) => {
@@ -21,16 +20,20 @@ export default function Registration() {
   const sendRegistration = () => {
     const url = "http://localhost:8080/registration";
 
+    // False to not send token
     postData(url, formData)
       .then((result) => {
-        setConfirmationToken(result.data);
-        setRegistrationState("success");
-        setMessage("Please confirm your email!");
+        if (result) {
+          setRegistrationState("success");
+          setMessage("Please confirm your email!");
+        } else {
+          setRegistrationState("danger");
+          setMessage("Please check your ceredentials!");
+        }
       })
       .catch((error) => {
-        console.log(error);
         setRegistrationState("danger");
-        setMessage("Email, username or password already taken!");
+        setMessage("Please check your ceredentials!");
       });
   };
 
@@ -71,6 +74,16 @@ export default function Registration() {
               type="password"
               placeholder="Password"
               name="password"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              onChange={(event) => handleChange(event)}
+              type="password"
+              placeholder="Confirm Password"
+              name="confirmPassword"
             />
           </Form.Group>
 

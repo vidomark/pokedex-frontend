@@ -9,6 +9,7 @@ import { fetchData } from "../util/api";
 import { dropdownItemStyle } from "../util/style";
 import { postData } from "../util/api";
 import pokeball from "../images/pokeball-icon.svg";
+import token from "../util/token";
 
 export default function Search() {
   const setPokemons = useSetPokemons();
@@ -16,20 +17,22 @@ export default function Search() {
   const [abilites, setAbilites] = useState(null);
 
   const filterPokemons = (url, data) => {
-    postData(url, data).then((result) => setPokemons(result));
+    const header = { Authorization: `Bearer ${token.getToken()}` };
+    postData(url, data, header).then((result) => setPokemons(result.data));
   };
 
   useEffect(() => {
     // Every type
     const typesUrl = "http://localhost:8080/pokemon/types";
-    fetchData(typesUrl)
-      .then((result) => setTypes(result))
+    const header = { Authorization: `Bearer ${token.getToken()}` };
+    fetchData(typesUrl, header)
+      .then((result) => setTypes(result.data))
       .catch((error) => console.log(error));
 
     // Every ability
     const abilitiesUrl = "http://localhost:8080/pokemon/abilities";
-    fetchData(abilitiesUrl)
-      .then((result) => setAbilites(result))
+    fetchData(abilitiesUrl, header)
+      .then((result) => setAbilites(result.data))
       .catch((error) => console.log(error));
   }, []);
 
