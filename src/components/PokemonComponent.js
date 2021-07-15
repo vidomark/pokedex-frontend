@@ -22,7 +22,8 @@ export default function PokemonComponent({ selectPokemon }) {
   useEffect(() => {
     if (apiController.getState() === "get") {
       const url = `http://localhost:8080/pokemon?limit=${currentPokemonNumber}`;
-      fetchData(url).then((result) => {
+      const header = { Authorization: `Bearer ${token.getToken()}` };
+      fetchData(url, header).then((result) => {
         try {
           setPokemons(result.data);
         } catch (exception) {}

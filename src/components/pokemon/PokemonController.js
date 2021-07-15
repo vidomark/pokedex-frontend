@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import token from "../../util/token";
 import { Link } from "react-router-dom";
 import { capitalizeText } from "../../util/textCapitalizer";
 import { convertId } from "../../util/idConverter";
@@ -15,11 +16,12 @@ export default function PokemonController({ pokemon, selectPokemon }) {
   const followingPokemonUrl = `http://localhost:8080/pokemon/${followingId}`;
 
   useEffect(() => {
-    fetchData(previousPokemonUrl)
+    const header = { Authorization: `Bearer ${token.getToken()}` };
+    fetchData(previousPokemonUrl, header)
       .then((result) => setPreviousPokemon(result.data))
       .catch((error) => console.log(error));
 
-    fetchData(followingPokemonUrl)
+    fetchData(followingPokemonUrl, header)
       .then((result) => setFollowingPokemon(result.data))
       .catch((error) => console.log(error));
   }, [followingPokemonUrl, previousPokemonUrl]);

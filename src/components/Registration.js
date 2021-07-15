@@ -23,8 +23,13 @@ export default function Registration() {
     // False to not send token
     postData(url, formData)
       .then((result) => {
-        setRegistrationState("success");
-        setMessage("Please confirm your email!");
+        if (result) {
+          setRegistrationState("success");
+          setMessage("Please confirm your email!");
+        } else {
+          setRegistrationState("danger");
+          setMessage("Please check your ceredentials!");
+        }
       })
       .catch((error) => {
         setRegistrationState("danger");

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import { useSetPokemons } from "../../contexts/PokemonListProvider";
 import { postData } from "../../util/api";
+import token from "../../util/token";
 
 // array of details
 export default function PokemonDetail({
@@ -21,7 +22,8 @@ export default function PokemonDetail({
   const setPokemons = useSetPokemons();
 
   const filterPokemons = (url, data) => {
-    postData(url, data).then((result) => setPokemons(result.data));
+    const header = { Authorization: `Bearer ${token.getToken()}` };
+    postData(url, data, header).then((result) => setPokemons(result.data));
   };
 
   return (

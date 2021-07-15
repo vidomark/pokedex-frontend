@@ -1,19 +1,19 @@
 import axios from "axios";
-import token from "../util/token";
 import apiController from "./apiController";
 
-export const fetchData = (url) => {
+export const fetchData = (url, headers = null) => {
   apiController.setState("get");
   return axios
-    .get(url, { headers: { Authorization: `Bearer ${token.getToken()}` } })
+    .get(url, { headers: headers })
     .then((result) => result)
     .catch((error) => console.log(error));
 };
 
-export const postData = (url, data) => {
+export const postData = (url, data, headers = null) => {
+  // Pokemon filter doesn't work
   apiController.setState("post");
   return axios
-    .post(url, data, { Authorization: `Bearer ${token.getToken()}` })
+    .post(url, data, { headers: headers })
     .then((result) => result)
     .catch((error) => console.log(error));
 };
