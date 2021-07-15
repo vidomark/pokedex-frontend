@@ -10,13 +10,10 @@ export const fetchData = (url) => {
     .catch((error) => console.log(error));
 };
 
-export const postData = (url, data, header = true) => {
-  const headers = header
-    ? { Authorization: `Bearer ${token.getToken()}` }
-    : null;
+export const postData = (url, data) => {
   apiController.setState("post");
   return axios
-    .post(url, data, { headers: headers })
+    .post(url, data, { Authorization: `Bearer ${token.getToken()}` })
     .then((result) => result)
     .catch((error) => console.log(error));
 };

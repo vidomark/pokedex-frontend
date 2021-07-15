@@ -21,7 +21,7 @@ export default function Registration() {
     const url = "http://localhost:8080/registration";
 
     // False to not send token
-    postData(url, formData, false)
+    postData(url, formData)
       .then((result) => {
         setRegistrationState("success");
         setMessage("Please confirm your email!");

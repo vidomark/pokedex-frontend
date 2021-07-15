@@ -28,7 +28,7 @@ export default function Login(props) {
     const url = "http://localhost:8080/login";
 
     // False to not send token
-    postData(url, formData, false).then((result) => {
+    postData(url, formData).then((result) => {
       // Successfull authentication
       if (result.headers.authorization) {
         const jwt = result.headers.authorization.slice(7);
